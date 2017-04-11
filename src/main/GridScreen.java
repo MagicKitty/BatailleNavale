@@ -10,11 +10,6 @@ import javax.swing.border.Border;
 import javax.swing.border.MatteBorder;
 
 public class GridScreen extends JPanel {
-	/**
-	 * 
-	 */
-	private static final long serialVersionUID = 1L;
-
 	public GridScreen(int a,int b) {
 		setLayout(new BorderLayout());
         setLayout(new GridBagLayout());
@@ -24,24 +19,11 @@ public class GridScreen extends JPanel {
                 gbc.gridx = col;
                 gbc.gridy = row;
                 CellPane cellPane = new CellPane();
-                Border border = null;
-                if (row < a-1) {
-                    if (col < b-1) {
-                        border = new MatteBorder(1, 1, 0, 0, Color.GRAY);
-                    } else {
-                        border = new MatteBorder(1, 1, 0, 1, Color.GRAY);
-                    }
-                } else {
-                    if (col < b-1) {
-                        border = new MatteBorder(1, 1, 1, 0, Color.GRAY);
-                    } else {
-                        border = new MatteBorder(1, 1, 1, 1, Color.GRAY);
-                    }
-                }
-                cellPane.setBorder(border);
+                cellPane.setBorder(new MatteBorder(1, 1, row < a-1 ? 0 : 1, col < b-1 ? 0 : 1, Color.GRAY));
                 add(cellPane, gbc);
             }
         }
+        
         // METTRE SUR UN AUTRE JPANEL
         Button but = new Button("OK", 0, 0, 0, 0, gbc,a/2,b);
         add(but,but.getGBC());

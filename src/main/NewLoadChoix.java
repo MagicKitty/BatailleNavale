@@ -12,26 +12,20 @@ import javax.swing.JFileChooser;
 import javax.swing.JPanel;
 
 public class NewLoadChoix extends JPanel implements ActionListener {
-	/**
-	 * 
-	 */
-	private static final long serialVersionUID = 1L;
-	Button newGame;
-	Button loadGame;
+	Button newGame, loadGame;
 	JFileChooser fc;
-	static private final String newline = "\n";
 
 	public NewLoadChoix() {
-		this.setBorder(BorderFactory.createTitledBorder("Partie"));
-		this.setBackground(Color.ORANGE);
-		this.setLayout(new GridBagLayout());
+		setBorder(BorderFactory.createTitledBorder("Partie"));
+		setBackground(Color.ORANGE);
+		setLayout(new GridBagLayout());
+		
 		GridBagConstraints gbc = new GridBagConstraints();
-		newGame = new Button("New Game", 10, 30, 10, 30, gbc, 0, 0);
+		add(newGame = new Button("New Game", 10, 30, 10, 30, gbc, 0, 0), newGame.getGBC());
+		add(loadGame = new Button("Load Game", 10, 28, 10, 28, gbc, 0, 1), loadGame.getGBC());
+		
 		newGame.addActionListener(this);
-		this.add(newGame, newGame.getGBC());
-		loadGame = new Button("Load Game", 10, 28, 10, 28, gbc, 0, 1);
 		loadGame.addActionListener(this);
-		this.add(loadGame, loadGame.getGBC());
 	}
 
 	public void actionPerformed(ActionEvent e) {
@@ -45,9 +39,9 @@ public class NewLoadChoix extends JPanel implements ActionListener {
 			int returnVal = fc.showOpenDialog(NewLoadChoix.this);
             if (returnVal == JFileChooser.APPROVE_OPTION) {
                 File file = fc.getSelectedFile();
-                System.out.println("Opening: "+file.getName()+newline);
+                System.out.println("Opening: "+file.getName() + System.lineSeparator());
             } else {
-            	System.out.println("Open command cancelled by user"+newline);
+            	System.out.println("Open command cancelled by user"+ System.lineSeparator());
             }
 		}
 	}
