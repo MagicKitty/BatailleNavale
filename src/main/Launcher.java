@@ -7,10 +7,11 @@ public class Launcher {
 	public static void main(String[] args) {
 		JFrame fenetre = new JFrame();
 		fenetre.setTitle("Bataille Navale");
-		fenetre.setSize(400, 400);
+		fenetre.setSize(500, 500);
 
-		fenetre.add(new NewLoadChoix());
+		fenetre.add(new GridScreen(10,10));
 
+		fenetre.setResizable(true);
 		fenetre.setLocationRelativeTo(null);
 		fenetre.setDefaultCloseOperation(JFrame.EXIT_ON_CLOSE);
 		fenetre.setVisible(true);

@@ -18,9 +18,9 @@ public class EpoqueChoix extends JPanel {
 		this.setBackground(Color.ORANGE);
 		this.setLayout(new GridBagLayout());
 		GridBagConstraints gbc = new GridBagConstraints();
-		Button moderne = new Button("Moderne XXè",10,30,10,30,gbc,0);
+		Button moderne = new Button("Moderne XXè",10,30,10,30,gbc,0,0);
 		this.add(moderne,moderne.getGBC());
-		Button renaissance = new Button("Renaissance XVè",10,17,10,16,gbc,1);
+		Button renaissance = new Button("Renaissance XVè",10,17,10,16,gbc,0,1);
 	    this.add(renaissance,renaissance.getGBC());
 	}
 }

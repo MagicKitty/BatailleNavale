@@ -26,10 +26,10 @@ public class NewLoadChoix extends JPanel implements ActionListener {
 		this.setBackground(Color.ORANGE);
 		this.setLayout(new GridBagLayout());
 		GridBagConstraints gbc = new GridBagConstraints();
-		newGame = new Button("New Game", 10, 30, 10, 30, gbc, 0);
+		newGame = new Button("New Game", 10, 30, 10, 30, gbc, 0, 0);
 		newGame.addActionListener(this);
 		this.add(newGame, newGame.getGBC());
-		loadGame = new Button("Load Game", 10, 28, 10, 28, gbc, 1);
+		loadGame = new Button("Load Game", 10, 28, 10, 28, gbc, 0, 1);
 		loadGame.addActionListener(this);
 		this.add(loadGame, loadGame.getGBC());
 	}

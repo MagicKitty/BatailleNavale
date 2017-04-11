@@ -14,7 +14,7 @@ public class Button extends JButton {
 	 */
 	private static final long serialVersionUID = 1L;
 	private GridBagConstraints g = new GridBagConstraints();
-	public Button(String title, int a,int b,int c,int d,GridBagConstraints gbc,int e) {
+	public Button(String title, int a,int b,int c,int d,GridBagConstraints gbc,int e,int f) {
 		super(title);
 		this.setBackground(new Color(59, 89, 182));
 		this.setForeground(Color.WHITE);
@@ -22,8 +22,8 @@ public class Button extends JButton {
 		this.setBorder(BorderFactory.createEmptyBorder(a,b,c,d));
 		this.setFont(new Font("Tahoma", Font.BOLD, 12));
 		
-		gbc.gridx = 0;
-		gbc.gridy = e;
+		gbc.gridx = e;
+		gbc.gridy = f;
 		gbc.gridheight = 1;
 		gbc.gridwidth = 1;
 		gbc.insets = new Insets(5,5,5,5);
