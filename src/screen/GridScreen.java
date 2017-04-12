@@ -5,6 +5,7 @@ import java.awt.Color;
 import java.awt.GridBagConstraints;
 import java.awt.GridBagLayout;
 
+import javax.swing.BorderFactory;
 import javax.swing.JPanel;
 import javax.swing.border.Border;
 import javax.swing.border.MatteBorder;
@@ -14,6 +15,8 @@ import main.CellPane;
 
 public class GridScreen extends JPanel {
 	public GridScreen(int a,int b) {
+		setBorder(BorderFactory.createTitledBorder("Placer bateaux"));
+		setBackground(Color.ORANGE);
 		setLayout(new BorderLayout());
         setLayout(new GridBagLayout());
         GridBagConstraints gbc = new GridBagConstraints();
