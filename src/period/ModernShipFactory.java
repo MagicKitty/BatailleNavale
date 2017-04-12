@@ -7,34 +7,28 @@ import ship.Destroyer;
 import ship.Submarine;
 
 public class ModernShipFactory implements IShipFactory {
-
 	@Override
 	public Carrier createCarrier() {
-		// TODO Auto-generated method stub
-		return null;
+		return new Carrier();
 	}
 
 	@Override
 	public Battleship createBattleship() {
-		// TODO Auto-generated method stub
-		return null;
+		return new Battleship();
 	}
 
 	@Override
 	public Cruiser createCruiser() {
-		// TODO Auto-generated method stub
-		return null;
+		return new Cruiser();
 	}
 
 	@Override
 	public Submarine createSubmarine() {
-		// TODO Auto-generated method stub
-		return null;
+		return new Submarine();
 	}
 
 	@Override
 	public Destroyer createDestroyer() {
-		// TODO Auto-generated method stub
-		return null;
+		return new Destroyer();
 	}
 }
