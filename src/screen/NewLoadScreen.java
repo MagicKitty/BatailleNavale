@@ -13,15 +13,20 @@ import javax.swing.JPanel;
 
 import main.Button;
 import main.Filter;
+import main.GameStatus;
+import main.GameWindow;
 
 public class NewLoadScreen extends JPanel implements ActionListener {
 	Button newGame, loadGame;
 	JFileChooser fc;
+	GameWindow window;
 
-	public NewLoadScreen() {
+	public NewLoadScreen(GameWindow gm) {
 		setBorder(BorderFactory.createTitledBorder("Partie"));
 		setBackground(Color.ORANGE);
 		setLayout(new GridBagLayout());
+		
+		window = gm;
 		
 		GridBagConstraints gbc = new GridBagConstraints();
 		add(newGame = new Button("New Game", 10, 30, 10, 30, gbc, 0, 0), newGame.getGBC());
@@ -34,8 +39,9 @@ public class NewLoadScreen extends JPanel implements ActionListener {
 	public void actionPerformed(ActionEvent e) {
 		Object source = e.getSource();
 		if (source == newGame) {
-			
+			window.setStatus(GameStatus.GRID);
 		} else if (source == loadGame) {
+			System.out.println("newGame");
 			fc = new JFileChooser();
 			fc.addChoosableFileFilter(new Filter());
 			fc.setAcceptAllFileFilterUsed(false);

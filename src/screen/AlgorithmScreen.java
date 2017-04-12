@@ -1,4 +1,4 @@
-package main;
+package screen;
 
 import java.awt.Color;
 import java.awt.GridBagConstraints;
@@ -7,8 +7,10 @@ import java.awt.GridBagLayout;
 import javax.swing.BorderFactory;
 import javax.swing.JPanel;
 
-public class AlgoChoix extends JPanel {
-	public AlgoChoix() {
+import main.Button;
+
+public class AlgorithmScreen extends JPanel {
+	public AlgorithmScreen() {
 		setBorder(BorderFactory.createTitledBorder("Algorithme"));
 		setBackground(Color.ORANGE);
 		setLayout(new GridBagLayout());
