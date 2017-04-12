@@ -1,4 +1,4 @@
-package main;
+package screen;
 
 import java.awt.Color;
 import java.awt.GridBagConstraints;
@@ -11,11 +11,14 @@ import javax.swing.BorderFactory;
 import javax.swing.JFileChooser;
 import javax.swing.JPanel;
 
-public class NewLoadChoix extends JPanel implements ActionListener {
+import main.Button;
+import main.Filter;
+
+public class NewLoadScreen extends JPanel implements ActionListener {
 	Button newGame, loadGame;
 	JFileChooser fc;
 
-	public NewLoadChoix() {
+	public NewLoadScreen() {
 		setBorder(BorderFactory.createTitledBorder("Partie"));
 		setBackground(Color.ORANGE);
 		setLayout(new GridBagLayout());
@@ -36,7 +39,7 @@ public class NewLoadChoix extends JPanel implements ActionListener {
 			fc = new JFileChooser();
 			fc.addChoosableFileFilter(new Filter());
 			fc.setAcceptAllFileFilterUsed(false);
-			int returnVal = fc.showOpenDialog(NewLoadChoix.this);
+			int returnVal = fc.showOpenDialog(NewLoadScreen.this);
             if (returnVal == JFileChooser.APPROVE_OPTION) {
                 File file = fc.getSelectedFile();
                 System.out.println("Opening: "+file.getName() + System.lineSeparator());

@@ -1,4 +1,4 @@
-package main;
+package screen;
 
 import java.awt.Color;
 import java.awt.GridBagConstraints;
@@ -7,8 +7,10 @@ import java.awt.GridBagLayout;
 import javax.swing.BorderFactory;
 import javax.swing.JPanel;
 
-public class EpoqueChoix extends JPanel {
-	public EpoqueChoix() {
+import main.Button;
+
+public class PeriodScreen extends JPanel {
+	public PeriodScreen() {
 		setBorder(BorderFactory.createTitledBorder("Époque"));
 		setBackground(Color.ORANGE);
 		setLayout(new GridBagLayout());

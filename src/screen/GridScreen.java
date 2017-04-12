@@ -1,4 +1,4 @@
-package main;
+package screen;
 
 import java.awt.BorderLayout;
 import java.awt.Color;
@@ -8,6 +8,9 @@ import java.awt.GridBagLayout;
 import javax.swing.JPanel;
 import javax.swing.border.Border;
 import javax.swing.border.MatteBorder;
+
+import main.Button;
+import main.CellPane;
 
 public class GridScreen extends JPanel {
 	public GridScreen(int a,int b) {

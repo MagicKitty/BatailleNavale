@@ -1,4 +1,4 @@
-package main;
+package screen;
 
 import java.awt.Color;
 import java.awt.GridBagConstraints;
@@ -7,8 +7,10 @@ import java.awt.GridBagLayout;
 import javax.swing.BorderFactory;
 import javax.swing.JPanel;
 
-public class TirChoix extends JPanel {
-	public TirChoix() {
+import main.Button;
+
+public class ShotScreen extends JPanel {
+	public ShotScreen() {
 		setBorder(BorderFactory.createTitledBorder("Tir"));
 		setBackground(Color.ORANGE);
 		setLayout(new GridBagLayout());
