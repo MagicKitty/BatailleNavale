@@ -39,7 +39,7 @@ public class NewLoadScreen extends JPanel implements ActionListener {
 	public void actionPerformed(ActionEvent e) {
 		Object source = e.getSource();
 		if (source == newGame) {
-			window.setStatus(GameStatus.GRID);
+			window.setStatus(GameStatus.PERIOD);
 		} else if (source == loadGame) {
 			System.out.println("newGame");
 			fc = new JFileChooser();
