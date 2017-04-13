@@ -1,26 +1,22 @@
 package game;
 
+import java.util.ArrayList;
+import java.util.List;
+
 import org.json.JSONArray;
 import org.json.JSONException;
 import org.json.JSONObject;
 
-import main.GameWindow;
+import cell.AbstractCell;
+import cell.Grid;
+import cell.ShipCell;
+import ship.AbstractShip;
 
 public class JSONBuilder {
 	private JSONObject obj;
-	private JSONArray array;
-	
-	public JSONArray getArray() {
-		return array;
-	}
-
-	public void setArray(JSONArray array) {
-		this.array = array;
-	}
 
 	public JSONBuilder() {
 		obj = new JSONObject();
-		array = new JSONArray();
 	}
 
 	public void addString(String id, String s) {
@@ -40,22 +36,44 @@ public class JSONBuilder {
 		}
 	}
 
-	public void addObject(String id, Object o) {
+	public void addObject(Object o) {
+		String className = o.getClass().getName();
 		try {
-			obj.put(id, o);
+			if (className.equals("Grid")) {
+				obj.append(className, ((Grid) o).getNumberOfSeaShots());
+				obj.append(className, ((Grid) o).getShipShots());
+				ArrayList<AbstractCell> aac = new ArrayList<AbstractCell>();
+				aac = ((Grid) o).getAac();
+				for (int i = 0; i < aac.size(); i++) {
+					obj.append(className, aac.get(i).getX());
+					obj.append(className, aac.get(i).getY());
+				}
+			} else if (className.equals("AbstractShip")) {
+				obj.append(className, ((AbstractShip) o).getName());
+				obj.append(className, ((AbstractShip) o).isAlive());
+				obj.append(className, ((AbstractShip) o).getNumberOfCellsAlive());
+				obj.append(className, ((AbstractShip) o).getNumberOfBullets());
+				ArrayList<ShipCell> asc = new ArrayList<>();
+				asc = ((AbstractShip) o).getAsc();
+				for (int i = 0; i < asc.size(); i++) {
+					obj.append(className, asc.get(i).getLife());
+				}
+			} else {
+				System.out.println("unknown object");
+			}
 		} catch (Exception e) {
-			// TODO: handle exception
-		}
-	}
-
-	public void updateObject(String id, Object o) {
-		obj.remove(id);
-		try {
-			obj.put(id, o);
-		} catch (JSONException e) {
 			e.printStackTrace();
 		}
 	}
+
+	// public void updateObject(String id, Object o) {
+	// obj.remove(id);
+	// try {
+	// obj.put(id, o);
+	// } catch (JSONException e) {
+	// e.printStackTrace();
+	// }
+	// }
 
 	public void addArray(String id, JSONArray a) {
 		try {
@@ -97,5 +115,18 @@ public class JSONBuilder {
 
 	public String toString() {
 		return obj.toString();
+	}
+
+	public static void main(String[] args) {
+		JSONObject obj = new JSONObject();
+		List<Integer> l = new ArrayList<Integer>();
+		l.add(5);
+		l.add(6);
+		try {
+			obj.append("gna", new JSONArray(l));
+			System.out.println(obj.toString());
+		} catch (Exception e) {
+			e.printStackTrace();
+		}
 	}
 }

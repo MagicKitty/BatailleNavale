@@ -10,6 +10,23 @@ public class Grid {
 	private int numberOfSeaShots;
 	private int shipShots;
 	private ArrayList<AbstractCell> aac = new ArrayList<AbstractCell>();
+
+	public AbstractGame getAg() {
+		return ag;
+	}
+
+	public int getNumberOfSeaShots() {
+		return numberOfSeaShots;
+	}
+
+	public int getShipShots() {
+		return shipShots;
+	}
+
+	public ArrayList<AbstractCell> getAac() {
+		return aac;
+	}
+
 	
 	public void addSeaShot(){
 		

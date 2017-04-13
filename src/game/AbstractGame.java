@@ -1,6 +1,7 @@
 package game;
 
 import java.util.ArrayList;
+import java.util.List;
 
 import cell.Grid;
 import graphic.Coord2D;
@@ -18,6 +19,34 @@ public abstract class AbstractGame {
 	private Grid ennemiGrid;
 	private IShipFactory sf;
 	private ArrayList<AbstractShip> aas = new ArrayList<>(5);
+
+	public BattleshipGame getBg() {
+		return bg;
+	}
+
+	public IPlayer getHumain() {
+		return humain;
+	}
+
+	public IPlayer getComputer() {
+		return computer;
+	}
+
+	public Grid getMyGrid() {
+		return myGrid;
+	}
+
+	public Grid getEnnemiGrid() {
+		return ennemiGrid;
+	}
+
+	public IShipFactory getSf() {
+		return sf;
+	}
+
+	public ArrayList<AbstractShip> getAas() {
+		return aas;
+	}
 	
 	public void play() {
 		

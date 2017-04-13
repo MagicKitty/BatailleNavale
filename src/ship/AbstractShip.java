@@ -13,6 +13,31 @@ public abstract class AbstractShip {
 	private IBehaviorDefensive bd;
 	private IBehaviorOffensive bo;
 	
+	public boolean isAlive() {
+		return isAlive;
+	}
+
+	public int getNumberOfCellsAlive() {
+		return numberOfCellsAlive;
+	}
+
+	public int getNumberOfBullets() {
+		return numberOfBullets;
+	}
+
+	public ArrayList<ShipCell> getAsc() {
+		return asc;
+	}
+
+	public IBehaviorDefensive getBd() {
+		return bd;
+	}
+
+	public IBehaviorOffensive getBo() {
+		return bo;
+	}
+
+	
 	public AbstractShip(String n) {
 		name = n;
 	}
