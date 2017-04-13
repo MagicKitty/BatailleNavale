@@ -15,7 +15,7 @@ public class JSONBuilder {
 		}
 	}
 	
-	public void changeString(String id, String s) {
+	public void updateString(String id, String s) {
 		obj.remove(id);
 		try {
 			obj.put(id, s);
@@ -32,7 +32,7 @@ public class JSONBuilder {
 		}
 	}
 	
-	public void changeObject(String id, Object o) {
+	public void updateObject(String id, Object o) {
 		obj.remove(id);
 		try {
 			obj.put(id, o);
@@ -49,7 +49,7 @@ public class JSONBuilder {
 		}
 	}
 	
-	public void changeArray(String id, JSONArray a) {
+	public void updateArray(String id, JSONArray a) {
 		obj.remove(id);
 		try {
 			obj.put(id, a);
@@ -66,7 +66,7 @@ public class JSONBuilder {
 		}
 	}
 	
-	public void changeInteger(String id, int i) {
+	public void updateInteger(String id, int i) {
 		obj.remove(id);
 		try {
 			obj.put(id, i);
@@ -77,5 +77,9 @@ public class JSONBuilder {
 	
 	public void removeObject(String id) throws JSONException {
 		obj.remove(id);
+	}
+	
+	public String toString() {
+		return obj.toString();
 	}
 }
