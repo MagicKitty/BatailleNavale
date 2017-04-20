@@ -13,6 +13,10 @@ public abstract class AbstractShip {
 	private IBehaviorDefensive bd;
 	private IBehaviorOffensive bo;
 	
+	public AbstractShip(String n) {
+		name = n;
+	}
+	
 	public boolean isAlive() {
 		return isAlive;
 	}
@@ -29,24 +33,26 @@ public abstract class AbstractShip {
 		return asc;
 	}
 
-	public IBehaviorDefensive getBd() {
-		return bd;
+	public double getDefense() {
+		return bd.getDefense();
 	}
 
-	public IBehaviorOffensive getBo() {
-		return bo;
+	public double getAttack() {
+		return bo.getAttack();
 	}
 
-	
-	public AbstractShip(String n) {
-		name = n;
-	}
-	
 	public int getSize() {
 		return 0;
 	}
 	
 	public String getName() {
 		return name;
+	}
+	
+	public void KillACell() {
+		numberOfCellsAlive -= 1;
+		
+		if (numberOfCellsAlive == 0)
+			isAlive = false;
 	}
 }
