@@ -41,12 +41,13 @@ public class JSONBuilder {
 		try {
 			if (className.equals("Grid")) {
 				obj.append(className, ((Grid) o).getNumberOfSeaShots());
-				obj.append(className, ((Grid) o).getShipShots());
-				ArrayList<AbstractCell> aac = new ArrayList<AbstractCell>();
-				aac = ((Grid) o).getAac();
-				for (int i = 0; i < aac.size(); i++) {
-					obj.append(className, aac.get(i).getX());
-					obj.append(className, aac.get(i).getY());
+				obj.append(className, ((Grid) o).getNumberOfShipShots());
+				AbstractCell[][] cell2D = ((Grid) o).getCells2D();
+				for (int x = 0; x < 10; x++) {
+					for (int y = 0; y < 10; y++) {
+						obj.append(className, cell2D[x][y].getX());
+						obj.append(className, cell2D[x][y].getY());
+					}
 				}
 			} else if (className.equals("AbstractShip")) {
 				obj.append(className, ((AbstractShip) o).getName());
