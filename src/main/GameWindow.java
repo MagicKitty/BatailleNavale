@@ -1,5 +1,7 @@
 package main;
 
+import java.awt.BorderLayout;
+
 import javax.swing.JFrame;
 import javax.swing.JPanel;
 
@@ -8,10 +10,13 @@ import screen.*;
 
 public class GameWindow extends JFrame {
 	private JPanel screen;
+	private JPanel buttons;
 	private GameType gt;
 	
 	public GameWindow() {
 		super("Bataille Navale");
+		
+		this.setLayout(new BorderLayout());
 		
 		gt = new GameType();
 		
@@ -45,7 +50,8 @@ public class GameWindow extends JFrame {
 				break;
 			case GRID:
 				System.out.println(gt);
-				add(screen = new GridScreen(10, 10));
+				add(screen = new GridScreen(10, 10),BorderLayout.NORTH);
+				add(buttons = new ButtonsPane(),BorderLayout.SOUTH);
 				break;
 		}
 		
