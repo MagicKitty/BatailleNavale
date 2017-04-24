@@ -44,7 +44,7 @@ public class Grid {
 		return numberOfSeaShots;
 	}
 
-	public int getShipShots() {
+	public int getNumberOfShipShots() {
 		return numberOfShipShots;
 	}
 

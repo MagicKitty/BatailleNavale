@@ -41,7 +41,7 @@ public class JSONBuilder {
 		try {
 			if (className.equals("Grid")) {
 				obj.append(className, ((Grid) o).getNumberOfSeaShots());
-				obj.append(className, ((Grid) o).getShipShots());
+				obj.append(className, ((Grid) o).getNumberOfShipShots());
 				AbstractCell[][] cell2D = ((Grid) o).getCells2D();
 				for (int x = 0; x < 10; x++) {
 					for (int y = 0; y < 10; y++) {
