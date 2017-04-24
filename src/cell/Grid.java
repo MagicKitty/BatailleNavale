@@ -52,6 +52,16 @@ public class Grid {
 		return Cells2D;
 	}
 
+	public AbstractCell getCell(int x, int y){
+		return Cells2D[x][y];
+	}
+	
+	public AbstractCell getCell(Coord2D c){
+		int x = c.getX();
+		int y = c.getY();
+		
+		return Cells2D[x][y];
+	}
 	
 	public void addSeaShot(){
 		numberOfSeaShots++;
