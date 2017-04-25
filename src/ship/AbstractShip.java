@@ -5,7 +5,6 @@ import java.util.ArrayList;
 import cell.ShipCell;
 
 public abstract class AbstractShip {
-	private String name;
 	private boolean isAlive;
 	private int numberOfCellsAlive;
 	private int numberOfBullets;
@@ -13,8 +12,7 @@ public abstract class AbstractShip {
 	private IBehaviorDefensive bd;
 	private IBehaviorOffensive bo;
 	
-	public AbstractShip(String n) {
-		name = n;
+	public AbstractShip() {
 	}
 	
 	public boolean isAlive() {
@@ -41,13 +39,9 @@ public abstract class AbstractShip {
 		return bo.getAttack();
 	}
 
-	public int getSize() {
-		return 0;
-	}
+	public abstract int getSize();
 	
-	public String getName() {
-		return name;
-	}
+	public abstract String getName();
 	
 	public void KillACell() {
 		numberOfCellsAlive -= 1;
