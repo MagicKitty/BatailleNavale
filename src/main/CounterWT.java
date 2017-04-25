@@ -1,18 +1,20 @@
 package main;
 
-import java.awt.FlowLayout;
+import java.awt.BorderLayout;
 
 import javax.swing.JLabel;
 import javax.swing.JPanel;
 
 public class CounterWT extends JPanel {
+	{
+        setOpaque(false);
+    }
 	public CounterWT(int a, int b) {
 		super();
-		setLayout(new FlowLayout());
-		JLabel lab1 = new JLabel("Eau : "+a, JLabel.CENTER);
-		add(lab1);
-		
-		JLabel lab2 = new JLabel("Touché : "+b, JLabel.CENTER);
-		add(lab2);
+		setLayout(new BorderLayout());
+		JLabel lab1 = new JLabel("Eau : "+a,JLabel.CENTER);
+		add(lab1,BorderLayout.NORTH);
+		JLabel lab2 = new JLabel("Touché : "+b,JLabel.CENTER);
+		add(lab2,BorderLayout.CENTER);
 	}
 }

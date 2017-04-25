@@ -29,7 +29,7 @@ public class GridScreen extends JPanel {
     }
 	
 	public GridScreen(int a,int b, String s) {
-		setBorder(BorderFactory.createTitledBorder("Placer bateaux"));
+		setBorder(BorderFactory.createTitledBorder(s));
 		setBackground(Color.ORANGE);
         setLayout(new GridBagLayout());
         GridBagConstraints gbc = new GridBagConstraints();

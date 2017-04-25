@@ -26,7 +26,7 @@ public class GameWindow extends JFrame {
 		
 		gt = new GameType();
 		
-		setSize(500, 500);
+		setSize(500,550);
 
 		setResizable(true);
 		setLocationRelativeTo(null);
@@ -61,9 +61,9 @@ public class GameWindow extends JFrame {
 				break;
 			case INGAME:
 				System.out.println(gt);
-				add(screen = new GridScreen(10, 10, "Grille ennemie"),BorderLayout.NORTH);
+				add(buttons = new ButtonsPane(3,"Quitter","Sauvegarder","Algorithme"),BorderLayout.NORTH);
 				add(screen = new GridScreen(10, 10, "Ma grille"),BorderLayout.CENTER);
-				add(buttons = new ButtonsPane(3,"Quitter","Sauvegarder","Algorithme"),BorderLayout.SOUTH);
+				add(screen = new GridScreen(10, 10, "Grille ennemie"),BorderLayout.SOUTH);
 				add(informations = new CounterWT(0,0),BorderLayout.EAST);
 				break;
 		}
