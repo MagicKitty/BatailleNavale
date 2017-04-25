@@ -2,7 +2,7 @@ package player;
 
 import graphic.Coord2D;
 
-public class StrategyA implements IChooseCellStrategy {
+public class CrossStrategy implements IChooseCellStrategy {
 
 	@Override
 	public Coord2D chooseCell() {
