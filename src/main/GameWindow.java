@@ -58,6 +58,7 @@ public class GameWindow extends JFrame {
 				add(screen = new GridScreen(10, 10),BorderLayout.NORTH);
 				add(buttons = new ButtonsPane(),BorderLayout.SOUTH);
 				add(boats = new BoatsPane(screen), null);
+				//test
 				break;
 		}
 		
