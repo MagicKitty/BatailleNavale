@@ -40,10 +40,10 @@ public class AlgorithmScreen extends JPanel implements ActionListener {
 		Object source = e.getSource();
 		if (source == aleatoire) {
 			_gt.setAlgorithm("aleatoire");
-			_gw.setStatus(GameStatus.GRID);
+			_gw.setStatus(GameStatus.INGAME);
 		} else if(source == croix) {
 			_gt.setAlgorithm("croix");
-			_gw.setStatus(GameStatus.GRID);
+			_gw.setStatus(GameStatus.INGAME);
 		}
 	}
 }
