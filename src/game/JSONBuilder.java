@@ -117,17 +117,4 @@ public class JSONBuilder {
 	public String toString() {
 		return obj.toString();
 	}
-
-	public static void main(String[] args) {
-		JSONObject obj = new JSONObject();
-		List<Integer> l = new ArrayList<Integer>();
-		l.add(5);
-		l.add(6);
-		try {
-			obj.append("gna", new JSONArray(l));
-			System.out.println(obj.toString());
-		} catch (Exception e) {
-			e.printStackTrace();
-		}
-	}
 }
