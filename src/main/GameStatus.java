@@ -5,5 +5,6 @@ public enum GameStatus {
 	PERIOD,
 	SHOT,
 	ALGORITHM,
-	GRID
+	GRID,
+	INGAME
 }

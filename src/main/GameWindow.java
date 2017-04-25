@@ -16,6 +16,7 @@ public class GameWindow extends JFrame {
 	private JPanel screen;
 	private JPanel buttons;
 	private JPanel boats;
+	private JPanel informations;
 	private GameType gt;
 	
 	public GameWindow() {
@@ -54,11 +55,16 @@ public class GameWindow extends JFrame {
 				add(screen = new AlgorithmScreen(this, gt));
 				break;
 			case GRID:
-				System.out.println(gt);
 				add(screen = new GridScreen(10, 10),BorderLayout.NORTH);
-				add(buttons = new ButtonsPane(),BorderLayout.SOUTH);
-				add(boats = new BoatsPane(screen), null);
-				//test
+				add(buttons = new ButtonsPane(1,"Continue"),BorderLayout.SOUTH);
+				add(boats = new BoatsPane(screen));
+				break;
+			case INGAME:
+				System.out.println(gt);
+				add(screen = new GridScreen(10, 10, "Grille ennemie"),BorderLayout.NORTH);
+				add(screen = new GridScreen(10, 10, "Ma grille"),BorderLayout.CENTER);
+				add(buttons = new ButtonsPane(3,"Quitter","Sauvegarder","Algorithme"),BorderLayout.SOUTH);
+				add(informations = new CounterWT(0,0),BorderLayout.EAST);
 				break;
 		}
 		

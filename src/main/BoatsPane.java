@@ -1,29 +1,35 @@
 package main;
 
 import java.awt.Color;
+import java.awt.FlowLayout;
+import java.awt.Image;
 
-import javax.swing.JComponent;
+import javax.imageio.ImageIO;
+import javax.swing.ImageIcon;
+import javax.swing.JButton;
 import javax.swing.JPanel;
 
 public class BoatsPane extends JPanel {
 	public BoatsPane(JPanel screen) {
 		super();
-		this.setLayout(null);
+		this.setLayout(new FlowLayout());
 		this.setBackground(Color.ORANGE);
-		ComponentMove listener = new ComponentMove(this);
-        for(int i=0; i<10; i++) {
-        	this.add(createComponent());
-        }
-        addMouseListener(listener);
-        addMouseMotionListener(listener);
+		for (int i = 0; i < 5; i++) {
+			this.add(createComponent(i));
+		}
 	}
-	
-	private JComponent createComponent() {
-        JPanel component=new JPanel();
-        component.setLocation((int)(Math.random()*100), (int)(Math.random()*100));
-        component.setSize(50,50);
-        component.setBackground(Color.DARK_GRAY);
-        component.setEnabled(false); // les composants ne doivent pas intercepter la souris
-        return component;
-    }
+
+	private JButton createComponent(int i) {
+		JButton component = new JButton(""+i);
+		try {
+			Image img = ImageIO.read(getClass().getResource("../images/ship.bmp"));
+			component.setIcon(new ImageIcon(img));
+		} catch (Exception ex) {
+			System.out.println(ex);
+		}
+		component.setSize(100, 80);
+		component.setFocusPainted(false);
+		component.setBackground(Color.DARK_GRAY);
+		return component;
+	}
 }
