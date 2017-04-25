@@ -1,13 +1,11 @@
 package screen;
 
-import java.awt.BorderLayout;
 import java.awt.Color;
 import java.awt.GridBagConstraints;
 import java.awt.GridBagLayout;
 
 import javax.swing.BorderFactory;
 import javax.swing.JPanel;
-import javax.swing.border.Border;
 import javax.swing.border.MatteBorder;
 
 import main.Button;
@@ -28,9 +26,5 @@ public class GridScreen extends JPanel {
                 add(cellPane, gbc);
             }
         }
-        
-        // METTRE SUR UN AUTRE JPANEL
-        Button but = new Button("OK", 0, 0, 0, 0, gbc,a/2,b);
-        add(but,but.getGBC());
     }
 }

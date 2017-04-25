@@ -6,11 +6,16 @@ import javax.swing.JFrame;
 import javax.swing.JPanel;
 
 import game.GameType;
-import screen.*;
+import screen.AlgorithmScreen;
+import screen.GridScreen;
+import screen.NewLoadScreen;
+import screen.PeriodScreen;
+import screen.ShotScreen;
 
 public class GameWindow extends JFrame {
 	private JPanel screen;
 	private JPanel buttons;
+	private JPanel boats;
 	private GameType gt;
 	
 	public GameWindow() {
@@ -52,6 +57,7 @@ public class GameWindow extends JFrame {
 				System.out.println(gt);
 				add(screen = new GridScreen(10, 10),BorderLayout.NORTH);
 				add(buttons = new ButtonsPane(),BorderLayout.SOUTH);
+				add(boats = new BoatsPane(screen), null);
 				break;
 		}
 		

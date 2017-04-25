@@ -1,17 +1,18 @@
 package main;
 
-import java.awt.BorderLayout;
 import java.awt.Color;
-import java.awt.Dimension;
+import java.awt.GridBagConstraints;
+import java.awt.GridBagLayout;
 
-import javax.swing.JButton;
 import javax.swing.JPanel;
 
 public class ButtonsPane extends JPanel {
 	public ButtonsPane() {
-		this.setLayout(new BorderLayout());
+		super();
+		setLayout(new GridBagLayout());
+		GridBagConstraints gbc = new GridBagConstraints();
 		this.setBackground(Color.ORANGE);
-		this.setLayout(null);
-		this.add(new JButton("hello"),BorderLayout.SOUTH);
+        Button but = new Button("Continuer", 5, 5, 5, 5, gbc,0,0);
+        add(but,but.getGBC());
 	}
 }
