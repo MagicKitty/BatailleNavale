@@ -9,7 +9,6 @@ import java.awt.event.ActionListener;
 import javax.swing.BorderFactory;
 import javax.swing.JPanel;
 
-import game.GameType;
 import main.Button;
 import main.GameStatus;
 import main.GameWindow;

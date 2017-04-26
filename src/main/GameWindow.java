@@ -5,7 +5,7 @@ import java.awt.BorderLayout;
 import javax.swing.JFrame;
 import javax.swing.JPanel;
 
-import game.GameType;
+import screen.GameType;
 import screen.AlgorithmScreen;
 import screen.GridScreen;
 import screen.NewLoadScreen;
