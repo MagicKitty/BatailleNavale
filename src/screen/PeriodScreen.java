@@ -11,7 +11,6 @@ import javax.swing.BorderFactory;
 import javax.swing.JFileChooser;
 import javax.swing.JPanel;
 
-import game.GameType;
 import main.Button;
 import main.Filter;
 import main.GameStatus;

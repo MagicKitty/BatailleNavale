@@ -3,7 +3,6 @@ package main;
 import javax.swing.JFrame;
 import javax.swing.JPanel;
 
-import game.GameType;
 import screen.*;
 
 public class GameWindow extends JFrame {

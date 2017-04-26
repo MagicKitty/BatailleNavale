@@ -4,6 +4,7 @@ import java.util.ArrayList;
 
 import cell.Grid;
 import cell.ShipCell;
+import cell.ShipCellData;
 import graphic.Coord2D;
 import period.FutureShipFactory;
 import period.IShipFactory;
@@ -30,7 +31,8 @@ public abstract class AbstractGame {
 	private Grid myGrid;
 	private Grid ennemiGrid;
 	private IShipFactory sf;
-	private ArrayList<AbstractShip> aas = new ArrayList<>(5);
+	private ArrayList<AbstractShip> aasHuman = new ArrayList<>(5);
+	private ArrayList<AbstractShip> aasComputer = new ArrayList<>(5);
 	
 	public AbstractGame(Period p, StrategyType strategy){
 		
@@ -66,16 +68,27 @@ public abstract class AbstractGame {
 		ennemiGrid = new Grid(this);
 	}
 
-	public BattleshipGame getBg() {
-		return bg;
+	public abstract GameType getGameType();
+	
+	public Period getTimePeriod(){
+		return timePeriod;
 	}
-
-	public IPlayer getHumain() {
-		return humain;
+	
+	public StrategyType getComputerStrategy() {
+		return computerStrategy;
 	}
-
-	public IPlayer getComputer() {
-		return computer;
+	
+	public void setComputerStrategy(StrategyType strategy) {
+		computerStrategy = strategy;
+		
+		switch(computerStrategy){
+		case RANDOM:
+			computer.setStrategy(new RandomStrategy());
+			break;
+		case CROSS:
+			computer.setStrategy(new CrossStrategy());
+			break;
+		}
 	}
 
 	public Grid getMyGrid() {
@@ -86,39 +99,72 @@ public abstract class AbstractGame {
 		return ennemiGrid;
 	}
 
-	public IShipFactory getSf() {
-		return sf;
+	public AbstractShip getShip(ShipType type, PlayerType player) {
+		
+		ArrayList<AbstractShip> concernedAas = null;
+		
+		switch(player){
+		case COMPUTER:
+			concernedAas = aasComputer;
+		case HUMAN:
+			concernedAas = aasHuman;
+		}
+		
+		switch(type){
+		case CARRIER:
+			return concernedAas.get(0);
+		case BATTLESHIP:
+			return concernedAas.get(1);
+		case CRUISER:
+			return concernedAas.get(2);
+		case SUBMARINE:
+			return concernedAas.get(3);
+		case DESTROYER:
+			return concernedAas.get(4);
+		default:
+			return null;
+		}
 	}
-
-	public ArrayList<AbstractShip> getAas() {
-		return aas;
+	
+	private void setShip(ShipType type, AbstractShip ship, PlayerType player) {
+		
+		ArrayList<AbstractShip> concernedAas = null;
+		
+		switch(player){
+		case COMPUTER:
+			concernedAas = aasComputer;
+		case HUMAN:
+			concernedAas = aasHuman;
+		}
+		
+		switch(type){
+		case CARRIER:
+			concernedAas.set(0, ship);
+		case BATTLESHIP:
+			concernedAas.set(1, ship);
+		case CRUISER:
+			concernedAas.set(2, ship);
+		case SUBMARINE:
+			concernedAas.set(3, ship);
+		case DESTROYER:
+			concernedAas.set(4, ship);
+		}
 	}
 	
 	public void play() {
 		
 	}
 	
-	public String getGameType() {
-		return null;
-	}
 	
-	public String getTimePeriod() {
-		return null;
-	}
 	
-	public String getComputerStrategy() {
-		return null;
-	}
-	
-	public void setComputerStrategy() {
-		
-	}
+
 	
 	/**
-	 * adding a ship to the game and by extension to the grid
+	 * adding a new ship to the game and by extension to the grid
 	 * @param type the type of the ship wanted
 	 * @param c the cord of the top-left corner of the ship
 	 * @param ori orientation of the ship
+	 * @param player player concerned by the adding
 	 * @return false if adding the ship fails
 	 */
 	public boolean addShipDefault(ShipType type, Coord2D c, Orientation ori, PlayerType player ) {
@@ -172,7 +218,7 @@ public abstract class AbstractGame {
 					return false;
 		}
 		
-		aas.add(ship);
+		setShip(type, ship, player);
 		
 		if (ori == Orientation.HORIZONTAL) {
 			//linking cells on the grid to the ship
@@ -183,6 +229,54 @@ public abstract class AbstractGame {
 			for (int y = yCord; y < ship.getSize(); y++)
 				concernedGrid.addDefaultShipCell(xCord, y, ship);
 		}
+		
+		return true;
+	}
+	
+	/**
+	 * 
+	 * @param type the type of the ship to add
+	 * @param ship the ship to add
+	 * @param c the cord of the top-left corner of the ship
+	 * @param ori orientation of the ship
+	 * @param player player concerned by the adding
+	 * @param dataCells cells' data from JSON save file
+	 * @return false if adding the ship fails
+	 */
+	public boolean addShip(ShipType type, AbstractShip ship, Coord2D c, Orientation ori, PlayerType player, ShipCellData dataCells[]) {
+		Grid concernedGrid = null;
+	
+		if (player == PlayerType.COMPUTER)
+			concernedGrid = getEnnemiGrid();
+		else
+			concernedGrid = getMyGrid();
+		
+		int xCord = c.getX();
+		int yCord = c.getY();
+		
+		if (xCord < 0 || xCord >= 10 || yCord < 0 || yCord >= 10)
+			return false;
+		
+		if (dataCells.length != ship.getSize())
+			return false;
+		
+		if (ori == Orientation.HORIZONTAL)
+			if (xCord + ship.getSize() >= 10)
+				return false;
+		else
+			if (yCord + ship.getSize() >= 10)
+				return false;
+			
+		//checking if there is already a ship or not
+		for (ShipCellData dataCell : dataCells)
+			if (concernedGrid.getCell(dataCell.getX(), dataCell.getY()) instanceof ShipCell)
+				return false;
+		
+		setShip(type, ship, player);
+
+		//linking cells on the grid to the ship
+		for (ShipCellData dataCell : dataCells)
+			concernedGrid.addShipCell(dataCell.getX(), dataCell.getY(), dataCell.getLife(), ship);
 		
 		return true;
 	}
