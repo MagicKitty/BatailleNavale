@@ -279,5 +279,27 @@ public abstract class AbstractGame {
 		return true;
 	}
 	
+	public boolean deleteShip(ShipType type, PlayerType player){
+		Grid concernedGrid = null;
+		
+		if (player == PlayerType.COMPUTER)
+			concernedGrid = getEnnemiGrid();
+		else
+			concernedGrid = getMyGrid();
+		
+		AbstractShip ship = getShip(type, player);
+		
+		for (ShipCell cell : ship.getAsc()){
+			int x = cell.getX();
+			int y = cell.getY();
+			
+			concernedGrid.addDefaultSeaCell(x, y);
+		}
+		
+		setShip(type, null, player);
+		
+		return true;
+	}
+	
 	public abstract boolean hit(PlayerType player, Coord2D coord);
 }
