@@ -99,7 +99,11 @@ public abstract class AbstractGame {
 		return ennemiGrid;
 	}
 	
-	public abstract void play();
+	protected ComputerPlayer getComputerPlayer(){
+		return computer;
+	}
+	
+	public abstract void play(Coord2D humanTarget);
 
 	public AbstractShip getShip(ShipType type, PlayerType player) {
 		
@@ -274,4 +278,6 @@ public abstract class AbstractGame {
 		
 		return true;
 	}
+	
+	public abstract boolean hit(PlayerType player, Coord2D coord);
 }
