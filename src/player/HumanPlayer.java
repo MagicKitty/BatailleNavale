@@ -1,11 +1,12 @@
 package player;
 
 import graphic.Coord2D;
+import ship.ShipType;
 
 public class HumanPlayer implements IPlayer {
 
 	@Override
-	public String chooseShip() {
+	public ShipType chooseShip() {
 		// TODO Auto-generated method stub
 		return null;
 	}

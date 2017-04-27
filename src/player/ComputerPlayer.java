@@ -1,12 +1,13 @@
 package player;
 
 import graphic.Coord2D;
+import ship.ShipType;
 
 public class ComputerPlayer implements IPlayer {
 	IChooseCellStrategy ccs;
 
 	@Override
-	public String chooseShip() {
+	public ShipType chooseShip() {
 		// TODO Auto-generated method stub
 		return null;
 	}

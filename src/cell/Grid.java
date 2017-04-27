@@ -85,7 +85,7 @@ public class Grid {
 		return Cells2D[x][y].isVisible();
 	}
 	
-	public void hit(Coord2D c, int damage) {
+	public void hit(Coord2D c, double damage) {
 		int x = c.getX();
 		int y = c.getY();
 		
