@@ -83,6 +83,30 @@ public class PlaceShipsScreen extends GridScreen {
 				for(int i = 0; i < 4; i++) if(cruiser.getX() + i < 10) colorCell(cruiser.getX() + i, cruiser.getY(),-1);
 			}
 		}
+		
+		if(battleship.getX() != -1) {
+			if(battleship.getX() < 9) {
+				for(int i = 0; i < 2; i++) colorCell(battleship.getX() + i, battleship.getY(), 2);
+			} else {
+				for(int i = 0; i < 2; i++) if(battleship.getX() + i < 10) colorCell(battleship.getX() + i, battleship.getY(),-1);
+			}
+		}
+		
+		if(submarine.getX() != -1) {
+			if(submarine.getX() < 9) {
+				for(int i = 0; i < 3; i++) colorCell(submarine.getX() + i, submarine.getY(), 2);
+			} else {
+				for(int i = 0; i < 3; i++) if(submarine.getX() + i < 10) colorCell(submarine.getX() + i, submarine.getY(), -1);
+			}
+		}
+		
+		if(destroyer.getX() != -1) {
+			if(destroyer.getX() < 9) {
+				for(int i = 0; i < 3; i++) colorCell(destroyer.getX() + i, destroyer.getY(), 2);
+			} else {
+				for(int i = 0; i < 3; i++) if(destroyer.getX() + i < 10) colorCell(destroyer.getX() + i, destroyer.getY(), -1);
+			}
+		}
 	}
 	
 	private void updateScreen() {
@@ -90,5 +114,8 @@ public class PlaceShipsScreen extends GridScreen {
 		
 		if(carrierPos.getX() != -1) for(int i = 0; i < 5; i++) colorCell(carrierPos.getX() + i, carrierPos.getY(), 1);
 		if(cruiserPos.getX() != -1) for(int i = 0; i < 4; i++) colorCell(cruiserPos.getX() + i, cruiserPos.getY(), 1);
+		if(battleshipPos.getX() != -1) for(int i = 0; i < 2; i++) colorCell(battleshipPos.getX() + i, battleshipPos.getY(), 1);
+		if(submarinePos.getX() != -1) for(int i = 0; i < 3; i++) colorCell(submarinePos.getX() + i, submarinePos.getY(), 1);
+		if(destroyerPos.getX() != -1) for(int i = 0; i < 3; i++) colorCell(destroyerPos.getX() + i, destroyerPos.getY(), 1);
 	}
 }
