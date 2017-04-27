@@ -14,4 +14,5 @@ public class Carrier extends AbstractShip {
 	public String getName() {
 		return "Carrier";
 	}
+	
 }

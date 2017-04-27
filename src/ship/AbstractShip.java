@@ -11,10 +11,10 @@ public abstract class AbstractShip {
 	private ArrayList<ShipCell> asc = new ArrayList<>();
 	private IBehaviorDefensive bd;
 	private IBehaviorOffensive bo;
-	
+
 	public AbstractShip() {
 	}
-	
+
 	public boolean isAlive() {
 		return isAlive;
 	}
@@ -39,13 +39,21 @@ public abstract class AbstractShip {
 		return bo.getAttack();
 	}
 
+	public void setDefense(IBehaviorDefensive iBehaviorDefensive) {
+		bd=iBehaviorDefensive;
+	}
+
+	public void setAttack(IBehaviorOffensive iBehaviorOffensive){
+		bo=iBehaviorOffensive;
+	}
+
 	public abstract int getSize();
-	
+
 	public abstract String getName();
-	
+
 	public void KillACell() {
 		numberOfCellsAlive -= 1;
-		
+
 		if (numberOfCellsAlive == 0)
 			isAlive = false;
 	}
