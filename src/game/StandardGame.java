@@ -14,4 +14,10 @@ public class StandardGame extends AbstractGame {
 		return GameType.STANDARD;
 	}
 
+	@Override
+	public void play() {
+		// TODO Auto-generated method stub
+		
+	}
+
 }
