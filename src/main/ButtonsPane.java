@@ -8,13 +8,22 @@ import java.awt.event.ActionListener;
 
 import javax.swing.JPanel;
 
+import controller.ButtonController;
+
 public class ButtonsPane extends JPanel implements ActionListener {
-	public ButtonsPane(int a, String ... args) {
+	private ButtonController controller;
+	
+	public ButtonsPane(ButtonController controller, String ... args) {
 		super();
+		
+		if(controller != null) {
+			this.controller = controller;
+		}
+		
 		setLayout(new GridBagLayout());
 		GridBagConstraints gbc = new GridBagConstraints();
 		this.setBackground(Color.ORANGE);
-		for (int i = 0; i < a; i++) {
+		for (int i = 0; i < args.length; i++) {
 			Button but = new Button(args[i], 5, 5, 5, 5, gbc, i, 0);
 			but.addActionListener(this);
 			add(but, but.getGBC());
@@ -22,22 +31,8 @@ public class ButtonsPane extends JPanel implements ActionListener {
 	}
 	
 	public void actionPerformed(ActionEvent e) {
-		Object source = e.getSource();
-		System.out.println(e.getSource().toString());
-//		if (source == newGame) {
-//			window.setStatus(GameStatus.PERIOD);
-//		} else if (source == loadGame) {
-//			System.out.println("newGame");
-//			fc = new JFileChooser();
-//			fc.addChoosableFileFilter(new Filter());
-//			fc.setAcceptAllFileFilterUsed(false);
-//			int returnVal = fc.showOpenDialog(NewLoadScreen.this);
-//            if (returnVal == JFileChooser.APPROVE_OPTION) {
-//                File file = fc.getSelectedFile();
-//                System.out.println("Opening: "+file.getName() + System.lineSeparator());
-//            } else {
-//            	System.out.println("Open command cancelled by user"+ System.lineSeparator());
-//            }
-//		}
+		if(controller != null) {
+			controller.handleButton(e.getSource());
+		}
 	}
 }
