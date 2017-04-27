@@ -14,10 +14,10 @@ public class DAO {
 		return null;
 	}
 
-	public void saveGame(String a, AbstractGame ag) {
+	public void saveGame(String fileName, AbstractGame ag) {
 		JSONBuilder jb = new JSONBuilder();
 
-		File f = new File(a);
+		File f = new File(fileName);
 		if (!f.exists() && !f.isDirectory()) {
 			jb.addString("timePeriod", ag.getTimePeriod().toString());
 			jb.addString("computerStrategy", ag.getComputerStrategy().toString());
@@ -30,7 +30,7 @@ public class DAO {
 			}
 			*/
 			try {
-				PrintWriter writer = new PrintWriter(a, "UTF-8");
+				PrintWriter writer = new PrintWriter(fileName, "UTF-8");
 				writer.println(jb.toString());
 				writer.close();
 			} catch (IOException e) {
