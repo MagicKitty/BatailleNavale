@@ -12,6 +12,7 @@ import screen.AlgorithmScreen;
 import screen.GridScreen;
 import screen.NewLoadScreen;
 import screen.PeriodScreen;
+import screen.PlaceShipsScreen;
 import screen.ShotScreen;
 
 public class GameWindow extends JFrame {	
@@ -87,7 +88,7 @@ public class GameWindow extends JFrame {
 			case GRID:
 				if(placeShipsController == null) placeShipsController = new PlaceShipsController();
 				
-				add(placeGridScreen != null ? placeGridScreen : (placeGridScreen = new GridScreen(10, 10, null)),BorderLayout.NORTH);
+				add(placeGridScreen != null ? placeGridScreen : (placeGridScreen = new PlaceShipsScreen(placeShipsController)),BorderLayout.NORTH);
 				add(placeButtonsScreen != null ? placeButtonsScreen : (placeButtonsScreen = new ButtonsPane(mainActionsController, "Continue")), BorderLayout.SOUTH);
 				add(boatsScreen != null ? boatsScreen : (boatsScreen = new BoatsPane(placeShipsController)));
 				break;

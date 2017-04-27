@@ -6,7 +6,11 @@ public class PlaceShipsController {
 	private ShipType addedType;
 	
 	public PlaceShipsController() {
-		
+		addedType = ShipType.CARRIER;
+	}
+	
+	public ShipType getAddedType() {
+		return addedType;
 	}
 	
 	public void chooseCarrier() {

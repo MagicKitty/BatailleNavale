@@ -21,7 +21,7 @@ public class InGameScreen extends JPanel {
             for (int col = 0; col < b; col++) {
                 gbc.gridx = col;
                 gbc.gridy = row;
-                CellPane cellPane = new CellPane(1);
+                CellPane cellPane = new CellPane(1, null);
                 cellPane.setBorder(new MatteBorder(1, 1, row < a-1 ? 0 : 1, col < b-1 ? 0 : 1, Color.GRAY));
                 add(cellPane, gbc);
             }

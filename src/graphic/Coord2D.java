@@ -4,9 +4,8 @@ public class Coord2D {
 	private int x;
 	private int y;
 	
-	public Coord2D(int a, int b) {
-		x = a;
-		y = b;
+	public Coord2D(int px, int py) {
+		setPosition(px, py);
 	}
 	
 	public int getX() {
@@ -15,5 +14,14 @@ public class Coord2D {
 	
 	public int getY() {
 		return y;
+	}
+	
+	public void setPosition(int px, int py) {
+		x = px;
+		y = py;
+	}
+	
+	public Coord2D clone() {
+		return new Coord2D(x, y);
 	}
 }
