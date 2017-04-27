@@ -98,6 +98,8 @@ public abstract class AbstractGame {
 	public Grid getEnnemiGrid() {
 		return ennemiGrid;
 	}
+	
+	public abstract void play();
 
 	public AbstractShip getShip(ShipType type, PlayerType player) {
 		
@@ -150,14 +152,6 @@ public abstract class AbstractGame {
 			concernedAas.set(4, ship);
 		}
 	}
-	
-	public void play() {
-		
-	}
-	
-	
-	
-
 	
 	/**
 	 * adding a new ship to the game and by extension to the grid

@@ -25,5 +25,7 @@ public abstract class AbstractCell {
 	
 	public abstract boolean isValidHit();
 	
+	public abstract boolean isVisible();
+	
 	public abstract void hit(double a);
 }
