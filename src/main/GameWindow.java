@@ -14,9 +14,10 @@ import screen.ShotScreen;
 
 public class GameWindow extends JFrame {
 	private JPanel screen;
-	private JPanel buttons;
-	private JPanel boats;
-	private JPanel informations;
+	
+	private JPanel newLoadScreen, periodScreen, shotScreen, algorithmScreen, placeGridScreen, placeButtonsScreen;
+	private JPanel boatsScreen, igButtonsScreen, myGridScreen, enemyGridScreen, informationsScreen;
+	
 	private GameType gt;
 	
 	public GameWindow() {
@@ -43,28 +44,28 @@ public class GameWindow extends JFrame {
 		
 		switch(s) {
 			case NEW_LOAD:
-				add(screen = new NewLoadScreen(this));
+				add(newLoadScreen != null ? newLoadScreen : (newLoadScreen = new NewLoadScreen(this)));
 				break;
 			case PERIOD:
-				add(screen = new PeriodScreen(this, gt = new GameType()));
+				add(periodScreen != null ? periodScreen : (periodScreen = new PeriodScreen(this, gt = new GameType())));
 				break;
 			case SHOT:
-				add(screen = new ShotScreen(this, gt));
+				add(shotScreen != null ? shotScreen : (shotScreen = new ShotScreen(this, gt)));
 				break;
 			case ALGORITHM:
-				add(screen = new AlgorithmScreen(this, gt));
+				add(algorithmScreen != null ? algorithmScreen : (algorithmScreen = new AlgorithmScreen(this, gt)));
 				break;
 			case GRID:
-				add(screen = new GridScreen(10, 10),BorderLayout.NORTH);
-				add(buttons = new ButtonsPane(1,"Continue"),BorderLayout.SOUTH);
-				add(boats = new BoatsPane(screen));
+				add(placeGridScreen != null ? placeGridScreen : (placeGridScreen = new GridScreen(10, 10)),BorderLayout.NORTH);
+				add(placeButtonsScreen != null ? placeButtonsScreen : (placeButtonsScreen = new ButtonsPane(1,"Continue")), BorderLayout.SOUTH);
+				add(boatsScreen != null ? boatsScreen : (boatsScreen = new BoatsPane()));
 				break;
 			case INGAME:
 				System.out.println(gt);
-				add(buttons = new ButtonsPane(3,"Quitter","Sauvegarder","Algorithme"),BorderLayout.NORTH);
-				add(screen = new GridScreen(10, 10, "Ma grille"),BorderLayout.CENTER);
-				add(screen = new GridScreen(10, 10, "Grille ennemie"),BorderLayout.SOUTH);
-				add(informations = new CounterWT(0,0),BorderLayout.EAST);
+				add(igButtonsScreen != null ? igButtonsScreen : (igButtonsScreen = new ButtonsPane(3,"Quitter","Sauvegarder","Algorithme")),BorderLayout.NORTH);
+				add(myGridScreen != null ? myGridScreen : (myGridScreen = new GridScreen(10, 10, "Ma grille")),BorderLayout.CENTER);
+				add(enemyGridScreen != null ? enemyGridScreen : (enemyGridScreen = new GridScreen(10, 10, "Grille ennemie")),BorderLayout.SOUTH);
+				add(informationsScreen != null ? informationsScreen : (informationsScreen = new CounterWT(0,0)),BorderLayout.EAST);
 				break;
 		}
 		
