@@ -5,6 +5,7 @@ import java.awt.BorderLayout;
 import javax.swing.JFrame;
 import javax.swing.JPanel;
 
+import controller.PlaceShipsController;
 import screen.GameType;
 import screen.AlgorithmScreen;
 import screen.GridScreen;
@@ -16,6 +17,7 @@ public class GameWindow extends JFrame {
 	private JPanel newLoadScreen, periodScreen, shotScreen, algorithmScreen, placeGridScreen, placeButtonsScreen;
 	private JPanel boatsScreen, igButtonsScreen, myGridScreen, enemyGridScreen, informationsScreen;
 	
+	private PlaceShipsController placeShipsController;
 	private GameType gt;
 	private GameStatus status;
 	
@@ -79,9 +81,11 @@ public class GameWindow extends JFrame {
 				add(algorithmScreen != null ? algorithmScreen : (algorithmScreen = new AlgorithmScreen(this, gt)));
 				break;
 			case GRID:
+				if(placeShipsController == null) placeShipsController = new PlaceShipsController();
+				
 				add(placeGridScreen != null ? placeGridScreen : (placeGridScreen = new GridScreen(10, 10)),BorderLayout.NORTH);
 				add(placeButtonsScreen != null ? placeButtonsScreen : (placeButtonsScreen = new ButtonsPane(1,"Continue")), BorderLayout.SOUTH);
-				add(boatsScreen != null ? boatsScreen : (boatsScreen = new BoatsPane()));
+				add(boatsScreen != null ? boatsScreen : (boatsScreen = new BoatsPane(placeShipsController)));
 				break;
 			case INGAME:
 				System.out.println(gt);
