@@ -12,16 +12,17 @@ import screen.NewLoadScreen;
 import screen.PeriodScreen;
 import screen.ShotScreen;
 
-public class GameWindow extends JFrame {
-	private JPanel screen;
-	
+public class GameWindow extends JFrame {	
 	private JPanel newLoadScreen, periodScreen, shotScreen, algorithmScreen, placeGridScreen, placeButtonsScreen;
 	private JPanel boatsScreen, igButtonsScreen, myGridScreen, enemyGridScreen, informationsScreen;
 	
 	private GameType gt;
+	private GameStatus status;
 	
 	public GameWindow() {
 		super("Bataille Navale");
+		
+		status = GameStatus.START;
 		
 		this.setLayout(new BorderLayout());
 		
@@ -38,8 +39,30 @@ public class GameWindow extends JFrame {
 	}
 	
 	public void setStatus(GameStatus s) {
-		if(screen != null) {
-			remove(screen);
+		switch(status) {
+			case NEW_LOAD:
+				remove(newLoadScreen);
+				break;
+			case PERIOD:
+				remove(periodScreen);
+				break;
+			case SHOT:
+				remove(shotScreen);
+				break;
+			case ALGORITHM:
+				remove(algorithmScreen);
+				break;
+			case GRID:
+				remove(placeGridScreen);
+				remove(placeButtonsScreen);
+				remove(boatsScreen);
+				break;
+			case INGAME:
+				remove(igButtonsScreen);
+				remove(myGridScreen);
+				remove(enemyGridScreen);
+				remove(informationsScreen);
+				break;
 		}
 		
 		switch(s) {
@@ -68,6 +91,8 @@ public class GameWindow extends JFrame {
 				add(informationsScreen != null ? informationsScreen : (informationsScreen = new CounterWT(0,0)),BorderLayout.EAST);
 				break;
 		}
+		
+		status = s;
 		
 		validate();
 		repaint();
