@@ -10,7 +10,7 @@ import javax.swing.JButton;
 import javax.swing.JPanel;
 
 public class BoatsPane extends JPanel {
-	public BoatsPane(JPanel screen) {
+	public BoatsPane() {
 		super();
 		this.setLayout(new FlowLayout());
 		this.setBackground(Color.ORANGE);
