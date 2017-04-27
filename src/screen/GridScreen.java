@@ -13,8 +13,10 @@ import main.CellPane;
 
 public class GridScreen extends JPanel {
 	CellPane cellPane;
-	public GridScreen(int a,int b) {
-		setBorder(BorderFactory.createTitledBorder("Placer bateaux"));
+	
+	public GridScreen(int a, int b, String title) {
+		if(title != null) setBorder(BorderFactory.createTitledBorder(title));
+		
 		setBackground(Color.ORANGE);
         setLayout(new GridBagLayout());
         GridBagConstraints gbc = new GridBagConstraints();
@@ -22,27 +24,7 @@ public class GridScreen extends JPanel {
             for (int col = 0; col < b; col++) {
                 gbc.gridx = col;
                 gbc.gridy = row;
-                newCellPane(1);
-                cellPane.setBorder(new MatteBorder(1, 1, row < a-1 ? 0 : 1, col < b-1 ? 0 : 1, Color.GRAY));
-                add(cellPane, gbc);
-            }
-        }
-    }
-	
-	public void newCellPane(int tailleBateau) {
-		cellPane = new CellPane(tailleBateau);
-	}
-	
-	public GridScreen(int a,int b, String s) {
-		setBorder(BorderFactory.createTitledBorder(s));
-		setBackground(Color.ORANGE);
-        setLayout(new GridBagLayout());
-        GridBagConstraints gbc = new GridBagConstraints();
-        for (int row = 0; row < a; row++) {
-            for (int col = 0; col < b; col++) {
-                gbc.gridx = col;
-                gbc.gridy = row;
-                newCellPane(1);
+        		cellPane = new CellPane(1);
                 cellPane.setBorder(new MatteBorder(1, 1, row < a-1 ? 0 : 1, col < b-1 ? 0 : 1, Color.GRAY));
                 add(cellPane, gbc);
             }

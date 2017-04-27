@@ -85,7 +85,7 @@ public class GameWindow extends JFrame {
 			case GRID:
 				if(placeShipsController == null) placeShipsController = new PlaceShipsController();
 				
-				add(placeGridScreen != null ? placeGridScreen : (placeGridScreen = new GridScreen(10, 10)),BorderLayout.NORTH);
+				add(placeGridScreen != null ? placeGridScreen : (placeGridScreen = new GridScreen(10, 10, null)),BorderLayout.NORTH);
 				add(placeButtonsScreen != null ? placeButtonsScreen : (placeButtonsScreen = new ButtonsPane(1,"Continue")), BorderLayout.SOUTH);
 				add(boatsScreen != null ? boatsScreen : (boatsScreen = new BoatsPane(placeShipsController)));
 				break;
