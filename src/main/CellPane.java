@@ -10,7 +10,7 @@ import javax.swing.JPanel;
 public class CellPane extends JPanel {
 	private Color defaultBackground;
 
-    public CellPane() {
+    public CellPane(int tailleBateau) {
         addMouseListener(new MouseAdapter() {
             @Override
             public void mouseEntered(MouseEvent e) {

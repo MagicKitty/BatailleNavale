@@ -12,6 +12,7 @@ import main.Button;
 import main.CellPane;
 
 public class GridScreen extends JPanel {
+	CellPane cellPane;
 	public GridScreen(int a,int b) {
 		setBorder(BorderFactory.createTitledBorder("Placer bateaux"));
 		setBackground(Color.ORANGE);
@@ -21,12 +22,16 @@ public class GridScreen extends JPanel {
             for (int col = 0; col < b; col++) {
                 gbc.gridx = col;
                 gbc.gridy = row;
-                CellPane cellPane = new CellPane();
+                newCellPane(1);
                 cellPane.setBorder(new MatteBorder(1, 1, row < a-1 ? 0 : 1, col < b-1 ? 0 : 1, Color.GRAY));
                 add(cellPane, gbc);
             }
         }
     }
+	
+	public void newCellPane(int tailleBateau) {
+		cellPane = new CellPane(tailleBateau);
+	}
 	
 	public GridScreen(int a,int b, String s) {
 		setBorder(BorderFactory.createTitledBorder(s));
@@ -37,7 +42,7 @@ public class GridScreen extends JPanel {
             for (int col = 0; col < b; col++) {
                 gbc.gridx = col;
                 gbc.gridy = row;
-                CellPane cellPane = new CellPane();
+                newCellPane(1);
                 cellPane.setBorder(new MatteBorder(1, 1, row < a-1 ? 0 : 1, col < b-1 ? 0 : 1, Color.GRAY));
                 add(cellPane, gbc);
             }
