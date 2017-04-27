@@ -14,4 +14,9 @@ public class AdvancedGame extends StandardGame {
 		return GameType.ADVANCED;	
 	}
 
+	public void play() {
+		// TODO Auto-generated method stub
+		
+	}
+	
 }

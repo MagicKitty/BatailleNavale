@@ -26,4 +26,10 @@ public class SeaCell extends AbstractCell {
 		//+1 to the seashot counter
 		getGrid().addSeaShot();
 	}
+
+	@Override
+	public boolean isVisible() {
+		//if the sea cell was already hit, the cell is visible
+		return isHit;
+	}
 }
