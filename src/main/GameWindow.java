@@ -65,6 +65,8 @@ public class GameWindow extends JFrame {
 				break;
 		}
 		
+		s=status.INGAME;
+		
 		switch(s) {
 			case NEW_LOAD:
 				add(newLoadScreen != null ? newLoadScreen : (newLoadScreen = new NewLoadScreen(this)));

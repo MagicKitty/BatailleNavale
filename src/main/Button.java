@@ -4,9 +4,14 @@ import java.awt.Color;
 import java.awt.Font;
 import java.awt.GridBagConstraints;
 import java.awt.Insets;
+import java.awt.event.ActionEvent;
+import java.io.File;
 
 import javax.swing.BorderFactory;
 import javax.swing.JButton;
+import javax.swing.JFileChooser;
+
+import screen.NewLoadScreen;
 
 public class Button extends JButton {
 	private GridBagConstraints g = new GridBagConstraints();
