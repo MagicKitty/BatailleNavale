@@ -52,17 +52,21 @@ public class CellPane extends JPanel {
 			defaultBackground = new Color(100, 100, 100);
 		} else if (n == 1) {
 //			defaultBackground = new Color(0, 153, 204);
-			try {
-				imageBoatFrontUp = ImageIO.read(getClass().getResource("../images/front_horiz.png"));
-			} catch (IOException e) {
-				e.printStackTrace();
-			}
+			setImage();
 		} else if (n == 2) {
 			defaultBackground = new Color(0, 204, 255);
 		} else if (n == -1) {
 			defaultBackground = new Color(200, 0, 0);
 		}
 		setBackground(defaultBackground);
+	}
+	
+	private void setImage() {
+		try {
+			imageBoatFrontUp = ImageIO.read(getClass().getResource("../images/front_horiz.png"));
+		} catch (IOException e) {
+			e.printStackTrace();
+		}
 	}
 
 	public void setPosition(int r, int c) {
