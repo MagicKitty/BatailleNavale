@@ -17,6 +17,7 @@ public class CellPane extends JPanel {
 	private GridScreen grid;
 	private Color defaultBackground;
 	private int row, col;
+	private Image imageBoatFrontUp;
 
 	public CellPane(int tailleBateau, GridScreen pGrid) {
 		grid = pGrid;
@@ -50,7 +51,12 @@ public class CellPane extends JPanel {
 		if (n == 0) {
 			defaultBackground = new Color(100, 100, 100);
 		} else if (n == 1) {
-			defaultBackground = new Color(0, 153, 204);
+//			defaultBackground = new Color(0, 153, 204);
+			try {
+				imageBoatFrontUp = ImageIO.read(getClass().getResource("../images/front_horiz.png"));
+			} catch (IOException e) {
+				e.printStackTrace();
+			}
 		} else if (n == 2) {
 			defaultBackground = new Color(0, 204, 255);
 		} else if (n == -1) {
@@ -80,13 +86,9 @@ public class CellPane extends JPanel {
 	@Override
 	protected void paintComponent(Graphics g) {
 		super.paintComponent(g);
-		Image bgImage=null;
-		try {
-			bgImage = ImageIO.read(getClass().getResource("../images/front_up.png"));
-		} catch (IOException e) {
-			e.printStackTrace();
+		if (imageBoatFrontUp != null) {
+			Image front_up = imageBoatFrontUp.getScaledInstance(30, 30, Image.SCALE_DEFAULT);
+			g.drawImage(front_up, 0, 0, null);
 		}
-		bgImage.getScaledInstance(10, 10, Image.SCALE_DEFAULT);
-		g.drawImage(bgImage, 0, 0, null);
 	}
 }
