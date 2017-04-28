@@ -18,10 +18,14 @@ public class CellPane extends JPanel {
 	private Color defaultBackground;
 	private int row, col;
 	private Image imageBoatFrontUp;
+	private int widthCell;
+	private int heightCell;
 
 	public CellPane(int tailleBateau, GridScreen pGrid) {
 		grid = pGrid;
 		setStatus(0);
+		widthCell = 30;
+		heightCell = 30;
 
 		addMouseListener(new MouseAdapter() {
 			@Override
@@ -84,14 +88,14 @@ public class CellPane extends JPanel {
 
 	@Override
 	public Dimension getPreferredSize() {
-		return new Dimension(30, 30);
+		return new Dimension(widthCell,heightCell);
 	}
 
 	@Override
 	protected void paintComponent(Graphics g) {
 		super.paintComponent(g);
 		if (imageBoatFrontUp != null) {
-			Image front_up = imageBoatFrontUp.getScaledInstance(30, 30, Image.SCALE_DEFAULT);
+			Image front_up = imageBoatFrontUp.getScaledInstance(widthCell,heightCell, Image.SCALE_DEFAULT);
 			g.drawImage(front_up, 0, 0, null);
 		}
 	}
