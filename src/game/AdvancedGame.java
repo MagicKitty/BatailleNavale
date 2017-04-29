@@ -8,7 +8,7 @@ import player.PlayerType;
 import player.StrategyType;
 import ship.AbstractShip;
 
-public class AdvancedGame extends StandardGame {
+public class AdvancedGame extends AbstractGame {
 
 	private AbstractShip selectedShipComputer, selectedShipHuman;
 	
@@ -61,11 +61,11 @@ public class AdvancedGame extends StandardGame {
 		
 		switch (player){
 		case COMPUTER:
-			concernedGrid = getMyGrid();
+			concernedGrid = getHumanGrid();
 			concernedShip = selectedShipComputer;
 			break;
 		case HUMAN:
-			concernedGrid = getEnnemiGrid();
+			concernedGrid = getComputerGrid();
 			concernedShip = selectedShipHuman;
 			break;
 		}

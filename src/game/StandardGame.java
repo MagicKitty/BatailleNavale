@@ -33,10 +33,10 @@ public class StandardGame extends AbstractGame {
 		
 		switch (player){
 		case COMPUTER:
-			concernedGrid = getMyGrid();
+			concernedGrid = getHumanGrid();
 			break;
 		case HUMAN:
-			concernedGrid = getEnnemiGrid();
+			concernedGrid = getComputerGrid();
 			break;
 		}
 		

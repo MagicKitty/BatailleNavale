@@ -1,21 +1,23 @@
 package player;
 
+import game.AbstractGame;
 import graphic.Coord2D;
 import ship.ShipType;
 
-public class ComputerPlayer implements IPlayer {
+public class ComputerPlayer {
 	IChooseCellStrategy ccs;
+	AbstractGame game;
 
-	@Override
+	public ComputerPlayer(AbstractGame game){
+		this.game = game;
+	}
+	
 	public ShipType chooseShip() {
-		// TODO Auto-generated method stub
-		return null;
+		return ccs.chooseShip(game.getComputerShips());
 	}
 
-	@Override
 	public Coord2D chooseCell() {
-		// TODO Auto-generated method stub
-		return null;
+		return ccs.chooseCell(game.getHumanGrid());
 	}
 	
 	public void setStrategy(IChooseCellStrategy ccs) {
