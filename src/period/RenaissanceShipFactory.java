@@ -2,6 +2,8 @@ package period;
 
 import ship.Battleship;
 import ship.Carrier;
+import ship.ConstantBehaviorDefensive;
+import ship.ConstantBehaviorOffensive;
 import ship.Cruiser;
 import ship.Destroyer;
 import ship.IBehaviorDefensive;
@@ -13,22 +15,8 @@ public class RenaissanceShipFactory implements IShipFactory {
 	@Override
 	public Carrier createCarrier() {
 		Carrier carrier = new Carrier();
-		carrier.setAttack(new IBehaviorOffensive() {
-
-			@Override
-			public double getAttack() {
-				// TODO Auto-generated method stub
-				return 3;
-			}
-		});
-		carrier.setDefense(new IBehaviorDefensive() {
-
-			@Override
-			public double getDefense() {
-				// TODO Auto-generated method stub
-				return 5;
-			}
-		});
+		carrier.setAttack(new ConstantBehaviorOffensive(3));
+		carrier.setDefense(new ConstantBehaviorDefensive(5));
 		return carrier;
 	}
 
@@ -36,22 +24,8 @@ public class RenaissanceShipFactory implements IShipFactory {
 	public Battleship createBattleship() {
 		Battleship battleship = new Battleship();
 
-		battleship.setAttack(new IBehaviorOffensive() {
-
-			@Override
-			public double getAttack() {
-				// TODO Auto-generated method stub
-				return 3;
-			}
-		});
-		battleship.setDefense(new IBehaviorDefensive() {
-
-			@Override
-			public double getDefense() {
-				// TODO Auto-generated method stub
-				return 4;
-			}
-		});
+		battleship.setAttack(new ConstantBehaviorOffensive(3));
+		battleship.setDefense(new ConstantBehaviorDefensive(4));
 
 		return battleship;
 	}
@@ -59,22 +33,8 @@ public class RenaissanceShipFactory implements IShipFactory {
 	@Override
 	public Cruiser createCruiser() {
 		Cruiser cruiser = new Cruiser();
-		cruiser.setAttack(new IBehaviorOffensive() {
-
-			@Override
-			public double getAttack() {
-				// TODO Auto-generated method stub
-				return 2;
-			}
-		});
-		cruiser.setDefense(new IBehaviorDefensive() {
-			
-			@Override
-			public double getDefense() {
-				// TODO Auto-generated method stub
-				return 3;
-			}
-		});
+		cruiser.setAttack(new ConstantBehaviorOffensive(2));
+		cruiser.setDefense(new ConstantBehaviorDefensive(3));
 
 		return cruiser;
 	}
@@ -83,22 +43,8 @@ public class RenaissanceShipFactory implements IShipFactory {
 	public Submarine createSubmarine() {
 		Submarine submarine = new Submarine();
 	
-		submarine.setAttack(new IBehaviorOffensive() {
-
-			@Override
-			public double getAttack() {
-				// TODO Auto-generated method stub
-				return 1;
-			}
-		});
-		submarine.setDefense(new IBehaviorDefensive() {
-			
-			@Override
-			public double getDefense() {
-				// TODO Auto-generated method stub
-				return 2;
-			}
-		});
+		submarine.setAttack(new ConstantBehaviorOffensive(1));
+		submarine.setDefense(new ConstantBehaviorDefensive(2));
 
 		return submarine;
 	}
@@ -107,22 +53,8 @@ public class RenaissanceShipFactory implements IShipFactory {
 	public Destroyer createDestroyer() {
 		Destroyer destroyer = new Destroyer();
 		
-		destroyer.setAttack(new IBehaviorOffensive() {
-
-			@Override
-			public double getAttack() {
-				// TODO Auto-generated method stub
-				return 1;
-			}
-		});
-		destroyer.setDefense(new IBehaviorDefensive() {
-			
-			@Override
-			public double getDefense() {
-				// TODO Auto-generated method stub
-				return 1;
-			}
-		});
+		destroyer.setAttack(new ConstantBehaviorOffensive(1));
+		destroyer.setDefense(new ConstantBehaviorDefensive(1));
 		return destroyer;
 	}
 }
