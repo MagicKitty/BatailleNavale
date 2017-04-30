@@ -17,7 +17,7 @@ public class MainActionsController implements ButtonController {
 		if(s instanceof JButton) {
 			switch(((JButton) s).getText()) {
 				case "Quitter": System.exit(-1); break;
-				case "Continue": gamewindow.setStatus(GameStatus.INGAME); break;
+				//case "Continue": gamewindow.setStatus(GameStatus.INGAME); break;
 				case "Algorithme": gamewindow.setStatus(GameStatus.ALGORITHM); break;
 				case "Sauvegarder": break;
 			}

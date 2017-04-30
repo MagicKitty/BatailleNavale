@@ -12,20 +12,17 @@ import javax.imageio.ImageIO;
 import javax.swing.JPanel;
 
 import screen.GridScreen;
+import graphic.ImageDB;
 
 public class CellPane extends JPanel {
 	private GridScreen grid;
 	private Color defaultBackground;
 	private int row, col;
-	private Image imageBoatFrontHoriz;
-	private int widthCell;
-	private int heightCell;
+	private Image image;
 
 	public CellPane(int tailleBateau, GridScreen pGrid) {
 		grid = pGrid;
 		setStatus(0);
-		widthCell = 30;
-		heightCell = 30;
 
 		addMouseListener(new MouseAdapter() {
 			@Override
@@ -52,25 +49,27 @@ public class CellPane extends JPanel {
 	}
 
 	public void setStatus(int n) {
+		image = null;
+		
 		if (n == 0) {
-			defaultBackground = new Color(100, 100, 100);
-		} else if (n == 1) {
 			defaultBackground = new Color(0, 153, 204);
-			setImage();
+		} else if (n == 1) {
+			image = ImageDB.getInstance().getBH();
 		} else if (n == 2) {
-			defaultBackground = new Color(0, 204, 255);
+			image = ImageDB.getInstance().getBU();
+		} else if(n == 3) {
+			image = ImageDB.getInstance().getFH();
+		} else if(n == 4) {
+			image = ImageDB.getInstance().getFU();
+		} else if(n == 5) {
+			image = ImageDB.getInstance().getMH();
+		} else if(n == 6) {
+			image = ImageDB.getInstance().getMU();
 		} else if (n == -1) {
 			defaultBackground = new Color(200, 0, 0);
 		}
 		setBackground(defaultBackground);
-	}
-	
-	private void setImage() {
-		try {
-			imageBoatFrontHoriz = ImageIO.read(getClass().getResource("../images/front_horiz.png"));
-		} catch (IOException e) {
-			e.printStackTrace();
-		}
+		this.repaint();
 	}
 
 	public void setPosition(int r, int c) {
@@ -88,15 +87,13 @@ public class CellPane extends JPanel {
 
 	@Override
 	public Dimension getPreferredSize() {
-		return new Dimension(widthCell,heightCell);
+		return new Dimension(30, 30);
 	}
 
 	@Override
 	protected void paintComponent(Graphics g) {
 		super.paintComponent(g);
-		if (imageBoatFrontHoriz != null) {
-			Image front_up = imageBoatFrontHoriz.getScaledInstance(widthCell,heightCell, Image.SCALE_DEFAULT);
-			g.drawImage(front_up, 0, 0, null);
-		}
+		if (image != null) g.drawImage(image, 0, 0, null);
 	}
 }
+//Image front_up = imageBoatFrontHoriz.getScaledInstance(widthCell,heightCell, Image.SCALE_DEFAULT);

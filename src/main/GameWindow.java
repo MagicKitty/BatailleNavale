@@ -86,10 +86,10 @@ public class GameWindow extends JFrame {
 				add(algorithmScreen != null ? algorithmScreen : (algorithmScreen = new AlgorithmScreen(this, gt)));
 				break;
 			case GRID:
-				if(placeShipsController == null) placeShipsController = new PlaceShipsController();
+				if(placeShipsController == null) placeShipsController = new PlaceShipsController(this);
 				
 				add(placeGridScreen != null ? placeGridScreen : (placeGridScreen = new PlaceShipsScreen(placeShipsController)),BorderLayout.NORTH);
-				add(placeButtonsScreen != null ? placeButtonsScreen : (placeButtonsScreen = new ButtonsPane(mainActionsController, "Continue")), BorderLayout.SOUTH);
+				add(placeButtonsScreen != null ? placeButtonsScreen : (placeButtonsScreen = new ButtonsPane(placeShipsController, "Continue")), BorderLayout.SOUTH);
 				add(boatsScreen != null ? boatsScreen : (boatsScreen = new BoatsPane(placeShipsController)));
 				break;
 			case INGAME:
