@@ -11,6 +11,7 @@ import javax.swing.JPanel;
 import controller.ButtonController;
 
 public class ButtonsPane extends JPanel implements ActionListener {
+	private static final long serialVersionUID = 1L;
 	private ButtonController controller;
 	
 	public ButtonsPane(ButtonController controller, String ... args) {

@@ -8,10 +8,10 @@ import javax.swing.BorderFactory;
 import javax.swing.JPanel;
 import javax.swing.border.MatteBorder;
 
-import main.Button;
 import main.CellPane;
 
 public class InGameScreen extends JPanel {
+	private static final long serialVersionUID = 1L;
 	public InGameScreen(int a,int b) {
 		setBorder(BorderFactory.createTitledBorder("Placer bateaux"));
 		setBackground(Color.ORANGE);

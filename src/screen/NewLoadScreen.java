@@ -17,6 +17,7 @@ import main.GameStatus;
 import main.GameWindow;
 
 public class NewLoadScreen extends JPanel implements ActionListener {
+	private static final long serialVersionUID = 1L;
 	Button newGame, loadGame;
 	JFileChooser fc;
 	GameWindow window;

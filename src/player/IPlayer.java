@@ -1,6 +1,5 @@
 package player;
 
-import game.AbstractGame;
 import graphic.Coord2D;
 import ship.ShipType;
 

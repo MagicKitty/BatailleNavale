@@ -4,6 +4,7 @@ import java.awt.*;
 import javax.swing.*;
 
 public class Grid extends JFrame {
+	private static final long serialVersionUID = 1L;
 
 	public Grid() {
 		super("Drawing a grid");

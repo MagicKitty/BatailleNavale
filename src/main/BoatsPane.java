@@ -14,6 +14,7 @@ import javax.swing.JPanel;
 import controller.PlaceShipsController;
 
 public class BoatsPane extends JPanel implements ActionListener {
+	private static final long serialVersionUID = 1L;
 	private JButton carrier, cruiser, destroyer, submarine, battleship;
 	private PlaceShipsController psc;
 	

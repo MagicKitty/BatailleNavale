@@ -6,15 +6,14 @@ import java.awt.Graphics;
 import java.awt.Image;
 import java.awt.event.MouseAdapter;
 import java.awt.event.MouseEvent;
-import java.io.IOException;
 
-import javax.imageio.ImageIO;
 import javax.swing.JPanel;
 
-import screen.GridScreen;
 import graphic.ImageDB;
+import screen.GridScreen;
 
 public class CellPane extends JPanel {
+	private static final long serialVersionUID = 1L;
 	private GridScreen grid;
 	private Color defaultBackground;
 	private int row, col;

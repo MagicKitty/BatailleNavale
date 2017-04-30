@@ -3,11 +3,9 @@ package game;
 import java.io.File;
 import java.io.IOException;
 import java.io.PrintWriter;
-import java.util.ArrayList;
-
-import ship.AbstractShip;
 
 public class DAO {
+	@SuppressWarnings("unused")
 	private BattleshipGame bsg;
 
 	public Game loadGame(String a) {

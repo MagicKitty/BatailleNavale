@@ -5,18 +5,16 @@ import java.awt.GridBagConstraints;
 import java.awt.GridBagLayout;
 import java.awt.event.ActionEvent;
 import java.awt.event.ActionListener;
-import java.io.File;
 
 import javax.swing.BorderFactory;
-import javax.swing.JFileChooser;
 import javax.swing.JPanel;
 
 import main.Button;
-import main.Filter;
 import main.GameStatus;
 import main.GameWindow;
 
 public class ShotScreen extends JPanel implements ActionListener {
+	private static final long serialVersionUID = 1L;
 	private Button normal, decidable;
 	private GameWindow _gw;
 	private GameType _gt;

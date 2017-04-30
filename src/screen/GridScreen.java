@@ -9,10 +9,10 @@ import javax.swing.BorderFactory;
 import javax.swing.JPanel;
 import javax.swing.border.MatteBorder;
 
-import main.Button;
 import main.CellPane;
 
 public class GridScreen extends JPanel {
+	private static final long serialVersionUID = 1L;
 	private LinkedList<CellPane> cells;
 	
 	public GridScreen(int a, int b, String title) {

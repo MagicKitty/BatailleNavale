@@ -5,6 +5,7 @@ import graphic.Coord2D;
 import ship.ShipType;
 
 public class PlaceShipsScreen extends GridScreen {
+	private static final long serialVersionUID = 1L;
 	private PlaceShipsController controller;
 	private Coord2D carrierPos, cruiserPos, battleshipPos, submarinePos, destroyerPos;
 	

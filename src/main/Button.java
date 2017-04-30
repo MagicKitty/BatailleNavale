@@ -4,16 +4,12 @@ import java.awt.Color;
 import java.awt.Font;
 import java.awt.GridBagConstraints;
 import java.awt.Insets;
-import java.awt.event.ActionEvent;
-import java.io.File;
 
 import javax.swing.BorderFactory;
 import javax.swing.JButton;
-import javax.swing.JFileChooser;
-
-import screen.NewLoadScreen;
 
 public class Button extends JButton {
+	private static final long serialVersionUID = 1L;
 	private GridBagConstraints g = new GridBagConstraints();
 
 	public Button(String title, int a,int b,int c,int d, GridBagConstraints gbc, int e,int f) {

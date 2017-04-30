@@ -74,7 +74,7 @@ public class PlaceShipsController implements ButtonController {
 			if(isReady()) {
 				gamewindow.setStatus(GameStatus.INGAME);
 			} else {
-				(new JOptionPane()).showMessageDialog(null, "Vous devez placer vos cinq bateaux !", "Erreur", JOptionPane.ERROR_MESSAGE);
+				JOptionPane.showMessageDialog(null, "Vous devez placer vos cinq bateaux !", "Erreur", JOptionPane.ERROR_MESSAGE);
 			}
 		}
 	}

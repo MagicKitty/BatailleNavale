@@ -7,15 +7,16 @@ import javax.swing.JPanel;
 
 import controller.MainActionsController;
 import controller.PlaceShipsController;
-import screen.GameType;
 import screen.AlgorithmScreen;
+import screen.GameType;
 import screen.GridScreen;
 import screen.NewLoadScreen;
 import screen.PeriodScreen;
 import screen.PlaceShipsScreen;
 import screen.ShotScreen;
 
-public class GameWindow extends JFrame {	
+public class GameWindow extends JFrame {
+	private static final long serialVersionUID = 1L;
 	private JPanel newLoadScreen, periodScreen, shotScreen, algorithmScreen, placeGridScreen, placeButtonsScreen;
 	private JPanel boatsScreen, igButtonsScreen, myGridScreen, enemyGridScreen, informationsScreen;
 	
@@ -70,6 +71,8 @@ public class GameWindow extends JFrame {
 				remove(enemyGridScreen);
 				remove(informationsScreen);
 				break;
+		default:
+			break;
 		}
 		
 		switch(s) {
@@ -99,6 +102,8 @@ public class GameWindow extends JFrame {
 				add(enemyGridScreen != null ? enemyGridScreen : (enemyGridScreen = new GridScreen(10, 10, "Grille ennemie")),BorderLayout.SOUTH);
 				add(informationsScreen != null ? informationsScreen : (informationsScreen = new CounterWT(0,0)),BorderLayout.EAST);
 				break;
+		default:
+			break;
 		}
 		
 		status = s;

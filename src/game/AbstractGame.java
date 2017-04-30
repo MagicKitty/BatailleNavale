@@ -14,7 +14,6 @@ import period.RenaissanceShipFactory;
 import player.ComputerPlayer;
 import player.CrossStrategy;
 import player.HumanPlayer;
-import player.IPlayer;
 import player.PlayerType;
 import player.RandomStrategy;
 import player.StrategyType;
@@ -25,7 +24,9 @@ import ship.ShipType;
 public abstract class AbstractGame {
 	private Period timePeriod;
 	private StrategyType computerStrategy;
+	@SuppressWarnings("unused")
 	private BattleshipGame bg = null;
+	@SuppressWarnings("unused")
 	private HumanPlayer humain;
 	private ComputerPlayer computer;
 	private Grid myGrid;

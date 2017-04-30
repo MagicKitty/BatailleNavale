@@ -14,6 +14,7 @@ import main.GameStatus;
 import main.GameWindow;
 
 public class AlgorithmScreen extends JPanel implements ActionListener {
+	private static final long serialVersionUID = 1L;
 	private GameWindow _gw;
 	private GameType _gt;
 	private Button aleatoire, croix;

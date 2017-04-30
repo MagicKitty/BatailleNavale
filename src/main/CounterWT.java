@@ -6,6 +6,7 @@ import javax.swing.JLabel;
 import javax.swing.JPanel;
 
 public class CounterWT extends JPanel {
+	private static final long serialVersionUID = 1L;
 	{
         setOpaque(false);
     }

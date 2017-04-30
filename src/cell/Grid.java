@@ -1,10 +1,8 @@
 package cell;
 
-import java.util.ArrayList;
-
-import ship.AbstractShip;
 import game.AbstractGame;
 import graphic.Coord2D;
+import ship.AbstractShip;
 
 public class Grid {
 	private AbstractGame ag;
