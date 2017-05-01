@@ -10,14 +10,25 @@ public class Coord2D {
 		setPosition(px, py);
 	}
 	
+	/**
+	 * @return abscissa of the coordinate
+	 */
 	public int getX() {
 		return x;
 	}
 	
+	/**
+	 * @return ordinate of the coordinate
+	 */
 	public int getY() {
 		return y;
 	}
 	
+	/**
+	 * setting the position of the coordinate
+	 * @param px abscissa wanted
+	 * @param py ordinate wanted
+	 */
 	public void setPosition(int px, int py) {
 		x = px;
 		y = py;
@@ -27,6 +38,11 @@ public class Coord2D {
 		return new Coord2D(x, y);
 	}
 	
+	/**
+	 * getting the coordinate of the neighbor of this coordinate
+	 * @param dir the direction to the neighbor
+	 * @return the neighbor of the coordinate
+	 */
 	public Coord2D getNeighbor(Direction dir){
 		int nX = x;
 		int nY = y;

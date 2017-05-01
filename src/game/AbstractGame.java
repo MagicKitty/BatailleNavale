@@ -32,6 +32,11 @@ public abstract class AbstractGame {
 	private IShipFactory sf;
 	private Ships humanShips, computerShips;
 	
+	/**
+	 * initializing the game with new grids, a specfic factory and a specific strategy for the computer
+	 * @param p period selected for the ships' factory
+	 * @param strategy computer's strategy selected
+	 */
 	public AbstractGame(Period p, StrategyType strategy){
 		
 		timePeriod = p;
@@ -68,16 +73,29 @@ public abstract class AbstractGame {
 		humanShips = new Ships();
 	}
 
+	/**
+	 * @return the type of the game (Advanced or Standard)
+	 */
 	public abstract GameType getGameType();
 	
+	/**
+	 * @return the time period which is used
+	 */
 	public Period getTimePeriod(){
 		return timePeriod;
 	}
 	
+	/**
+	 * @return the computer's strategy type which is used
+	 */
 	public StrategyType getComputerStrategy() {
 		return computerStrategy;
 	}
 	
+	/**
+	 * setting the strategy of the computer
+	 * @param strategy the type of the strategy (Cross or Random)
+	 */
 	public void setComputerStrategy(StrategyType strategy) {
 		computerStrategy = strategy;
 		
@@ -91,24 +109,46 @@ public abstract class AbstractGame {
 		}
 	}
 
+	/**
+	 * @return the grid of the human player
+	 */
 	public Grid getHumanGrid() {
 		return humanGrid;
 	}
 
+	/**
+	 * @return the grid of the computer
+	 */
 	public Grid getComputerGrid() {
 		return computerGrid;
 	}
 	
+	/**
+	 * @return computer's ships
+	 */
 	public Ships getComputerShips(){
 		return computerShips;
 	}
 	
+	/**
+	 * @return computer player
+	 */
 	protected ComputerPlayer getComputerPlayer(){
 		return computer;
 	}
 	
+	/**
+	 * playing one turn
+	 * @param humanTarget the target choosed by the human player
+	 */
 	public abstract void play(Coord2D humanTarget);
 
+	/**
+	 * getting a specific ship
+	 * @param type the type of the ship
+	 * @param player which player own the ship
+	 * @return the ship of the player and of the type asked
+	 */
 	public AbstractShip getShip(ShipType type, PlayerType player) {
 		
 		Ships concernedShips = null;
@@ -123,6 +163,12 @@ public abstract class AbstractGame {
 		return concernedShips.getShip(type);
 	}
 	
+	/**
+	 * setting a ship to a specific player
+	 * @param type the type of the ship
+	 * @param ship the ship itself
+	 * @param player the player which will own the ship
+	 */
 	private void setShip(ShipType type, AbstractShip ship, PlayerType player) {
 		
 		Ships concernedShips = null;
@@ -212,7 +258,7 @@ public abstract class AbstractGame {
 	}
 	
 	/**
-	 * 
+	 * adding an existing ship
 	 * @param type the type of the ship to add
 	 * @param ship the ship to add
 	 * @param c the cord of the top-left corner of the ship
@@ -259,6 +305,12 @@ public abstract class AbstractGame {
 		return true;
 	}
 	
+	/**
+	 * removing a ship
+	 * @param type the type of the ship
+	 * @param player the player which owns the ship
+	 * @return true if deleting succeed
+	 */
 	public boolean deleteShip(ShipType type, PlayerType player){
 		Grid concernedGrid = null;
 		
@@ -281,5 +333,11 @@ public abstract class AbstractGame {
 		return true;
 	}
 	
-	public abstract boolean hit(PlayerType player, Coord2D coord);
+	/**
+	 * hit a cell
+	 * @param player the player which plays
+	 * @param coord the target on the grid
+	 * @return false if the target is not valid
+	 */
+	protected abstract boolean hit(PlayerType player, Coord2D coord);
 }

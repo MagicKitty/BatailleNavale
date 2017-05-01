@@ -12,6 +12,11 @@ public class AdvancedGame extends AbstractGame {
 
 	private AbstractShip selectedShipComputer, selectedShipHuman;
 	
+	/**
+	 * initializing the game with new grids, a specfic factory and a specific strategy for the computer
+	 * @param p period selected for the ships' factory
+	 * @param strategy computer's strategy selected
+	 */
 	public AdvancedGame(Period period, StrategyType strategy) {
 		super(period, strategy);
 		
@@ -19,10 +24,17 @@ public class AdvancedGame extends AbstractGame {
 		selectedShipHuman = null;
 	}
 	
+	/**
+	 * @return the type of the game (Advanced or Standard)
+	 */
 	public GameType getGameType(){
 		return GameType.ADVANCED;	
 	}
 
+	/**
+	 * playing one turn
+	 * @param humanTarget the target choosed by the human player
+	 */
 	public void play(Coord2D humanTarget) {
 		hit(PlayerType.HUMAN, humanTarget);
 		
@@ -33,6 +45,11 @@ public class AdvancedGame extends AbstractGame {
 		hit(PlayerType.COMPUTER, comp.chooseCell());
 	}
 	
+	/**
+	 * setting which ship is selected
+	 * @param ship ship concerned
+	 * @param player player concerned
+	 */
 	public void setSelectedShip(AbstractShip ship, PlayerType player){
 		switch (player){
 		case COMPUTER:
@@ -44,6 +61,11 @@ public class AdvancedGame extends AbstractGame {
 		}
 	}
 	
+	/**
+	 * getting the ship which was selected for playing
+	 * @param player the player which plays
+	 * @return player's selected ship
+	 */
 	public AbstractShip getSelectedShip(PlayerType player){
 		switch (player){
 		case COMPUTER:
@@ -55,7 +77,13 @@ public class AdvancedGame extends AbstractGame {
 		}
 	}
 	
-	public boolean hit(PlayerType player, Coord2D coord){
+	/**
+	 * hit a cell
+	 * @param player the player which plays
+	 * @param coord the target on the grid
+	 * @return false if the target is not valid
+	 */
+	protected boolean hit(PlayerType player, Coord2D coord){
 		Grid concernedGrid = null;
 		AbstractShip concernedShip = null;
 		
