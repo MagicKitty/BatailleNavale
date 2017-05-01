@@ -7,7 +7,10 @@ public class Ships {
 	private ArrayList<AbstractShip> chips;
 	
 	public Ships(){
-		chips = new ArrayList<>();
+		chips = new ArrayList<>(5);
+		
+		for (int i = 0; i < 5; i++)
+			chips.add(i, null);
 	}
 	
 	public AbstractShip getShip(ShipType type){
