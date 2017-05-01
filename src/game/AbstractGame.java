@@ -32,8 +32,8 @@ public abstract class AbstractGame {
 	private Grid myGrid;
 	private Grid ennemiGrid;
 	private IShipFactory sf;
-	private ArrayList<AbstractShip> aasHuman = new ArrayList<>(5);
-	private ArrayList<AbstractShip> aasComputer = new ArrayList<>(5);
+	private ArrayList<AbstractShip> aasHuman;
+	private ArrayList<AbstractShip> aasComputer;
 	
 	public AbstractGame(Period p, StrategyType strategy){
 		
@@ -53,6 +53,14 @@ public abstract class AbstractGame {
 		
 		humain = new HumanPlayer();
 		computer = new ComputerPlayer();
+		
+		aasComputer = new ArrayList<>(5);
+		aasHuman = new ArrayList<>(5);
+		
+		for (int i = 0; i < 5; i++){
+			aasComputer.add(i, null);
+			aasHuman.add(i, null);
+		}
 		
 		computerStrategy = strategy;
 		
