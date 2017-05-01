@@ -7,6 +7,9 @@ import javax.swing.JPanel;
 
 import controller.MainActionsController;
 import controller.PlaceShipsController;
+import game.AbstractGame;
+import game.AdvancedGame;
+import player.StrategyType;
 import screen.AlgorithmScreen;
 import screen.GameType;
 import screen.GridScreen;
@@ -24,6 +27,8 @@ public class GameWindow extends JFrame {
 	private MainActionsController mainActionsController;
 	private GameType gt;
 	private GameStatus status;
+	
+	private AbstractGame game;
 	
 	public GameWindow() {
 		super("Bataille Navale");
@@ -89,21 +94,23 @@ public class GameWindow extends JFrame {
 				add(algorithmScreen != null ? algorithmScreen : (algorithmScreen = new AlgorithmScreen(this, gt)));
 				break;
 			case GRID:
+				if(game == null) {
+					game = new AdvancedGame(gt.getPeriod(), gt.getAlgorithm());
+				}
 				if(placeShipsController == null) placeShipsController = new PlaceShipsController(this);
 				
 				add(placeGridScreen != null ? placeGridScreen : (placeGridScreen = new PlaceShipsScreen(placeShipsController)),BorderLayout.NORTH);
 				add(placeButtonsScreen != null ? placeButtonsScreen : (placeButtonsScreen = new ButtonsPane(placeShipsController, "Continue")), BorderLayout.SOUTH);
 				add(boatsScreen != null ? boatsScreen : (boatsScreen = new BoatsPane(placeShipsController)));
 				break;
-			case INGAME:
-				System.out.println(gt);
+			case INGAME:				
 				add(igButtonsScreen != null ? igButtonsScreen : (igButtonsScreen = new ButtonsPane(mainActionsController, "Quitter","Sauvegarder","Algorithme")),BorderLayout.NORTH);
 				add(myGridScreen != null ? myGridScreen : (myGridScreen = new GridScreen(10, 10, "Ma grille")),BorderLayout.CENTER);
 				add(enemyGridScreen != null ? enemyGridScreen : (enemyGridScreen = new GridScreen(10, 10, "Grille ennemie")),BorderLayout.SOUTH);
 				add(informationsScreen != null ? informationsScreen : (informationsScreen = new CounterWT(0,0)),BorderLayout.EAST);
 				break;
-		default:
-			break;
+			default:
+				break;
 		}
 		
 		status = s;
@@ -111,4 +118,6 @@ public class GameWindow extends JFrame {
 		validate();
 		repaint();
 	}
+	
+	public AbstractGame getGame() { return game; }
 }

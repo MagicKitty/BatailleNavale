@@ -12,6 +12,7 @@ import javax.swing.JPanel;
 import main.Button;
 import main.GameStatus;
 import main.GameWindow;
+import player.StrategyType;
 
 public class AlgorithmScreen extends JPanel implements ActionListener {
 	private static final long serialVersionUID = 1L;
@@ -39,11 +40,11 @@ public class AlgorithmScreen extends JPanel implements ActionListener {
 	public void actionPerformed(ActionEvent e) {
 		Object source = e.getSource();
 		if (source == aleatoire) {
-			_gt.setAlgorithm("aleatoire");
-			_gw.setStatus(GameStatus.GRID);
+			_gt.setAlgorithm(StrategyType.RANDOM);
+			_gw.setStatus(_gw.getGame() == null ? GameStatus.GRID : GameStatus.INGAME);
 		} else if(source == croix) {
-			_gt.setAlgorithm("croix");
-			_gw.setStatus(GameStatus.GRID);
+			_gt.setAlgorithm(StrategyType.CROSS);
+			_gw.setStatus(_gw.getGame() == null ? GameStatus.GRID : GameStatus.INGAME);
 		}
 	}
 }

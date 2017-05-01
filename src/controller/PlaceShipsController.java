@@ -3,14 +3,19 @@ package controller;
 import javax.swing.JButton;
 import javax.swing.JOptionPane;
 
+import game.AbstractGame;
+import graphic.Coord2D;
 import main.GameStatus;
 import main.GameWindow;
+import player.PlayerType;
+import ship.Orientation;
 import ship.ShipType;
 
 public class PlaceShipsController implements ButtonController {
 	private GameWindow gamewindow;
 	private ShipType addedType;
 	private boolean carrierReady, cruiserReady, battleshipReady, destroyerReady, submarineReady;
+	private Coord2D carrierPos, cruiserPos, battleshipPos, destroyerPos, submarinePos;
 	
 	public PlaceShipsController(GameWindow gw) {
 		gamewindow = gw;
@@ -46,13 +51,13 @@ public class PlaceShipsController implements ButtonController {
 		return carrierReady && cruiserReady && battleshipReady && destroyerReady && submarineReady;
 	}
 	
-	public void setShipStatus(ShipType ship, boolean status) {
+	public void setShipPosition(ShipType ship, Coord2D position) {
 		switch(ship) {
-			case CARRIER: carrierReady = status; break;
-			case CRUISER: cruiserReady = status; break;
-			case BATTLESHIP: battleshipReady = status; break;
-			case DESTROYER: destroyerReady = status; break;
-			case SUBMARINE: submarineReady = status; break;
+			case CARRIER: carrierPos = position; carrierReady = true; break;
+			case CRUISER: cruiserPos = position; cruiserReady = true; break;
+			case BATTLESHIP: battleshipPos = position; battleshipReady = true; break;
+			case DESTROYER: destroyerPos = position; destroyerReady = true; break;
+			case SUBMARINE: submarinePos = position; submarineReady = true; break;
 		}
 	}
 	
@@ -72,6 +77,14 @@ public class PlaceShipsController implements ButtonController {
 	public void handleButton(Object s) {
 		if(s instanceof JButton && ((JButton) s).getText() == "Continue") {
 			if(isReady()) {
+				AbstractGame game = gamewindow.getGame();
+				
+				game.addShipDefault(ShipType.CARRIER, carrierPos, Orientation.HORIZONTAL, PlayerType.HUMAN);
+				game.addShipDefault(ShipType.CRUISER, cruiserPos, Orientation.HORIZONTAL, PlayerType.HUMAN);
+				game.addShipDefault(ShipType.BATTLESHIP, battleshipPos, Orientation.HORIZONTAL, PlayerType.HUMAN);
+				game.addShipDefault(ShipType.DESTROYER, destroyerPos, Orientation.HORIZONTAL, PlayerType.HUMAN);
+				game.addShipDefault(ShipType.SUBMARINE, submarinePos, Orientation.HORIZONTAL, PlayerType.HUMAN);
+				
 				gamewindow.setStatus(GameStatus.INGAME);
 			} else {
 				JOptionPane.showMessageDialog(null, "Vous devez placer vos cinq bateaux !", "Erreur", JOptionPane.ERROR_MESSAGE);

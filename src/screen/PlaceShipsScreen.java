@@ -124,7 +124,7 @@ public class PlaceShipsScreen extends GridScreen {
 		clearScreen();
 		
 		if(carrierPos.getX() != -1) {
-			controller.setShipStatus(ShipType.CARRIER, true);
+			controller.setShipPosition(ShipType.CARRIER, carrierPos);
 			
 			colorCell(carrierPos.getX(), carrierPos.getY(), 1);
 			for(int i = 1; i < 4; i++) colorCell(carrierPos.getX() + i, carrierPos.getY(), 5);
@@ -132,7 +132,7 @@ public class PlaceShipsScreen extends GridScreen {
 		}
 		
 		if(cruiserPos.getX() != -1) {
-			controller.setShipStatus(ShipType.CRUISER, true);
+			controller.setShipPosition(ShipType.CRUISER, cruiserPos);
 			
 			colorCell(cruiserPos.getX(), cruiserPos.getY(), 1);
 			for(int i = 1; i < 3; i++) colorCell(cruiserPos.getX() + i, cruiserPos.getY(), 5);
@@ -140,14 +140,14 @@ public class PlaceShipsScreen extends GridScreen {
 		}
 		
 		if(battleshipPos.getX() != -1) {
-			controller.setShipStatus(ShipType.BATTLESHIP, true);
+			controller.setShipPosition(ShipType.BATTLESHIP, battleshipPos);
 			
 			colorCell(battleshipPos.getX(), battleshipPos.getY(), 1);
 			colorCell(battleshipPos.getX() + 1, battleshipPos.getY(), 3);
 		}
 		
 		if(submarinePos.getX() != -1) {
-			controller.setShipStatus(ShipType.SUBMARINE, true);
+			controller.setShipPosition(ShipType.SUBMARINE, submarinePos);
 			
 			colorCell(submarinePos.getX(), submarinePos.getY(), 1);
 			colorCell(submarinePos.getX() + 1, submarinePos.getY(), 5);
@@ -155,7 +155,7 @@ public class PlaceShipsScreen extends GridScreen {
 		}
 		
 		if(destroyerPos.getX() != -1) {
-			controller.setShipStatus(ShipType.DESTROYER, true);
+			controller.setShipPosition(ShipType.DESTROYER, destroyerPos);
 			
 			colorCell(destroyerPos.getX(), destroyerPos.getY(), 1);
 			colorCell(destroyerPos.getX() + 1, destroyerPos.getY(), 5);

@@ -1,24 +1,29 @@
 package screen;
 
+import period.Period;
+import player.StrategyType;
+
 public class GameType {
-	private String _period, _shot, _algorithm;
+	private Period _period;
+	private StrategyType _algorithm;
+	private String _shot;
 	
 	public GameType() {
 	}
 
-	public String getAlgorithm() {
+	public StrategyType getAlgorithm() {
 		return _algorithm;
 	}
 
-	public void setAlgorithm(String algorithm) {
+	public void setAlgorithm(StrategyType algorithm) {
 		_algorithm = algorithm;
 	}
 
-	public String getPeriod() {
+	public Period getPeriod() {
 		return _period;
 	}
 
-	public void setPeriod(String period) {
+	public void setPeriod(Period period) {
 		_period = period;
 	}
 

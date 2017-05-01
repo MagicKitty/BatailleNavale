@@ -12,6 +12,7 @@ import javax.swing.JPanel;
 import main.Button;
 import main.GameStatus;
 import main.GameWindow;
+import period.Period;
 
 public class PeriodScreen extends JPanel implements ActionListener {
 	private static final long serialVersionUID = 1L;
@@ -38,10 +39,10 @@ public class PeriodScreen extends JPanel implements ActionListener {
 	public void actionPerformed(ActionEvent e) {
 		Object source = e.getSource();
 		if (source == moderne) {
-			_gt.setPeriod("moderne");
+			_gt.setPeriod(Period.MODERN);
 			_gw.setStatus(GameStatus.SHOT);
 		} else if(source == renaissance) {
-			_gt.setPeriod("renaissance");
+			_gt.setPeriod(Period.RENAISSANCE);
 			_gw.setStatus(GameStatus.SHOT);
 		}
 	}
