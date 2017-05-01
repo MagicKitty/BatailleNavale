@@ -5,16 +5,20 @@ import graphic.Coord2D;
 import ship.ShipType;
 import ship.Ships;
 
-public class CrossStrategy implements IChooseCellStrategy {
+public class CrossStrategy extends AbstractBasicStrategy implements IChooseCellStrategy {
+
+	public CrossStrategy() {
+		super();
+	}
 
 	@Override
-	public Coord2D chooseCell(Grid humanGrid) {
+	public ShipType chooseShip(Ships computerShips) {
 		// TODO Auto-generated method stub
 		return null;
 	}
 
 	@Override
-	public ShipType chooseShip(Ships computerShips) {
+	protected Coord2D chooseNewTarget(Grid humanGrid) {
 		// TODO Auto-generated method stub
 		return null;
 	}
