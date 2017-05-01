@@ -13,27 +13,24 @@ import period.Period;
 import period.RenaissanceShipFactory;
 import player.ComputerPlayer;
 import player.CrossStrategy;
-import player.HumanPlayer;
 import player.PlayerType;
 import player.RandomStrategy;
 import player.StrategyType;
 import ship.AbstractShip;
 import ship.Orientation;
 import ship.ShipType;
+import ship.Ships;
 
 public abstract class AbstractGame {
 	private Period timePeriod;
 	private StrategyType computerStrategy;
 	@SuppressWarnings("unused")
 	private BattleshipGame bg = null;
-	@SuppressWarnings("unused")
-	private HumanPlayer humain;
 	private ComputerPlayer computer;
-	private Grid myGrid;
-	private Grid ennemiGrid;
+	private Grid humanGrid;
+	private Grid computerGrid;
 	private IShipFactory sf;
-	private ArrayList<AbstractShip> aasHuman;
-	private ArrayList<AbstractShip> aasComputer;
+	private Ships humanShips, computerShips;
 	
 	public AbstractGame(Period p, StrategyType strategy){
 		
@@ -51,16 +48,7 @@ public abstract class AbstractGame {
 			break;
 		}
 		
-		humain = new HumanPlayer();
-		computer = new ComputerPlayer();
-		
-		aasComputer = new ArrayList<>(5);
-		aasHuman = new ArrayList<>(5);
-		
-		for (int i = 0; i < 5; i++){
-			aasComputer.add(i, null);
-			aasHuman.add(i, null);
-		}
+		computer = new ComputerPlayer(this);
 		
 		computerStrategy = strategy;
 		
@@ -73,8 +61,11 @@ public abstract class AbstractGame {
 			break;
 		}
 		
-		myGrid = new Grid(this);
-		ennemiGrid = new Grid(this);
+		humanGrid = new Grid(this);
+		computerGrid = new Grid(this);
+		
+		computerShips = new Ships();
+		humanShips = new Ships();
 	}
 
 	public abstract GameType getGameType();
@@ -100,12 +91,16 @@ public abstract class AbstractGame {
 		}
 	}
 
-	public Grid getMyGrid() {
-		return myGrid;
+	public Grid getHumanGrid() {
+		return humanGrid;
 	}
 
-	public Grid getEnnemiGrid() {
-		return ennemiGrid;
+	public Grid getComputerGrid() {
+		return computerGrid;
+	}
+	
+	public Ships getComputerShips(){
+		return computerShips;
 	}
 	
 	protected ComputerPlayer getComputerPlayer(){
@@ -116,54 +111,30 @@ public abstract class AbstractGame {
 
 	public AbstractShip getShip(ShipType type, PlayerType player) {
 		
-		ArrayList<AbstractShip> concernedAas = null;
+		Ships concernedShips = null;
 		
 		switch(player){
 		case COMPUTER:
-			concernedAas = aasComputer;
+			concernedShips = computerShips;
 		case HUMAN:
-			concernedAas = aasHuman;
+			concernedShips = humanShips;
 		}
 		
-		switch(type){
-		case CARRIER:
-			return concernedAas.get(0);
-		case BATTLESHIP:
-			return concernedAas.get(1);
-		case CRUISER:
-			return concernedAas.get(2);
-		case SUBMARINE:
-			return concernedAas.get(3);
-		case DESTROYER:
-			return concernedAas.get(4);
-		default:
-			return null;
-		}
+		return concernedShips.getShip(type);
 	}
 	
 	private void setShip(ShipType type, AbstractShip ship, PlayerType player) {
 		
-		ArrayList<AbstractShip> concernedAas = null;
+		Ships concernedShips = null;
 		
 		switch(player){
 		case COMPUTER:
-			concernedAas = aasComputer;
+			concernedShips = computerShips;
 		case HUMAN:
-			concernedAas = aasHuman;
+			concernedShips = humanShips;
 		}
 		
-		switch(type){
-		case CARRIER:
-			concernedAas.set(0, ship);
-		case BATTLESHIP:
-			concernedAas.set(1, ship);
-		case CRUISER:
-			concernedAas.set(2, ship);
-		case SUBMARINE:
-			concernedAas.set(3, ship);
-		case DESTROYER:
-			concernedAas.set(4, ship);
-		}
+		concernedShips.setShip(type, ship);
 	}
 	
 	/**
@@ -179,9 +150,9 @@ public abstract class AbstractGame {
 		AbstractShip ship = null;
 	
 		if (player == PlayerType.COMPUTER)
-			concernedGrid = getEnnemiGrid();
+			concernedGrid = getComputerGrid();
 		else
-			concernedGrid = getMyGrid();
+			concernedGrid = getHumanGrid();
 		
 		switch(type){
 		case CARRIER:
@@ -254,9 +225,9 @@ public abstract class AbstractGame {
 		Grid concernedGrid = null;
 	
 		if (player == PlayerType.COMPUTER)
-			concernedGrid = getEnnemiGrid();
+			concernedGrid = getComputerGrid();
 		else
-			concernedGrid = getMyGrid();
+			concernedGrid = getHumanGrid();
 		
 		int xCord = c.getX();
 		int yCord = c.getY();
@@ -292,9 +263,9 @@ public abstract class AbstractGame {
 		Grid concernedGrid = null;
 		
 		if (player == PlayerType.COMPUTER)
-			concernedGrid = getEnnemiGrid();
+			concernedGrid = getComputerGrid();
 		else
-			concernedGrid = getMyGrid();
+			concernedGrid = getHumanGrid();
 		
 		AbstractShip ship = getShip(type, player);
 		

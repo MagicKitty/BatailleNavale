@@ -19,8 +19,8 @@ public class DAO {
 		if (!f.exists() && !f.isDirectory()) {
 			jb.addString("timePeriod", ag.getTimePeriod().toString());
 			jb.addString("computerStrategy", ag.getComputerStrategy().toString());
-			jb.addObject(ag.getMyGrid());
-			jb.addObject(ag.getEnnemiGrid());
+			jb.addObject(ag.getHumanGrid());
+			jb.addObject(ag.getComputerGrid());
 			/* A re-adapter
 			ArrayList<AbstractShip> aas = new ArrayList<>();
 			for (int i = 0; i < aas.size(); i++) {
