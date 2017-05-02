@@ -44,7 +44,8 @@ public class ShipCell extends AbstractCell {
 	public void hit(double a) {
 		//processing the hit
 		double damage = a - as.getDefense();
-		life -= damage;
+		if(damage>0.)
+			life -= damage;
 		
 		//checking if the player killed a cell
 		if (life <= 0)
