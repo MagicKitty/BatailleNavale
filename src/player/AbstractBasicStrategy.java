@@ -33,10 +33,8 @@ public abstract class AbstractBasicStrategy implements IChooseCellStrategy {
 
 	@Override
 	public Coord2D chooseCell(Grid humanGrid){
-		AbstractCell lastCell = humanGrid.getCell(lastCoord);
-		
 		if (!shipFound){ //no ship found
-			if ((lastCoord == null) || (lastCell instanceof SeaCell)){ //first shot or last shot landed in the sea
+			if ((lastCoord == null) || (humanGrid.getCell(lastCoord) instanceof SeaCell)){ //first shot or last shot landed in the sea
 				return chooseNewTarget(humanGrid);	
 			} else { //the neighbor found is a ShipCell
 				shipFound = true;
@@ -49,6 +47,8 @@ public abstract class AbstractBasicStrategy implements IChooseCellStrategy {
 				}
 			}
 		} else { //ship already found
+			AbstractCell lastCell = humanGrid.getCell(lastCoord);
+			
 			if (lastCell instanceof SeaCell){//the neighbor found is a SeaCell
 				return searchNeighbor(humanGrid, false);
 			} else {//the neighbor found is a ShipCell
