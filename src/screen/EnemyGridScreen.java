@@ -31,8 +31,25 @@ public class EnemyGridScreen extends GridScreen {
 	}
 	
 	public void handleClick(int row, int col) {
-		//((AdvancedGame) game).setSelectedShip(ship, player);
-		game.play(new Coord2D(col, row));
-		window.update();
+		AbstractCell cell = game.getComputerGrid().getCell(col, row);
+		
+		if(cell != null && cell.isValidHit()) {
+			game.play(new Coord2D(col, row));
+			window.update();
+		}
+	}
+	
+	public void handleMouseOver(int row, int col) {
+		AbstractCell cell = game.getComputerGrid().getCell(col, row);
+		if(cell != null && !cell.isValidHit()) {
+			colorCell(col, row, -1);
+		}
+	}
+	
+	public void handleMouseOut(int row, int col) {
+		AbstractCell cell = game.getComputerGrid().getCell(col, row);
+		if(cell != null) {
+			colorCell(col, row, cell.isVisible() ? (cell.isSea() ? 0 : 3) : -2);
+		}
 	}
 }
