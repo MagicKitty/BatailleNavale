@@ -124,6 +124,21 @@ public class PlaceShipsController implements ButtonController {
 	}
 	
 	public void setShipPosition(ShipType ship, Coord2D position) {
+		int size = 0, dx = 0, dy = 0;
+		Orientation ori = null;
+		
+		switch(ship) {
+			case CARRIER: size = 5; ori = carrierOri; break;
+			case CRUISER: size = 4; ori = cruiserOri; break;
+			case BATTLESHIP: size = 2; ori = battleshipOri; break;
+			case DESTROYER: case SUBMARINE: size = 3; ori = destroyerOri; break;
+		}
+		
+		if(ori == Orientation.HORIZONTAL) dx = size;
+		else dy = size;
+		
+		if(position.getX() + dx > 9 || position.getY() + dy > 9) return;
+		
 		switch(ship) {
 			case CARRIER: carrierPos = position; carrierReady = true; break;
 			case CRUISER: cruiserPos = position; cruiserReady = true; break;

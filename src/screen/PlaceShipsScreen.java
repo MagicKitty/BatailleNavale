@@ -25,21 +25,32 @@ public class PlaceShipsScreen extends GridScreen {
 	}
 	
 	public void handleClick(int row, int col) {
+		Coord2D pos = new Coord2D(col, row);
 		switch(controller.getAddedType()) {
 			case CARRIER:
-				carrierPos.setPosition(col, row);
+				if(drawShip(pos, controller.getShipOrientation(controller.getAddedType()), 5)) {
+					carrierPos.setPosition(col, row);
+				}
 				break;
 			case CRUISER:
-				cruiserPos.setPosition(col, row);
+				if(drawShip(pos, controller.getShipOrientation(controller.getAddedType()), 4)) {
+					cruiserPos.setPosition(col, row);
+				}
 				break;
 			case BATTLESHIP:
-				battleshipPos.setPosition(col, row);
+				if(drawShip(pos, controller.getShipOrientation(controller.getAddedType()), 2)) {
+					battleshipPos.setPosition(col, row);
+				}
 				break;
 			case SUBMARINE:
-				submarinePos.setPosition(col, row);
+				if(drawShip(pos, controller.getShipOrientation(controller.getAddedType()), 3)) {
+					submarinePos.setPosition(col, row);
+				}
 				break;
 			case DESTROYER:
-				destroyerPos.setPosition(col, row);
+				if(drawShip(pos, controller.getShipOrientation(controller.getAddedType()), 3)) {
+					destroyerPos.setPosition(col, row);
+				}
 				break;
 		}
 		
