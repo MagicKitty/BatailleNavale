@@ -12,15 +12,30 @@ import org.json.JSONObject;
 
 import jdk.nashorn.internal.objects.Global;
 import jdk.nashorn.internal.parser.JSONParser;
+import period.Period;
+import player.ComputerPlayer;
+import player.StrategyType;
 
 public class DAO {
 	@SuppressWarnings("unused")
 	private BattleshipGame bsg;
 
-	public Game loadGame(String filename) {
+	public AbstractGame loadGame(String filename) {
+		AbstractGame abstractGame = null;
+		
 		try {
 			BufferedReader reader = new BufferedReader(new FileReader(filename));
 			JSONObject jObject = new JSONObject(reader.readLine());
+			
+			GameType game = GameType.valueOf(jObject.getString("gameType"));
+			Period period = Period.valueOf(jObject.getString("timePeriod"));
+			StrategyType strategy = StrategyType.valueOf(jObject.getString("computerStrategy"));
+		
+			if (game == GameType.STANDARD)
+				abstractGame = new StandardGame(period, strategy);
+			else 
+				abstractGame = new AdvancedGame(period, strategy);
+			
 			reader.close();
 		} catch (Exception e) {
 			System.err.format("Exception occurred trying to read '%s'.", filename);
@@ -28,9 +43,7 @@ public class DAO {
 			System.exit(0);
 		}
 
-		// if(period.equals(""))
-
-		return null;
+		return abstractGame;
 	}
 
 	public void saveGame(String fileName, AbstractGame ag) {

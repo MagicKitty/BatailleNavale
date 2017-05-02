@@ -139,6 +139,7 @@ public class GameWindow extends JFrame {
 			case GRID:
 				if(game == null) {
 					game = new StandardGame(gt.getPeriod(), gt.getAlgorithm());
+					game.placeComputerShips();
 				}
 				if(placeShipsController == null) placeShipsController = new PlaceShipsController(this);
 				
