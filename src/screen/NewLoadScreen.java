@@ -42,7 +42,6 @@ public class NewLoadScreen extends JPanel implements ActionListener {
 		if (source == newGame) {
 			window.setStatus(GameStatus.PERIOD);
 		} else if (source == loadGame) {
-			System.out.println("newGame");
 			fc = new JFileChooser();
 			fc.addChoosableFileFilter(new Filter());
 			fc.setAcceptAllFileFilterUsed(false);
