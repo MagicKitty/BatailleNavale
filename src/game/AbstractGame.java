@@ -344,6 +344,7 @@ public abstract class AbstractGame {
 		return true;
 	}
 	
+
 	/**
 	 * hit a cell
 	 * @param player the player which plays
@@ -354,5 +355,13 @@ public abstract class AbstractGame {
 
 	public Ships getHumanShips() {
 		return humanShips;
+	}
+	
+	public void save(String filename) {
+		(new DAO()).saveGame(filename, this);
+	}
+	
+	public void save() {
+		save("game.txt");
 	}
 }

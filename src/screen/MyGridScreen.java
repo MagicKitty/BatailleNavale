@@ -1,5 +1,6 @@
 package screen;
 
+import cell.AbstractCell;
 import cell.Grid;
 import controller.PlaceShipsController;
 import game.AbstractGame;
@@ -7,12 +8,12 @@ import graphic.Coord2D;
 import ship.ShipType;
 
 public class MyGridScreen extends GridScreen {
-	private PlaceShipsController  controller;
+	private AbstractGame  game;
 	
-	public MyGridScreen(PlaceShipsController ctrl) {
+	public MyGridScreen(AbstractGame g) {
 		super(10, 10, "Ma grille");
 		
-		controller = ctrl;
+		game = g;
 		
 		update();
 	}
@@ -20,10 +21,12 @@ public class MyGridScreen extends GridScreen {
 	public void update() {
 		clearScreen();
 		
-		drawShip(controller.getShipPosition(ShipType.CARRIER), controller.getShipOrientation(ShipType.CARRIER), 5);
-		drawShip(controller.getShipPosition(ShipType.CRUISER), controller.getShipOrientation(ShipType.CRUISER), 4);
-		drawShip(controller.getShipPosition(ShipType.BATTLESHIP), controller.getShipOrientation(ShipType.BATTLESHIP), 2);
-		drawShip(controller.getShipPosition(ShipType.SUBMARINE), controller.getShipOrientation(ShipType.SUBMARINE), 3);
-		drawShip(controller.getShipPosition(ShipType.DESTROYER), controller.getShipOrientation(ShipType.DESTROYER), 3);
+		Grid grid = game.getHumanGrid();
+		
+		for(int i = 0; i < 10; i++) {
+			for(int j = 0; j < 10; j++) {
+				colorCell(i, j, grid.getCell(i, j).isSea() ? 0 : 3);
+			}
+		}
 	}
 }

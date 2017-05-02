@@ -1,7 +1,7 @@
 # BatailleNavale
-## commande de build :
 
-### ant clean
-### ant init
+## commande de build :
 ### ant build
+
+## commande de lancement :
 ### ant Launcher

@@ -3,6 +3,7 @@ package main;
 import java.awt.BorderLayout;
 
 import javax.swing.JFrame;
+import javax.swing.JOptionPane;
 import javax.swing.JPanel;
 
 import controller.MainActionsController;
@@ -54,6 +55,15 @@ public class GameWindow extends JFrame {
 		mainActionsController = new MainActionsController(this);
 	}
 	
+	public void save() {
+		if(game != null) {
+			String s = JOptionPane.showInputDialog("Nom du fichier");
+			if(s != null) {
+				game.save(s);
+			}
+		}
+	}
+	
 	public void update() {
 		switch(status) {
 			case NEW_LOAD:
@@ -77,7 +87,7 @@ public class GameWindow extends JFrame {
 				//(igButtonsScreen);
 				((EnemyGridScreen) enemyGridScreen).update();
 				((MyGridScreen) myGridScreen).update();
-				//(informationsScreen);
+				((CounterWT) informationsScreen).update();
 				break;
 			default:
 				break;
@@ -138,9 +148,9 @@ public class GameWindow extends JFrame {
 				break;
 			case INGAME:				
 				add(igButtonsScreen != null ? igButtonsScreen : (igButtonsScreen = new ButtonsPane(mainActionsController, "Quitter","Sauvegarder","Algorithme")),BorderLayout.NORTH);
-				add(myGridScreen != null ? myGridScreen : (myGridScreen = new MyGridScreen(placeShipsController)),BorderLayout.CENTER);
+				add(myGridScreen != null ? myGridScreen : (myGridScreen = new MyGridScreen(game)),BorderLayout.CENTER);
 				add(enemyGridScreen != null ? enemyGridScreen : (enemyGridScreen = new EnemyGridScreen(game, this)),BorderLayout.SOUTH);
-				add(informationsScreen != null ? informationsScreen : (informationsScreen = new CounterWT(0,0)),BorderLayout.EAST);
+				add(informationsScreen != null ? informationsScreen : (informationsScreen = new CounterWT(game)),BorderLayout.EAST);
 				break;
 			default:
 				break;
