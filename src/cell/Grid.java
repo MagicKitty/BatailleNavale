@@ -73,6 +73,9 @@ public class Grid {
 		int x = c.getX();
 		int y = c.getY();
 		
+		if (x < 0 || y < 0 || x > 9 || y > 9)
+			return false;
+		
 		return Cells2D[x][y].isValidHit();
 	}
 	

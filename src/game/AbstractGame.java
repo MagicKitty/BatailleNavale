@@ -13,28 +13,30 @@ import period.Period;
 import period.RenaissanceShipFactory;
 import player.ComputerPlayer;
 import player.CrossStrategy;
-import player.HumanPlayer;
 import player.PlayerType;
 import player.RandomStrategy;
 import player.StrategyType;
 import ship.AbstractShip;
 import ship.Orientation;
 import ship.ShipType;
+import ship.Ships;
 
 public abstract class AbstractGame {
 	private Period timePeriod;
 	private StrategyType computerStrategy;
 	@SuppressWarnings("unused")
 	private BattleshipGame bg = null;
-	@SuppressWarnings("unused")
-	private HumanPlayer humain;
 	private ComputerPlayer computer;
-	private Grid myGrid;
-	private Grid ennemiGrid;
+	private Grid humanGrid;
+	private Grid computerGrid;
 	private IShipFactory sf;
-	private ArrayList<AbstractShip> aasHuman;
-	private ArrayList<AbstractShip> aasComputer;
+	private Ships humanShips, computerShips;
 	
+	/**
+	 * initializing the game with new grids, a specfic factory and a specific strategy for the computer
+	 * @param p period selected for the ships' factory
+	 * @param strategy computer's strategy selected
+	 */
 	public AbstractGame(Period p, StrategyType strategy){
 		
 		timePeriod = p;
@@ -51,16 +53,7 @@ public abstract class AbstractGame {
 			break;
 		}
 		
-		humain = new HumanPlayer();
-		computer = new ComputerPlayer();
-		
-		aasComputer = new ArrayList<>(5);
-		aasHuman = new ArrayList<>(5);
-		
-		for (int i = 0; i < 5; i++){
-			aasComputer.add(i, null);
-			aasHuman.add(i, null);
-		}
+		computer = new ComputerPlayer(this);
 		
 		computerStrategy = strategy;
 		
@@ -73,20 +66,36 @@ public abstract class AbstractGame {
 			break;
 		}
 		
-		myGrid = new Grid(this);
-		ennemiGrid = new Grid(this);
+		humanGrid = new Grid(this);
+		computerGrid = new Grid(this);
+		
+		computerShips = new Ships();
+		humanShips = new Ships();
 	}
 
+	/**
+	 * @return the type of the game (Advanced or Standard)
+	 */
 	public abstract GameType getGameType();
 	
+	/**
+	 * @return the time period which is used
+	 */
 	public Period getTimePeriod(){
 		return timePeriod;
 	}
 	
+	/**
+	 * @return the computer's strategy type which is used
+	 */
 	public StrategyType getComputerStrategy() {
 		return computerStrategy;
 	}
 	
+	/**
+	 * setting the strategy of the computer
+	 * @param strategy the type of the strategy (Cross or Random)
+	 */
 	public void setComputerStrategy(StrategyType strategy) {
 		computerStrategy = strategy;
 		
@@ -100,70 +109,81 @@ public abstract class AbstractGame {
 		}
 	}
 
-	public Grid getMyGrid() {
-		return myGrid;
+	/**
+	 * @return the grid of the human player
+	 */
+	public Grid getHumanGrid() {
+		return humanGrid;
 	}
 
-	public Grid getEnnemiGrid() {
-		return ennemiGrid;
+	/**
+	 * @return the grid of the computer
+	 */
+	public Grid getComputerGrid() {
+		return computerGrid;
 	}
 	
+	/**
+	 * @return computer's ships
+	 */
+	public Ships getComputerShips(){
+		return computerShips;
+	}
+	
+	/**
+	 * @return computer player
+	 */
 	protected ComputerPlayer getComputerPlayer(){
 		return computer;
 	}
 	
+	/**
+	 * playing one turn
+	 * @param humanTarget the target choosed by the human player
+	 */
 	public abstract void play(Coord2D humanTarget);
 
+	/**
+	 * getting a specific ship
+	 * @param type the type of the ship
+	 * @param player which player own the ship
+	 * @return the ship of the player and of the type asked
+	 */
 	public AbstractShip getShip(ShipType type, PlayerType player) {
 		
-		ArrayList<AbstractShip> concernedAas = null;
+		Ships concernedShips = null;
 		
 		switch(player){
 		case COMPUTER:
-			concernedAas = aasComputer;
+			concernedShips = computerShips;
+			break;
 		case HUMAN:
-			concernedAas = aasHuman;
+			concernedShips = humanShips;
+			break;
 		}
 		
-		switch(type){
-		case CARRIER:
-			return concernedAas.get(0);
-		case BATTLESHIP:
-			return concernedAas.get(1);
-		case CRUISER:
-			return concernedAas.get(2);
-		case SUBMARINE:
-			return concernedAas.get(3);
-		case DESTROYER:
-			return concernedAas.get(4);
-		default:
-			return null;
-		}
+		return concernedShips.getShip(type);
 	}
 	
+	/**
+	 * setting a ship to a specific player
+	 * @param type the type of the ship
+	 * @param ship the ship itself
+	 * @param player the player which will own the ship
+	 */
 	private void setShip(ShipType type, AbstractShip ship, PlayerType player) {
-		
-		ArrayList<AbstractShip> concernedAas = null;
+		Ships concernedShips = null;
 		
 		switch(player){
 		case COMPUTER:
-			concernedAas = aasComputer;
+			concernedShips = computerShips;
+			break;
 		case HUMAN:
-			concernedAas = aasHuman;
+			concernedShips = humanShips;
+			break;
 		}
 		
-		switch(type){
-		case CARRIER:
-			concernedAas.set(0, ship);
-		case BATTLESHIP:
-			concernedAas.set(1, ship);
-		case CRUISER:
-			concernedAas.set(2, ship);
-		case SUBMARINE:
-			concernedAas.set(3, ship);
-		case DESTROYER:
-			concernedAas.set(4, ship);
-		}
+		concernedShips.setShip(type, ship);
 	}
 	
 	/**
@@ -175,13 +195,14 @@ public abstract class AbstractGame {
 	 * @return false if adding the ship fails
 	 */
 	public boolean addShipDefault(ShipType type, Coord2D c, Orientation ori, PlayerType player ) {
+		
 		Grid concernedGrid = null;
 		AbstractShip ship = null;
 	
 		if (player == PlayerType.COMPUTER)
-			concernedGrid = getEnnemiGrid();
+			concernedGrid = getComputerGrid();
 		else
-			concernedGrid = getMyGrid();
+			concernedGrid = getHumanGrid();
 		
 		switch(type){
 		case CARRIER:
@@ -225,6 +246,8 @@ public abstract class AbstractGame {
 					return false;
 		}
 		
+		ship.setPosition(c);
+		ship.setOrientation(ori);
 		setShip(type, ship, player);
 		
 		if (ori == Orientation.HORIZONTAL) {
@@ -241,7 +264,7 @@ public abstract class AbstractGame {
 	}
 	
 	/**
-	 * 
+	 * adding an existing ship
 	 * @param type the type of the ship to add
 	 * @param ship the ship to add
 	 * @param c the cord of the top-left corner of the ship
@@ -254,9 +277,9 @@ public abstract class AbstractGame {
 		Grid concernedGrid = null;
 	
 		if (player == PlayerType.COMPUTER)
-			concernedGrid = getEnnemiGrid();
+			concernedGrid = getComputerGrid();
 		else
-			concernedGrid = getMyGrid();
+			concernedGrid = getHumanGrid();
 		
 		int xCord = c.getX();
 		int yCord = c.getY();
@@ -279,6 +302,8 @@ public abstract class AbstractGame {
 			if (concernedGrid.getCell(dataCell.getX(), dataCell.getY()) instanceof ShipCell)
 				return false;
 		
+		ship.setPosition(c);
+		ship.setOrientation(ori);
 		setShip(type, ship, player);
 
 		//linking cells on the grid to the ship
@@ -288,13 +313,19 @@ public abstract class AbstractGame {
 		return true;
 	}
 	
+	/**
+	 * removing a ship
+	 * @param type the type of the ship
+	 * @param player the player which owns the ship
+	 * @return true if deleting succeed
+	 */
 	public boolean deleteShip(ShipType type, PlayerType player){
 		Grid concernedGrid = null;
 		
 		if (player == PlayerType.COMPUTER)
-			concernedGrid = getEnnemiGrid();
+			concernedGrid = getComputerGrid();
 		else
-			concernedGrid = getMyGrid();
+			concernedGrid = getHumanGrid();
 		
 		AbstractShip ship = getShip(type, player);
 		
@@ -310,12 +341,16 @@ public abstract class AbstractGame {
 		return true;
 	}
 	
-	public ArrayList<AbstractShip> getAasHuman() {
-		return this.aasHuman;
+
+	/**
+	 * hit a cell
+	 * @param player the player which plays
+	 * @param coord the target on the grid
+	 * @return false if the target is not valid
+	 */
+	protected abstract boolean hit(PlayerType player, Coord2D coord);
+
+	public Ships getHumanShips() {
+		return humanShips;
 	}
-	public ArrayList<AbstractShip> getAasComputer() {
-		return this.aasComputer;
-	}
-	
-	public abstract boolean hit(PlayerType player, Coord2D coord);
 }

@@ -66,6 +66,8 @@ public class CellPane extends JPanel {
 			image = ImageDB.getInstance().getMU();
 		} else if (n == -1) {
 			defaultBackground = new Color(200, 0, 0);
+		} else if(n == -2) {
+			defaultBackground = new Color(150, 150, 150);
 		}
 		setBackground(defaultBackground);
 		this.repaint();

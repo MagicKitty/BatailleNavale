@@ -13,24 +13,21 @@ public class DAO {
 	private BattleshipGame bsg;
 
 	public Game loadGame(String filename) {
-		try
-		  {
-		    BufferedReader reader = new BufferedReader(new FileReader(filename));
-		    String period = reader.readLine();
-		    System.out.println("DAO.java ligne 20 : "+period);
-		    String strategy = reader.readLine();
-		    System.out.println("DAO.java ligne 22 : "+strategy);
-		    reader.close();
-		  }
-		  catch (Exception e)
-		  {
-		    System.err.format("Exception occurred trying to read '%s'.", filename);
-		    e.printStackTrace();
-		    System.exit(0);
-		  }
-		
-//		if(period.equals(""))
-		
+		try {
+			BufferedReader reader = new BufferedReader(new FileReader(filename));
+			String period = reader.readLine();
+			System.out.println("DAO.java ligne 20 : " + period);
+			String strategy = reader.readLine();
+			System.out.println("DAO.java ligne 22 : " + strategy);
+			reader.close();
+		} catch (Exception e) {
+			System.err.format("Exception occurred trying to read '%s'.", filename);
+			e.printStackTrace();
+			System.exit(0);
+		}
+
+		// if(period.equals(""))
+
 		return null;
 	}
 
@@ -39,19 +36,13 @@ public class DAO {
 
 		File f = new File(fileName);
 		if (!f.exists() && !f.isDirectory()) {
-//			jb.addObject(ag.getComputerStrategy());
-//			jb.addObject(ag.getTimePeriod());
+			jb.addString("gameType", ag.getGameType().toString());
 			jb.addString("timePeriod", ag.getTimePeriod().toString());
 			jb.addString("computerStrategy", ag.getComputerStrategy().toString());
-			jb.addObject(ag.getMyGrid());
-			jb.addObject(ag.getEnnemiGrid());
-			for (int i = 0; i < ag.getAasComputer().size(); i++) {
-				jb.addObject(ag.getAasComputer().get(i));
-			}
-			for (int i = 0; i < ag.getAasHuman().size(); i++) {
-				jb.addObject(ag.getAasHuman().get(i));
-			}
+			jb.addShips("human", ag.getHumanShips());
+			jb.addShips("computer", ag.getComputerShips());
 			try {
+				System.out.println(jb.toString());
 				PrintWriter writer = new PrintWriter(fileName, "UTF-8");
 				writer.println(jb.toString());
 				writer.close();
@@ -60,4 +51,5 @@ public class DAO {
 			}
 		}
 	}
+
 }
