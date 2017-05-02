@@ -28,6 +28,10 @@ public class ShipCell extends AbstractCell {
 		return life;
 	}
 	
+	public boolean isAlive() {
+		return (life>0.);
+	}
+	
 	public boolean isValidHit() {
 		//if cell's life is below 0, the cell is dead and the player cannot hit it anymore
 		if (life <= 0)

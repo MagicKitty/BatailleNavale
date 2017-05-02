@@ -40,4 +40,9 @@ public class SeaCell extends AbstractCell {
 	public boolean isSea() {
 		return true;
 	}
+
+	@Override
+	public boolean isAlive() {
+		return false;
+	}
 }
