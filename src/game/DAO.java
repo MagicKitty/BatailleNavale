@@ -8,6 +8,11 @@ import java.io.PrintWriter;
 import java.util.ArrayList;
 import java.util.List;
 
+import org.json.JSONObject;
+
+import jdk.nashorn.internal.objects.Global;
+import jdk.nashorn.internal.parser.JSONParser;
+
 public class DAO {
 	@SuppressWarnings("unused")
 	private BattleshipGame bsg;
@@ -15,10 +20,7 @@ public class DAO {
 	public Game loadGame(String filename) {
 		try {
 			BufferedReader reader = new BufferedReader(new FileReader(filename));
-			String period = reader.readLine();
-			System.out.println("DAO.java ligne 20 : " + period);
-			String strategy = reader.readLine();
-			System.out.println("DAO.java ligne 22 : " + strategy);
+			JSONObject jObject = new JSONObject(reader.readLine());
 			reader.close();
 		} catch (Exception e) {
 			System.err.format("Exception occurred trying to read '%s'.", filename);
@@ -39,8 +41,8 @@ public class DAO {
 			jb.addString("gameType", ag.getGameType().toString());
 			jb.addString("timePeriod", ag.getTimePeriod().toString());
 			jb.addString("computerStrategy", ag.getComputerStrategy().toString());
-			jb.addShips("human", ag.getHumanShips());
-			jb.addShips("computer", ag.getComputerShips());
+			jb.addPlayerInfo("human", ag.getHumanShips(), ag.getHumanGrid());
+			jb.addPlayerInfo("computer", ag.getComputerShips(), ag.getComputerGrid());
 			try {
 				System.out.println(jb.toString());
 				PrintWriter writer = new PrintWriter(fileName, "UTF-8");

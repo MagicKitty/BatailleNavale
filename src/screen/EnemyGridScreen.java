@@ -1,5 +1,7 @@
 package screen;
 
+import javax.swing.JOptionPane;
+
 import cell.*;
 import game.*;
 import graphic.Coord2D;
@@ -25,12 +27,17 @@ public class EnemyGridScreen extends GridScreen {
 		for(int i = 0; i < 10; i++) {
 			for(int j = 0; j < 10; j++) {
 				AbstractCell c = grid.getCell(i, j);
-				colorCell(i, j, c.isVisible() ? (c.isSea() ? 0 : 3) : -2);
+				colorCell(i, j, c.isVisible() ? (c.isSea() ? 0 : 5) : -2);
 			}
 		}
 	}
 	
 	public void handleClick(int row, int col) {
+		if(game.isFinished()) {
+			JOptionPane.showMessageDialog(null, "Partie terminée !");
+			return;
+		}
+		
 		AbstractCell cell = game.getComputerGrid().getCell(col, row);
 		
 		if(cell != null && cell.isValidHit()) {
@@ -49,7 +56,7 @@ public class EnemyGridScreen extends GridScreen {
 	public void handleMouseOut(int row, int col) {
 		AbstractCell cell = game.getComputerGrid().getCell(col, row);
 		if(cell != null) {
-			colorCell(col, row, cell.isVisible() ? (cell.isSea() ? 0 : 3) : -2);
+			colorCell(col, row, cell.isVisible() ? (cell.isSea() ? 0 : 5) : -2);
 		}
 	}
 }

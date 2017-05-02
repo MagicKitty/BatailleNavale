@@ -1,6 +1,7 @@
 package game;
 
 import java.util.ArrayList;
+import java.util.Collection;
 
 import org.json.JSONArray;
 import org.json.JSONException;
@@ -73,13 +74,6 @@ public class JSONBuilder {
 			e.printStackTrace();
 		}
 	}
-
-	public JSONArray getShipArray(AbstractShip ship){
-		
-		
-		
-		return null;
-	}
 	
 	// public void updateObject(String id, Object o) {
 	// obj.remove(id);
@@ -132,7 +126,7 @@ public class JSONBuilder {
 		return obj.toString();
 	}
 
-	public void addShips(String string, Ships ships) {
+	public void addPlayerInfo(String string, Ships ships, Grid grid) {
 		JSONObject jo = new JSONObject();
 		
 		for (int i = 0; i < ShipType.values().length; i++)
@@ -143,11 +137,37 @@ public class JSONBuilder {
 		}
 		
 		try {
+			jo.put("fogOfWar", getFOWArray(grid));
+		} catch (JSONException e1) {
+			// TODO Auto-generated catch block
+			e1.printStackTrace();
+		}
+		
+		try {
 			obj.put(string, jo);
 		} catch (JSONException e) {
 			// TODO Auto-generated catch block
 			e.printStackTrace();
 		}
+	}
+
+	private JSONArray getFOWArray(Grid grid) {
+		JSONArray ja = new JSONArray();
+		
+		for (int x = 0; x < 10; x++){
+			for (int y = 0; y < 10; y++){
+				JSONObject jo = new JSONObject();
+				try {
+					jo.put("visible", grid.getCell(x, y).isVisible());
+				} catch (JSONException e) {
+					// TODO Auto-generated catch block
+					e.printStackTrace();
+				}
+				ja.put(jo);
+			}
+		}
+				
+		return ja;
 	}
 
 	private JSONObject getJSONShip(AbstractShip ship) {
@@ -186,4 +206,6 @@ public class JSONBuilder {
 		
 		return array;
 	}
+	
+	
 }
