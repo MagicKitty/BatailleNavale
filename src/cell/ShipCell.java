@@ -55,4 +55,12 @@ public class ShipCell extends AbstractCell {
 	public boolean isVisible() {
 		return visible;
 	}
+	
+	public boolean isShip() {
+		return true;
+	}
+	
+	public boolean isSea() {
+		return false;
+	}
 }

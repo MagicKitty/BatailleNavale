@@ -32,4 +32,12 @@ public class SeaCell extends AbstractCell {
 		//if the sea cell was already hit, the cell is visible
 		return isHit;
 	}
+	
+	public boolean isShip() {
+		return false;
+	}
+	
+	public boolean isSea() {
+		return true;
+	}
 }

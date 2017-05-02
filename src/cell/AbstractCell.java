@@ -53,4 +53,7 @@ public abstract class AbstractCell {
 	 * @param damage the damage
 	 */
 	public abstract void hit(double damage);
+	
+	public abstract boolean isSea();
+	public abstract boolean isShip();
 }

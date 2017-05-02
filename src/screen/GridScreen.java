@@ -15,7 +15,7 @@ public class GridScreen extends JPanel {
 	private static final long serialVersionUID = 1L;
 	private LinkedList<CellPane> cells;
 	
-	public GridScreen(int a, int b, String title) {
+	public GridScreen(int width, int height, String title) {
 		if(title != null) setBorder(BorderFactory.createTitledBorder(title));
 		
 		cells = new LinkedList<CellPane>();
@@ -23,13 +23,13 @@ public class GridScreen extends JPanel {
 		setBackground(Color.ORANGE);
         setLayout(new GridBagLayout());
         GridBagConstraints gbc = new GridBagConstraints();
-        for (int row = 0; row < a; row++) {
-            for (int col = 0; col < b; col++) {
+        for (int row = 0; row < width; row++) {
+            for (int col = 0; col < height; col++) {
                 gbc.gridx = col;
                 gbc.gridy = row;
                 
         		CellPane cellPane = new CellPane(1, this);
-                cellPane.setBorder(new MatteBorder(1, 1, row < a-1 ? 0 : 1, col < b-1 ? 0 : 1, Color.GRAY));
+                cellPane.setBorder(new MatteBorder(1, 1, row < width - 1 ? 0 : 1, col < height -1 ? 0 : 1, Color.GRAY));
                 cellPane.setPosition(row,  col);
                 cells.add(cellPane);
                 add(cellPane, gbc);
@@ -50,8 +50,12 @@ public class GridScreen extends JPanel {
 	}
 	
 	public void clearScreen() {
+		clearScreen(0);
+	}
+	
+	public void clearScreen(int color) {
 		for(CellPane c : cells) {
-			c.setStatus(0);
+			c.setStatus(color);
 		}
 	}
 	

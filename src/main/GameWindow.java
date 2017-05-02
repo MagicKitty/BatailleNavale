@@ -9,10 +9,13 @@ import controller.MainActionsController;
 import controller.PlaceShipsController;
 import game.AbstractGame;
 import game.AdvancedGame;
+import game.StandardGame;
 import player.StrategyType;
 import screen.AlgorithmScreen;
+import screen.EnemyGridScreen;
 import screen.GameType;
 import screen.GridScreen;
+import screen.MyGridScreen;
 import screen.NewLoadScreen;
 import screen.PeriodScreen;
 import screen.PlaceShipsScreen;
@@ -95,7 +98,7 @@ public class GameWindow extends JFrame {
 				break;
 			case GRID:
 				if(game == null) {
-					game = new AdvancedGame(gt.getPeriod(), gt.getAlgorithm());
+					game = new StandardGame(gt.getPeriod(), gt.getAlgorithm());
 				}
 				if(placeShipsController == null) placeShipsController = new PlaceShipsController(this);
 				
@@ -105,8 +108,8 @@ public class GameWindow extends JFrame {
 				break;
 			case INGAME:				
 				add(igButtonsScreen != null ? igButtonsScreen : (igButtonsScreen = new ButtonsPane(mainActionsController, "Quitter","Sauvegarder","Algorithme")),BorderLayout.NORTH);
-				add(myGridScreen != null ? myGridScreen : (myGridScreen = new GridScreen(10, 10, "Ma grille")),BorderLayout.CENTER);
-				add(enemyGridScreen != null ? enemyGridScreen : (enemyGridScreen = new GridScreen(10, 10, "Grille ennemie")),BorderLayout.SOUTH);
+				add(myGridScreen != null ? myGridScreen : (myGridScreen = new MyGridScreen(placeShipsController)),BorderLayout.CENTER);
+				add(enemyGridScreen != null ? enemyGridScreen : (enemyGridScreen = new EnemyGridScreen(game)),BorderLayout.SOUTH);
 				add(informationsScreen != null ? informationsScreen : (informationsScreen = new CounterWT(0,0)),BorderLayout.EAST);
 				break;
 			default:
