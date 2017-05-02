@@ -138,7 +138,11 @@ public class GameWindow extends JFrame {
 				break;
 			case GRID:
 				if(game == null) {
-					game = new StandardGame(gt.getPeriod(), gt.getAlgorithm());
+					if(gt.getShot().equals("normal")) {
+						game = new StandardGame(gt.getPeriod(), gt.getAlgorithm());
+					} else {
+						game = new AdvancedGame(gt.getPeriod(), gt.getAlgorithm());
+					}
 				}
 				if(placeShipsController == null) placeShipsController = new PlaceShipsController(this);
 				
