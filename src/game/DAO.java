@@ -8,20 +8,32 @@ import java.io.PrintWriter;
 import java.util.ArrayList;
 import java.util.List;
 
+import org.json.JSONArray;
+import org.json.JSONException;
 import org.json.JSONObject;
 
+import cell.ShipCellData;
+import graphic.Coord2D;
 import jdk.nashorn.internal.objects.Global;
 import jdk.nashorn.internal.parser.JSONParser;
 import period.Period;
 import player.ComputerPlayer;
+import player.PlayerType;
 import player.StrategyType;
+import ship.Orientation;
+import ship.ShipType;
 
 public class DAO {
 	@SuppressWarnings("unused")
 	private BattleshipGame bsg;
+	private AbstractGame abstractGame;
+	
+	public DAO(){
+		abstractGame = null;
+	}
 
 	public AbstractGame loadGame(String filename) {
-		AbstractGame abstractGame = null;
+		abstractGame = null;
 		
 		try {
 			BufferedReader reader = new BufferedReader(new FileReader(filename));
@@ -36,6 +48,9 @@ public class DAO {
 			else 
 				abstractGame = new AdvancedGame(period, strategy);
 			
+			setShips(jObject.getJSONObject("human"), PlayerType.HUMAN);
+			setShips(jObject.getJSONObject("computer"), PlayerType.COMPUTER);
+			
 			reader.close();
 		} catch (Exception e) {
 			System.err.format("Exception occurred trying to read '%s'.", filename);
@@ -44,6 +59,60 @@ public class DAO {
 		}
 
 		return abstractGame;
+	}
+
+	private void setShips(JSONObject jsonObject, PlayerType player) {
+		for (ShipType type : ShipType.values()){
+			try {
+				JSONObject shipObject = jsonObject.getJSONObject(type.toString());
+				boolean alive = jsonObject.getBoolean("isAlive");
+				int x = shipObject.getInt("x");
+				int y = shipObject.getInt("y");
+				int numbBullets = shipObject.getInt("numberOfBullets");
+				Orientation ori = Orientation.valueOf(shipObject.getString("orientation"));
+				ShipCellData[] scd = getShipCellsData(shipObject);
+					
+				abstractGame.addShip(type, numbBullets, new Coord2D(x, y), ori, player, scd);
+			} catch (Exception e) {
+				e.printStackTrace();
+			}
+		}
+		
+		abstractGame.applyVisiblityArray(getVisibilityArray(jsonObject.getJSONArray("fogOfWar")), player);
+	}
+
+	private boolean[][] getVisibilityArray(JSONArray fowArray) {
+		boolean[][] fow2D = null;
+		
+		for (int x = 0; x < 10; x++)
+			for (int y = 0; y < 10; y++)
+				try {
+					fow2D[x][y] = fowArray.getJSONObject(x*y).getBoolean("visibility");
+				} catch (JSONException e) {
+					// TODO Auto-generated catch block
+					e.printStackTrace();
+				}
+	
+		return fow2D;
+	}
+
+	private ShipCellData[] getShipCellsData(JSONObject shipObject) {
+		JSONArray jArray = new JSONArray();
+		ShipCellData[] scd = null;
+		
+		try {
+			jArray = shipObject.getJSONArray("cells");
+			for (int i = 0; i < jArray.length(); i++){
+				JSONObject obj = jArray.getJSONObject(i);
+				ShipCellData shipCellData = new ShipCellData(obj.getInt("x"), obj.getInt("y"), (float) obj.getDouble("life"));
+				scd[i] = shipCellData;
+			}
+		} catch (JSONException e) {
+			// TODO Auto-generated catch block
+			e.printStackTrace();
+		}
+		
+		return scd;
 	}
 
 	public void saveGame(String fileName, AbstractGame ag) {

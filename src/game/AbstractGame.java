@@ -295,13 +295,34 @@ public abstract class AbstractGame {
 	 * @param dataCells cells' data from JSON save file
 	 * @return false if adding the ship fails
 	 */
-	public boolean addShip(ShipType type, AbstractShip ship, Coord2D c, Orientation ori, PlayerType player, ShipCellData dataCells[]) {
+	public boolean addShip(ShipType type, int numberofBullets, Coord2D c, Orientation ori, PlayerType player, ShipCellData dataCells[]) {
 		Grid concernedGrid = null;
+		AbstractShip ship = null;
 	
 		if (player == PlayerType.COMPUTER)
 			concernedGrid = getComputerGrid();
 		else
 			concernedGrid = getHumanGrid();
+		
+		switch(type){
+		case CARRIER:
+			ship = sf.createCarrier();
+			break;
+		case BATTLESHIP:
+			ship = sf.createBattleship();
+			break;
+		case CRUISER:
+			ship = sf.createCruiser();
+			break;
+		case SUBMARINE:
+			ship = sf.createSubmarine();
+			break;
+		case DESTROYER:
+			ship = sf.createDestroyer();
+			break;
+		}
+		
+		ship.setNumberOfBullets(numberofBullets);
 		
 		int xCord = c.getX();
 		int yCord = c.getY();
@@ -382,5 +403,19 @@ public abstract class AbstractGame {
 	
 	public void save() {
 		save("game.txt");
+	}
+
+	public void applyVisiblityArray(boolean[][] visibilityArray, PlayerType player) {
+		Grid concernedGrid = null;
+		
+		if (player == PlayerType.COMPUTER)
+			concernedGrid = getComputerGrid();
+		else
+			concernedGrid = getHumanGrid();
+		
+		for(int x = 0; x < 10; x++)
+			for(int y = 0; y < 10; y++)
+				concernedGrid.getCell(x, y).setVisibility(visibilityArray[x][y]);
+		
 	}
 }

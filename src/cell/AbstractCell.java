@@ -4,6 +4,7 @@ public abstract class AbstractCell {
 	private int x;
 	private int y;
 	private Grid grid;
+	protected boolean visibility;
 
 	/**
 	 * initializing a cell with the grid which has the cell, and the coordinates of the cell
@@ -15,6 +16,7 @@ public abstract class AbstractCell {
 		this.x = x;
 		this.y = y;
 		this.grid = grid;
+		this.visibility = false;
 	}
 	
 	/**
@@ -38,6 +40,10 @@ public abstract class AbstractCell {
 		return grid;
 	}
 	
+	public void setVisibility(boolean visu){
+		this.visibility = visu;
+	}
+	
 	/**
 	 * @return false if the hit is not valid
 	 */
@@ -46,7 +52,9 @@ public abstract class AbstractCell {
 	/**
 	 * @return false if the other haven't discovered the cell yet
 	 */
-	public abstract boolean isVisible();
+	public boolean isVisible(){
+		return this.visibility;
+	}
 	
 	/**
 	 * hitting the cell with a damage

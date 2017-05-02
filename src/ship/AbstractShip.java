@@ -64,6 +64,10 @@ public abstract class AbstractShip {
 	public int getNumberOfBullets() {
 		return numberOfBullets;
 	}
+	
+	public void setNumberOfBullets(int newNumberBullets) {
+		numberOfBullets = newNumberBullets;
+	}
 
 	public ArrayList<ShipCell> getAsc() {
 		return asc;

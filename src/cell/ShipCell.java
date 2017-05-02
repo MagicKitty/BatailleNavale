@@ -6,13 +6,11 @@ public class ShipCell extends AbstractCell {
 
 	private double life;
 	private AbstractShip as;
-	private boolean visible;
 
 	public ShipCell(int x, int y, Grid grid, AbstractShip ship){
 		super(x, y, grid);
 		as = ship;
 		life = 1;
-		visible = false;
 		ship.addShipCell(this);
 	}
 	
@@ -20,7 +18,6 @@ public class ShipCell extends AbstractCell {
 		super(x, y, grid);
 		as = ship;
 		life = l;
-		visible = false;
 		ship.addShipCell(this);
 	}
 	
@@ -53,13 +50,8 @@ public class ShipCell extends AbstractCell {
 		//+1 to the shipshot counter
 		getGrid().addShipShot();
 		
-		if (!visible)
-			visible = true;
-	}
-
-	@Override
-	public boolean isVisible() {
-		return visible;
+		if (!visibility)
+			visibility = true;
 	}
 	
 	public boolean isShip() {
