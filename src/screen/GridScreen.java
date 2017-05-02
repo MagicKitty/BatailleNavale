@@ -50,8 +50,12 @@ public class GridScreen extends JPanel {
 	}
 	
 	public void clearScreen() {
+		clearScreen(0);
+	}
+	
+	public void clearScreen(int color) {
 		for(CellPane c : cells) {
-			c.setStatus(0);
+			c.setStatus(color);
 		}
 	}
 	
