@@ -65,7 +65,7 @@ public class DAO {
 		for (ShipType type : ShipType.values()){
 			try {
 				JSONObject shipObject = jsonObject.getJSONObject(type.toString());
-				boolean alive = jsonObject.getBoolean("isAlive");
+				boolean alive = jsonObject.getBoolean("alive");
 				int x = shipObject.getInt("x");
 				int y = shipObject.getInt("y");
 				int numbBullets = shipObject.getInt("numberOfBullets");
