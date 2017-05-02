@@ -71,6 +71,8 @@ public abstract class AbstractGame {
 		
 		computerShips = new Ships();
 		humanShips = new Ships();
+		
+		computer.placeShips();
 	}
 
 	/**
@@ -252,13 +254,14 @@ public abstract class AbstractGame {
 		
 		if (ori == Orientation.HORIZONTAL) {
 			//linking cells on the grid to the ship
-			for (int x = xCord; x < ship.getSize(); x++)
+			for (int x = xCord; x < ship.getSize() + xCord; x++)
 				concernedGrid.addDefaultShipCell(x, yCord, ship);
 		} else {
 			//linking cells on the grid to the ship
-			for (int y = yCord; y < ship.getSize(); y++)
+			for (int y = yCord; y < ship.getSize() + yCord; y++)
 				concernedGrid.addDefaultShipCell(xCord, y, ship);
 		}
+		
 		
 		return true;
 	}

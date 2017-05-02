@@ -82,4 +82,8 @@ public class Coord2D {
 		else
 			return false;
 	}
+	
+	public String toString(){
+		return "x : " + x + " y : " + y;
+	}
 }

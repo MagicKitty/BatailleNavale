@@ -108,4 +108,21 @@ public class Grid {
 	public void addDefaultShipCell(int x, int y, AbstractShip ship){
 		addShipCell(x, y, 1, ship);
 	}
+	
+	public String toString(){
+		StringBuilder sb = new StringBuilder();
+		for (int x = 0; x < 10; x++){
+			for (int y = 0; y < 10; y++){
+				sb.append("[");
+				if (getCell(x, y) instanceof ShipCell)
+					sb.append("X");
+				else
+					sb.append("_");
+				sb.append("]");
+			}
+			sb.append("\n");
+		}
+		
+		return sb.toString();
+	}
 }
