@@ -54,6 +54,36 @@ public class GameWindow extends JFrame {
 		mainActionsController = new MainActionsController(this);
 	}
 	
+	public void update() {
+		switch(status) {
+			case NEW_LOAD:
+				//(newLoadScreen);
+				break;
+			case PERIOD:
+				//(periodScreen);
+				break;
+			case SHOT:
+				//(shotScreen);
+				break;
+			case ALGORITHM:
+				//(algorithmScreen);
+				break;
+			case GRID:
+				//(placeGridScreen);
+				//(placeButtonsScreen);
+				((BoatsPane) boatsScreen).update();
+				break;
+			case INGAME:
+				//(igButtonsScreen);
+				//(myGridScreen);
+				//(enemyGridScreen);
+				//(informationsScreen);
+				break;
+			default:
+				break;
+		}
+	}
+	
 	public void setStatus(GameStatus s) {
 		switch(status) {
 			case NEW_LOAD:

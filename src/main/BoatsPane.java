@@ -12,6 +12,8 @@ import javax.swing.JButton;
 import javax.swing.JPanel;
 
 import controller.PlaceShipsController;
+import ship.Orientation;
+import ship.ShipType;
 
 public class BoatsPane extends JPanel implements ActionListener {
 	private static final long serialVersionUID = 1L;
@@ -37,6 +39,16 @@ public class BoatsPane extends JPanel implements ActionListener {
 		battleship.addActionListener(this);
 		destroyer.addActionListener(this);
 		submarine.addActionListener(this);
+		
+		update();
+	}
+	
+	public void update() {
+		carrier.setText("Porte avion " + getShipData(ShipType.CARRIER));
+		cruiser.setText("Croiseur " + getShipData(ShipType.CRUISER));
+		battleship.setText("Torpilleur " + getShipData(ShipType.BATTLESHIP));
+		destroyer.setText("Contre-torpilleur " + getShipData(ShipType.DESTROYER));
+		submarine.setText("Sous marin " + getShipData(ShipType.SUBMARINE));
 	}
 
 	private JButton createButton(String name) {
@@ -66,5 +78,11 @@ public class BoatsPane extends JPanel implements ActionListener {
 		} else if(e.getSource() == submarine) {
 			psc.chooseSubmarine();
 		}
+		
+		update();
+	}
+	
+	private String getShipData(ShipType ship) {
+		return "(" + (psc.getShipOrientation(ship) == Orientation.HORIZONTAL ? " horizontal" : "vertical") + ", " + (psc.getShipStatus(ship) ? "1" : "0") + "/1)";
 	}
 }
