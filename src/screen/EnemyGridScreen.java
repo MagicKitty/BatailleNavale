@@ -1,7 +1,7 @@
 package screen;
 
 import cell.*;
-import game.AbstractGame;
+import game.*;
 import graphic.Coord2D;
 
 public class EnemyGridScreen extends GridScreen {
@@ -28,6 +28,8 @@ public class EnemyGridScreen extends GridScreen {
 	}
 	
 	public void handleClick(int row, int col) {
+		//TEMPORAIRE
+		//((AdvancedGame) game).setSelectedShip(ship, player);
 		game.play(new Coord2D(row, col));
 	}
 }

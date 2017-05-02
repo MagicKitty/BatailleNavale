@@ -9,6 +9,7 @@ import controller.MainActionsController;
 import controller.PlaceShipsController;
 import game.AbstractGame;
 import game.AdvancedGame;
+import game.StandardGame;
 import player.StrategyType;
 import screen.AlgorithmScreen;
 import screen.EnemyGridScreen;
@@ -97,7 +98,7 @@ public class GameWindow extends JFrame {
 				break;
 			case GRID:
 				if(game == null) {
-					game = new AdvancedGame(gt.getPeriod(), gt.getAlgorithm());
+					game = new StandardGame(gt.getPeriod(), gt.getAlgorithm());
 				}
 				if(placeShipsController == null) placeShipsController = new PlaceShipsController(this);
 				
