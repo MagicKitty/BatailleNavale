@@ -8,7 +8,6 @@ import game.StandardGame;
 import period.Period;
 import player.StrategyType;
 import ship.Battleship;
-import ship.Ships;
 
 public class GridTests {
 

@@ -31,6 +31,7 @@ public abstract class AbstractGame {
 	private Grid computerGrid;
 	private IShipFactory sf;
 	private Ships humanShips, computerShips;
+	private boolean isFinished;
 	
 	/**
 	 * initializing the game with new grids, a specfic factory and a specific strategy for the computer
@@ -66,12 +67,18 @@ public abstract class AbstractGame {
 			break;
 		}
 		
+		isFinished = false;
+		
 		humanGrid = new Grid(this);
 		computerGrid = new Grid(this);
 		
 		computerShips = new Ships();
 		humanShips = new Ships();
 		
+		computer.placeShips();
+	}
+	
+	public void placeComputerShips(){
 		computer.placeShips();
 	}
 
@@ -85,6 +92,19 @@ public abstract class AbstractGame {
 	 */
 	public Period getTimePeriod(){
 		return timePeriod;
+	}
+	
+	public boolean isFinished(){
+		int humanAliveShipCounter = 0, computerAliveShipCounter = 0;
+		
+		for(ShipType type : ShipType.values()){
+			if (humanShips.getShip(type).isAlive())
+				humanAliveShipCounter++;
+			if (computerShips.getShip(type).isAlive())
+				computerAliveShipCounter++;
+		}
+		
+		return (humanAliveShipCounter == 0 || computerAliveShipCounter == 0);
 	}
 	
 	/**
@@ -261,7 +281,6 @@ public abstract class AbstractGame {
 			for (int y = yCord; y < ship.getSize() + yCord; y++)
 				concernedGrid.addDefaultShipCell(xCord, y, ship);
 		}
-		
 		
 		return true;
 	}

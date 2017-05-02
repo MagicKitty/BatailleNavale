@@ -31,8 +31,6 @@ public class ComputerPlayer {
 		Random r = new Random();
 		
 		for (ShipType type : ShipType.values()){
-			System.out.println(type);
-			
 			Coord2D c = new Coord2D(r.nextInt(10), r.nextInt(10));
 			Orientation ori = Orientation.values()[r.nextInt(Orientation.values().length)];
 			
