@@ -4,6 +4,7 @@ import cell.Grid;
 import controller.PlaceShipsController;
 import game.AbstractGame;
 import game.AdvancedGame;
+import player.PlayerType;
 import ship.ShipType;
 
 public class MyGridScreen extends GridScreen {
@@ -22,7 +23,8 @@ public class MyGridScreen extends GridScreen {
 	public void handleClick(int row, int col) {
 		ShipType ship = controller.getShipOn(row, col);
 		if(ship != null && game instanceof AdvancedGame) {
-			//((AdvancedGame) game).setSelectedShip(ship, PlayerType.HUMAN);
+			((AdvancedGame) game).setSelectedShip(ship, PlayerType.HUMAN);
+			System.out.println("Bateau séléctionné : " + ship);
 		}
 	}
 	
