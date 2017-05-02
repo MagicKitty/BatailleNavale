@@ -3,6 +3,7 @@ package main;
 import java.awt.BorderLayout;
 
 import javax.swing.JFrame;
+import javax.swing.JOptionPane;
 import javax.swing.JPanel;
 
 import controller.MainActionsController;
@@ -52,6 +53,12 @@ public class GameWindow extends JFrame {
 		setVisible(true);
 		
 		mainActionsController = new MainActionsController(this);
+	}
+	
+	public void save() {
+		if(game != null) {
+			game.save(JOptionPane.showInputDialog("Nom du fichier"));
+		}
 	}
 	
 	public void update() {
