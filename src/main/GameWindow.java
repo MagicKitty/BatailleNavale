@@ -57,7 +57,10 @@ public class GameWindow extends JFrame {
 	
 	public void save() {
 		if(game != null) {
-			game.save(JOptionPane.showInputDialog("Nom du fichier"));
+			String s = JOptionPane.showInputDialog("Nom du fichier");
+			if(s != null) {
+				game.save(s);
+			}
 		}
 	}
 	
