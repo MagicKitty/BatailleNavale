@@ -39,8 +39,9 @@ public class GridScreen extends JPanel {
         }
     }
 	
-	public void drawShip(Coord2D coord, Orientation orientation, int size) {
-		if(coord.getX() < 0 || coord.getY() < 0) return;
+	public boolean drawShip(Coord2D coord, Orientation orientation, int size) {
+		boolean res = true;
+		if(coord.getX() < 0 || coord.getY() < 0) return false;
 		
 		int startX = coord.getX(), startY = coord.getY(), ptr = 0;
 		int endX = Math.min(startX + (orientation == Orientation.HORIZONTAL ? size : 0), 9);
@@ -53,12 +54,20 @@ public class GridScreen extends JPanel {
 			C = 6;
 		}
 		
+		if(startX + (orientation == Orientation.HORIZONTAL ? size : 0) > 10
+			|| startY + (orientation == Orientation.VERTICAL ? size : 0) > 10) {
+			A = B = C = -1;
+			res = false;
+		}
+		
 		for(int x = startX; x <= endX; x++) {
 			for(int y = startY; y <= endY; y++) {
 				if(ptr < size) colorCell(x, y, (ptr == 0 ? A : (ptr == size - 1 ? B : C)));
 				ptr++;
 			}
 		}
+		
+		return res;
 	}
 	
 	public void handleMouseOver(int row, int col) {

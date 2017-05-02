@@ -65,4 +65,5 @@ public abstract class AbstractCell {
 	public abstract boolean isSea();
 	public abstract boolean isShip();
 	public abstract boolean isAlive();
+	public abstract double getLife();
 }
