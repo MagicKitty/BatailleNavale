@@ -78,7 +78,12 @@ public class DAO {
 			}
 		}
 		
-		abstractGame.applyVisiblityArray(getVisibilityArray(jsonObject.getJSONArray("fogOfWar")), player);
+		try {
+			abstractGame.applyVisiblityArray(getVisibilityArray(jsonObject.getJSONArray("fogOfWar")), player);
+		} catch (JSONException e) {
+			// TODO Auto-generated catch block
+			e.printStackTrace();
+		}
 	}
 
 	private boolean[][] getVisibilityArray(JSONArray fowArray) {

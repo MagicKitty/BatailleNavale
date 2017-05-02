@@ -74,8 +74,6 @@ public abstract class AbstractGame {
 		
 		computerShips = new Ships();
 		humanShips = new Ships();
-		
-		computer.placeShips();
 	}
 	
 	public void placeComputerShips(){
