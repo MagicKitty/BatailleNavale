@@ -156,8 +156,10 @@ public abstract class AbstractGame {
 		switch(player){
 		case COMPUTER:
 			concernedShips = computerShips;
+			break;
 		case HUMAN:
 			concernedShips = humanShips;
+			break;
 		}
 		
 		return concernedShips.getShip(type);
@@ -170,14 +172,15 @@ public abstract class AbstractGame {
 	 * @param player the player which will own the ship
 	 */
 	private void setShip(ShipType type, AbstractShip ship, PlayerType player) {
-		
 		Ships concernedShips = null;
 		
 		switch(player){
 		case COMPUTER:
 			concernedShips = computerShips;
+			break;
 		case HUMAN:
 			concernedShips = humanShips;
+			break;
 		}
 		
 		concernedShips.setShip(type, ship);
@@ -192,6 +195,7 @@ public abstract class AbstractGame {
 	 * @return false if adding the ship fails
 	 */
 	public boolean addShipDefault(ShipType type, Coord2D c, Orientation ori, PlayerType player ) {
+		
 		Grid concernedGrid = null;
 		AbstractShip ship = null;
 	
@@ -242,6 +246,8 @@ public abstract class AbstractGame {
 					return false;
 		}
 		
+		ship.setPosition(c);
+		ship.setOrientation(ori);
 		setShip(type, ship, player);
 		
 		if (ori == Orientation.HORIZONTAL) {
@@ -253,9 +259,6 @@ public abstract class AbstractGame {
 			for (int y = yCord; y < ship.getSize(); y++)
 				concernedGrid.addDefaultShipCell(xCord, y, ship);
 		}
-		
-		ship.setPosition(c);
-		ship.setOrientation(ori);
 		
 		return true;
 	}
@@ -299,14 +302,13 @@ public abstract class AbstractGame {
 			if (concernedGrid.getCell(dataCell.getX(), dataCell.getY()) instanceof ShipCell)
 				return false;
 		
+		ship.setPosition(c);
+		ship.setOrientation(ori);
 		setShip(type, ship, player);
 
 		//linking cells on the grid to the ship
 		for (ShipCellData dataCell : dataCells)
 			concernedGrid.addShipCell(dataCell.getX(), dataCell.getY(), dataCell.getLife(), ship);
-		
-		ship.setPosition(c);
-		ship.setOrientation(ori);
 		
 		return true;
 	}

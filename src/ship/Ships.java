@@ -30,7 +30,7 @@ public class Ships {
 		}
 	}
 	
-	public void setShip(ShipType type, AbstractShip ship){
+	public void setShip(ShipType type, AbstractShip ship){	
 		switch(type){
 		case CARRIER:
 			chips.set(0, ship);

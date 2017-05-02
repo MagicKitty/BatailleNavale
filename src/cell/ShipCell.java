@@ -13,6 +13,7 @@ public class ShipCell extends AbstractCell {
 		as = ship;
 		life = 1;
 		visible = false;
+		ship.addShipCell(this);
 	}
 	
 	public ShipCell(int x, int y, Grid grid, AbstractShip ship, double l){
@@ -20,6 +21,7 @@ public class ShipCell extends AbstractCell {
 		as = ship;
 		life = l;
 		visible = false;
+		ship.addShipCell(this);
 	}
 	
 	public double getLife() {

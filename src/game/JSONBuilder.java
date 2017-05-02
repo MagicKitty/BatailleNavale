@@ -127,13 +127,21 @@ public class JSONBuilder {
 
 	public void addShips(String string, Ships ships) {
 		JSONObject jo = new JSONObject();
+		
 		for (int i = 0; i < ShipType.values().length; i++)
 			try {
 				jo.put(ShipType.values()[i].toString(), getJSONShip(ships.getShip(ShipType.values()[i])));
 			} catch (JSONException e) {
 				e.printStackTrace();
-			}
 		}
+		
+		try {
+			obj.put(string, jo);
+		} catch (JSONException e) {
+			// TODO Auto-generated catch block
+			e.printStackTrace();
+		}
+	}
 
 	private JSONObject getJSONShip(AbstractShip ship) {
 		JSONObject jo = new JSONObject();
@@ -155,20 +163,18 @@ public class JSONBuilder {
 	
 	private JSONArray getCellsArray(AbstractShip ship){
 		JSONArray array = new JSONArray();
-		
+
 		for(ShipCell cell : ship.getAsc()){
 			JSONObject jo = new JSONObject();
-			
 			try {
 				jo.put("x", cell.getX());
 				jo.put("y", cell.getY());
 				jo.put("life", cell.getLife());
+				array.put(jo);
 			} catch (JSONException e) {
 				// TODO Auto-generated catch block
 				e.printStackTrace();
 			}
-			
-			array.put(jo);
 		}
 		
 		return array;

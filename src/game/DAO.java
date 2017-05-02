@@ -27,7 +27,6 @@ public class DAO {
 				PrintWriter writer = new PrintWriter(fileName, "UTF-8");
 				writer.println(jb.toString());
 				writer.close();
-				
 			} catch (IOException e) {
 
 			}

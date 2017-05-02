@@ -16,7 +16,6 @@ public abstract class AbstractShip {
 	private Orientation ori;
 
 	public AbstractShip() {
-		System.out.println("lllllllllllllllllel");
 		isAlive = true;
 		numberOfCellsAlive = 0;
 		numberOfBullets = 0;
@@ -86,6 +85,10 @@ public abstract class AbstractShip {
 		bo=iBehaviorOffensive;
 	}
 
+	public void addShipCell(ShipCell cell){
+		asc.add(cell);
+	}
+	
 	public abstract int getSize();
 
 	public abstract String getName();
