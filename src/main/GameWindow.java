@@ -59,6 +59,7 @@ public class GameWindow extends JFrame {
 		if(game != null) {
 			String s = JOptionPane.showInputDialog("Nom du fichier");
 			if(s != null) {
+				if(!s.substring(s.length() - 3).equals(".bn")) s += ".bn";
 				game.save(s);
 			}
 		}
@@ -66,25 +67,10 @@ public class GameWindow extends JFrame {
 	
 	public void update() {
 		switch(status) {
-			case NEW_LOAD:
-				//(newLoadScreen);
-				break;
-			case PERIOD:
-				//(periodScreen);
-				break;
-			case SHOT:
-				//(shotScreen);
-				break;
-			case ALGORITHM:
-				//(algorithmScreen);
-				break;
 			case GRID:
-				//(placeGridScreen);
-				//(placeButtonsScreen);
 				((BoatsPane) boatsScreen).update();
 				break;
 			case INGAME:
-				//(igButtonsScreen);
 				((EnemyGridScreen) enemyGridScreen).update();
 				((MyGridScreen) myGridScreen).update();
 				((CounterWT) informationsScreen).update();
