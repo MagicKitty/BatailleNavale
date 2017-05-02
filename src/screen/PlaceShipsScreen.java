@@ -47,28 +47,6 @@ public class PlaceShipsScreen extends GridScreen {
 		controller.update();
 	}
 	
-	public void drawShip(Coord2D coord, Orientation orientation, int size) {
-		if(coord.getX() < 0 || coord.getY() < 0) return;
-		
-		int startX = coord.getX(), startY = coord.getY(), ptr = 0;
-		int endX = Math.min(startX + (orientation == Orientation.HORIZONTAL ? size : 0), 9);
-		int endY = Math.min(startY + (orientation == Orientation.VERTICAL ? size : 0), 9);
-		
-		int A = 1, B = 3, C = 5;
-		if(orientation == Orientation.VERTICAL) {
-			A = 4;
-			B = 2;
-			C = 6;
-		}
-		
-		for(int x = startX; x <= endX; x++) {
-			for(int y = startY; y <= endY; y++) {
-				if(ptr < size) colorCell(x, y, (ptr == 0 ? A : (ptr == size - 1 ? B : C)));
-				ptr++;
-			}
-		}
-	}
-	
 	public void handleMouseOver(int row, int col) {
 		Coord2D carrier = carrierPos.clone();
 		Coord2D cruiser = cruiserPos.clone();
