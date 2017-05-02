@@ -19,7 +19,7 @@ public class MainActionsController implements ButtonController {
 				case "Quitter": System.exit(-1); break;
 				//case "Continue": gamewindow.setStatus(GameStatus.INGAME); break;
 				case "Algorithme": gamewindow.setStatus(GameStatus.ALGORITHM); break;
-				case "Sauvegarder": break;
+				case "Sauvegarder": gamewindow.save(); break;
 			}
 		}
 	}
