@@ -49,6 +49,8 @@ public class NewLoadScreen extends JPanel implements ActionListener {
             if (returnVal == JFileChooser.APPROVE_OPTION) {
                 File file = fc.getSelectedFile();
                 System.out.println("Opening: "+file.getName() + System.lineSeparator());
+                
+                window.openFile(file.getName());
             } else {
             	System.out.println("Open command cancelled by user"+ System.lineSeparator());
             }

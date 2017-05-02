@@ -1,6 +1,7 @@
 package main;
 
 import java.awt.BorderLayout;
+import java.io.File;
 
 import javax.swing.JFrame;
 import javax.swing.JOptionPane;
@@ -10,6 +11,7 @@ import controller.MainActionsController;
 import controller.PlaceShipsController;
 import game.AbstractGame;
 import game.AdvancedGame;
+import game.DAO;
 import game.StandardGame;
 import player.StrategyType;
 import screen.AlgorithmScreen;
@@ -63,6 +65,11 @@ public class GameWindow extends JFrame {
 				game.save(s);
 			}
 		}
+	}
+	
+	public void openFile(String filename) {
+		game = (new DAO()).loadGame(filename);
+		setStatus(GameStatus.INGAME);
 	}
 	
 	public void update() {
