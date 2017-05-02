@@ -9,6 +9,8 @@ import org.json.JSONObject;
 import cell.AbstractCell;
 import cell.Grid;
 import cell.ShipCell;
+import period.Period;
+import player.StrategyType;
 import ship.AbstractShip;
 
 public class JSONBuilder {
@@ -58,6 +60,10 @@ public class JSONBuilder {
 				for (int i = 0; i < asc.size(); i++) {
 					obj.append(className, asc.get(i).getLife());
 				}
+			} else if (className.equals("Period")) {
+				obj.append(className, ((Period) o).toString());
+			} else if (className.equals("StrategyType")) {
+				obj.append(className, ((StrategyType) o).toString());
 			} else {
 				System.out.println("unknown object");
 			}
@@ -65,15 +71,6 @@ public class JSONBuilder {
 			e.printStackTrace();
 		}
 	}
-
-	// public void updateObject(String id, Object o) {
-	// obj.remove(id);
-	// try {
-	// obj.put(id, o);
-	// } catch (JSONException e) {
-	// e.printStackTrace();
-	// }
-	// }
 
 	public void addArray(String id, JSONArray a) {
 		try {

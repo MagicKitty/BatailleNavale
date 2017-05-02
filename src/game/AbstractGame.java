@@ -310,5 +310,12 @@ public abstract class AbstractGame {
 		return true;
 	}
 	
+	public ArrayList<AbstractShip> getAasHuman() {
+		return this.aasHuman;
+	}
+	public ArrayList<AbstractShip> getAasComputer() {
+		return this.aasComputer;
+	}
+	
 	public abstract boolean hit(PlayerType player, Coord2D coord);
 }
