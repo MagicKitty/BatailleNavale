@@ -1,13 +1,20 @@
 package ship;
 
 public class Destroyer extends AbstractShip {
+	
+	private static int SIZE = 2;
+	
 	public Destroyer() {
-		super();
+		super(true, SIZE, 0);
 	}
 
+	public Destroyer(boolean alive, int numberOfBullets){
+		super(alive, SIZE, numberOfBullets);
+	}
+	
 	@Override
 	public int getSize() {
-		return 2;
+		return SIZE;
 	}
 
 	@Override

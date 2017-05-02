@@ -254,6 +254,9 @@ public abstract class AbstractGame {
 				concernedGrid.addDefaultShipCell(xCord, y, ship);
 		}
 		
+		ship.setPosition(c);
+		ship.setOrientation(ori);
+		
 		return true;
 	}
 	
@@ -302,6 +305,9 @@ public abstract class AbstractGame {
 		for (ShipCellData dataCell : dataCells)
 			concernedGrid.addShipCell(dataCell.getX(), dataCell.getY(), dataCell.getLife(), ship);
 		
+		ship.setPosition(c);
+		ship.setOrientation(ori);
+		
 		return true;
 	}
 	
@@ -340,4 +346,8 @@ public abstract class AbstractGame {
 	 * @return false if the target is not valid
 	 */
 	protected abstract boolean hit(PlayerType player, Coord2D coord);
+
+	public Ships getHumanShips() {
+		return humanShips;
+	}
 }
