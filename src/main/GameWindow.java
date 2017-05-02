@@ -54,6 +54,36 @@ public class GameWindow extends JFrame {
 		mainActionsController = new MainActionsController(this);
 	}
 	
+	public void update() {
+		switch(status) {
+			case NEW_LOAD:
+				//(newLoadScreen);
+				break;
+			case PERIOD:
+				//(periodScreen);
+				break;
+			case SHOT:
+				//(shotScreen);
+				break;
+			case ALGORITHM:
+				//(algorithmScreen);
+				break;
+			case GRID:
+				//(placeGridScreen);
+				//(placeButtonsScreen);
+				((BoatsPane) boatsScreen).update();
+				break;
+			case INGAME:
+				//(igButtonsScreen);
+				((EnemyGridScreen) enemyGridScreen).update();
+				((MyGridScreen) myGridScreen).update();
+				//(informationsScreen);
+				break;
+			default:
+				break;
+		}
+	}
+	
 	public void setStatus(GameStatus s) {
 		switch(status) {
 			case NEW_LOAD:
@@ -109,7 +139,7 @@ public class GameWindow extends JFrame {
 			case INGAME:				
 				add(igButtonsScreen != null ? igButtonsScreen : (igButtonsScreen = new ButtonsPane(mainActionsController, "Quitter","Sauvegarder","Algorithme")),BorderLayout.NORTH);
 				add(myGridScreen != null ? myGridScreen : (myGridScreen = new MyGridScreen(placeShipsController)),BorderLayout.CENTER);
-				add(enemyGridScreen != null ? enemyGridScreen : (enemyGridScreen = new EnemyGridScreen(game)),BorderLayout.SOUTH);
+				add(enemyGridScreen != null ? enemyGridScreen : (enemyGridScreen = new EnemyGridScreen(game, this)),BorderLayout.SOUTH);
 				add(informationsScreen != null ? informationsScreen : (informationsScreen = new CounterWT(0,0)),BorderLayout.EAST);
 				break;
 			default:

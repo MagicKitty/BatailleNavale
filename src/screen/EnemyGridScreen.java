@@ -3,14 +3,17 @@ package screen;
 import cell.*;
 import game.*;
 import graphic.Coord2D;
+import main.GameWindow;
 
 public class EnemyGridScreen extends GridScreen {
 	private AbstractGame game;
+	private GameWindow window;
 	
-	public EnemyGridScreen(AbstractGame g) {
+	public EnemyGridScreen(AbstractGame g, GameWindow gw) {
 		super(10, 10, "Grille ennemie");
 		
 		game = g;
+		window = gw;
 		update();
 	}
 	
@@ -28,8 +31,8 @@ public class EnemyGridScreen extends GridScreen {
 	}
 	
 	public void handleClick(int row, int col) {
-		//TEMPORAIRE
 		//((AdvancedGame) game).setSelectedShip(ship, player);
-		game.play(new Coord2D(row, col));
+		game.play(new Coord2D(col, row));
+		window.update();
 	}
 }

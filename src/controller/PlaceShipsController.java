@@ -25,6 +25,10 @@ public class PlaceShipsController implements ButtonController {
 		addedType = ShipType.CARRIER;
 	}
 	
+	public void update() {
+		gamewindow.update();
+	}
+	
 	public ShipType getAddedType() {
 		return addedType;
 	}
