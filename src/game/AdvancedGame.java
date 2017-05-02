@@ -7,6 +7,8 @@ import player.ComputerPlayer;
 import player.PlayerType;
 import player.StrategyType;
 import ship.AbstractShip;
+import ship.ShipType;
+import ship.Ships;
 
 public class AdvancedGame extends AbstractGame {
 
@@ -59,6 +61,23 @@ public class AdvancedGame extends AbstractGame {
 			selectedShipHuman = ship;
 			break;
 		}
+	}
+	
+	public void setSelectedShip(ShipType type, PlayerType player){
+		Ships concernedShips = null;
+		
+		switch (player){
+		case COMPUTER:
+			concernedShips = getComputerShips();
+			break;
+		case HUMAN:
+			concernedShips = getHumanShips();
+			break;
+		}
+		
+		AbstractShip ship = concernedShips.getShip(type);
+		
+		this.setSelectedShip(ship, player);
 	}
 	
 	/**
