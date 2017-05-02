@@ -4,18 +4,29 @@ import cell.AbstractCell;
 import cell.Grid;
 import controller.PlaceShipsController;
 import game.AbstractGame;
+import game.AdvancedGame;
 import graphic.Coord2D;
+import player.PlayerType;
 import ship.ShipType;
 
 public class MyGridScreen extends GridScreen {
 	private AbstractGame  game;
+	private PlaceShipsController controller;
 	
-	public MyGridScreen(AbstractGame g) {
+	public MyGridScreen(AbstractGame g, PlaceShipsController c) {
 		super(10, 10, "Ma grille");
 		
 		game = g;
+		controller = c;
 		
 		update();
+	}
+	
+	public void handleClick(int row, int col) {
+		ShipType ship = controller.getShipOn(row, col);
+		if(ship != null && game instanceof AdvancedGame) {
+			//((AdvancedGame) game).setSelectedShip(ship, PlayerType.HUMAN);
+		}
 	}
 	
 	public void update() {

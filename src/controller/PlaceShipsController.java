@@ -33,6 +33,30 @@ public class PlaceShipsController implements ButtonController {
 		return addedType;
 	}
 	
+	private boolean isShipIn(int row, int col, Coord2D shipPos, Orientation orientation, int size) {
+		if(shipPos.getX() <= row && shipPos.getY() <= col
+			&& shipPos.getX() + size * (orientation == Orientation.HORIZONTAL ? 1 : 0) >= row
+			&& shipPos.getY() + size * (orientation == Orientation.VERTICAL ? 1 : 0) >= col) {
+			return true;
+		}
+		return false;
+	}
+	
+	public ShipType getShipOn(int row, int col) {
+		if(isShipIn(row, col, carrierPos, carrierOri, 5)) {
+			return ShipType.CARRIER;
+		} else if(isShipIn(row, col, cruiserPos, cruiserOri, 4)) {
+			return ShipType.CRUISER;
+		} else if(isShipIn(row, col, battleshipPos, battleshipOri, 2)) {
+			return ShipType.BATTLESHIP;
+		} else if(isShipIn(row, col, submarinePos, submarineOri, 3)) {
+			return ShipType.SUBMARINE;
+		} else if(isShipIn(row, col, destroyerPos, destroyerOri, 3)) {
+			return ShipType.DESTROYER;
+		}
+		return null;
+	}
+	
 	public void chooseCarrier() {
 		if(addedType == ShipType.CARRIER) {
 			if(carrierOri == Orientation.HORIZONTAL) carrierOri = Orientation.VERTICAL;
