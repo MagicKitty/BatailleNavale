@@ -1,12 +1,9 @@
 package screen;
 
-import cell.AbstractCell;
 import cell.Grid;
 import controller.PlaceShipsController;
 import game.AbstractGame;
 import game.AdvancedGame;
-import graphic.Coord2D;
-import player.PlayerType;
 import ship.ShipType;
 
 public class MyGridScreen extends GridScreen {
