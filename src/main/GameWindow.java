@@ -13,6 +13,7 @@ import player.StrategyType;
 import screen.AlgorithmScreen;
 import screen.GameType;
 import screen.GridScreen;
+import screen.MyGridScreen;
 import screen.NewLoadScreen;
 import screen.PeriodScreen;
 import screen.PlaceShipsScreen;
@@ -105,7 +106,7 @@ public class GameWindow extends JFrame {
 				break;
 			case INGAME:				
 				add(igButtonsScreen != null ? igButtonsScreen : (igButtonsScreen = new ButtonsPane(mainActionsController, "Quitter","Sauvegarder","Algorithme")),BorderLayout.NORTH);
-				add(myGridScreen != null ? myGridScreen : (myGridScreen = new GridScreen(10, 10, "Ma grille")),BorderLayout.CENTER);
+				add(myGridScreen != null ? myGridScreen : (myGridScreen = new MyGridScreen(placeShipsController)),BorderLayout.CENTER);
 				add(enemyGridScreen != null ? enemyGridScreen : (enemyGridScreen = new GridScreen(10, 10, "Grille ennemie")),BorderLayout.SOUTH);
 				add(informationsScreen != null ? informationsScreen : (informationsScreen = new CounterWT(0,0)),BorderLayout.EAST);
 				break;

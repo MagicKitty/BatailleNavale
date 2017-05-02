@@ -61,6 +61,18 @@ public class PlaceShipsController implements ButtonController {
 		}
 	}
 	
+	public Coord2D getShipPosition(ShipType ship) {
+		Coord2D position = null;
+		switch(ship) {
+			case CARRIER: position = carrierPos; break;
+			case CRUISER: position = cruiserPos; break;
+			case BATTLESHIP: position = battleshipPos; break;
+			case DESTROYER: position = destroyerPos; break;
+			case SUBMARINE: position = submarinePos; break;
+		}
+		return position;
+	}
+	
 	public boolean getShipStatus(ShipType ship) {
 		boolean status = false;
 		switch(ship) {
