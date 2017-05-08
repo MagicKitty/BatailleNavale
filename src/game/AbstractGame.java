@@ -13,6 +13,7 @@ import period.Period;
 import period.RenaissanceShipFactory;
 import player.ComputerPlayer;
 import player.CrossStrategy;
+import player.PathStrategie;
 import player.PlayerType;
 import player.RandomStrategy;
 import player.StrategyType;
@@ -32,17 +33,21 @@ public abstract class AbstractGame {
 	private IShipFactory sf;
 	private Ships humanShips, computerShips;
 	private boolean isFinished;
-	
+
 	/**
-	 * initializing the game with new grids, a specfic factory and a specific strategy for the computer
-	 * @param p period selected for the ships' factory
-	 * @param strategy computer's strategy selected
+	 * initializing the game with new grids, a specfic factory and a specific
+	 * strategy for the computer
+	 * 
+	 * @param p
+	 *            period selected for the ships' factory
+	 * @param strategy
+	 *            computer's strategy selected
 	 */
-	public AbstractGame(Period p, StrategyType strategy){
-		
+	public AbstractGame(Period p, StrategyType strategy) {
+
 		timePeriod = p;
-		
-		switch(timePeriod){
+
+		switch (timePeriod) {
 		case FUTURE:
 			sf = new FutureShipFactory();
 			break;
@@ -53,30 +58,33 @@ public abstract class AbstractGame {
 			sf = new RenaissanceShipFactory();
 			break;
 		}
-		
+
 		computer = new ComputerPlayer(this);
-		
+
 		computerStrategy = strategy;
-		
-		switch(computerStrategy){
+
+		switch (computerStrategy) {
 		case RANDOM:
 			computer.setStrategy(new RandomStrategy());
 			break;
 		case CROSS:
 			computer.setStrategy(new CrossStrategy());
 			break;
+		case PATH:
+			computer.setStrategy(new PathStrategie());
+			break;
 		}
-		
+
 		isFinished = false;
-		
+
 		humanGrid = new Grid(this);
 		computerGrid = new Grid(this);
-		
+
 		computerShips = new Ships();
 		humanShips = new Ships();
 	}
-	
-	public void placeComputerShips(){
+
+	public void placeComputerShips() {
 		computer.placeShips();
 	}
 
@@ -84,47 +92,52 @@ public abstract class AbstractGame {
 	 * @return the type of the game (Advanced or Standard)
 	 */
 	public abstract GameType getGameType();
-	
+
 	/**
 	 * @return the time period which is used
 	 */
-	public Period getTimePeriod(){
+	public Period getTimePeriod() {
 		return timePeriod;
 	}
-	
-	public boolean isFinished(){
+
+	public boolean isFinished() {
 		int humanAliveShipCounter = 0, computerAliveShipCounter = 0;
-		
-		for(ShipType type : ShipType.values()){
+
+		for (ShipType type : ShipType.values()) {
 			if (humanShips.getShip(type).isAlive())
 				humanAliveShipCounter++;
 			if (computerShips.getShip(type).isAlive())
 				computerAliveShipCounter++;
 		}
-		
+
 		return (humanAliveShipCounter == 0 || computerAliveShipCounter == 0);
 	}
-	
+
 	/**
 	 * @return the computer's strategy type which is used
 	 */
 	public StrategyType getComputerStrategy() {
 		return computerStrategy;
 	}
-	
+
 	/**
 	 * setting the strategy of the computer
-	 * @param strategy the type of the strategy (Cross or Random)
+	 * 
+	 * @param strategy
+	 *            the type of the strategy (Cross or Random)
 	 */
 	public void setComputerStrategy(StrategyType strategy) {
 		computerStrategy = strategy;
-		
-		switch(computerStrategy){
+
+		switch (computerStrategy) {
 		case RANDOM:
 			computer.setStrategy(new RandomStrategy());
 			break;
 		case CROSS:
 			computer.setStrategy(new CrossStrategy());
+			break;
+		case PATH:
+			computer.setStrategy(new PathStrategie());
 			break;
 		}
 	}
@@ -142,38 +155,43 @@ public abstract class AbstractGame {
 	public Grid getComputerGrid() {
 		return computerGrid;
 	}
-	
+
 	/**
 	 * @return computer's ships
 	 */
-	public Ships getComputerShips(){
+	public Ships getComputerShips() {
 		return computerShips;
 	}
-	
+
 	/**
 	 * @return computer player
 	 */
-	protected ComputerPlayer getComputerPlayer(){
+	protected ComputerPlayer getComputerPlayer() {
 		return computer;
 	}
-	
+
 	/**
 	 * playing one turn
-	 * @param humanTarget the target choosed by the human player
+	 * 
+	 * @param humanTarget
+	 *            the target choosed by the human player
 	 */
 	public abstract void play(Coord2D humanTarget);
 
 	/**
 	 * getting a specific ship
-	 * @param type the type of the ship
-	 * @param player which player own the ship
+	 * 
+	 * @param type
+	 *            the type of the ship
+	 * @param player
+	 *            which player own the ship
 	 * @return the ship of the player and of the type asked
 	 */
 	public AbstractShip getShip(ShipType type, PlayerType player) {
-		
+
 		Ships concernedShips = null;
-		
-		switch(player){
+
+		switch (player) {
 		case COMPUTER:
 			concernedShips = computerShips;
 			break;
@@ -181,20 +199,24 @@ public abstract class AbstractGame {
 			concernedShips = humanShips;
 			break;
 		}
-		
+
 		return concernedShips.getShip(type);
 	}
-	
+
 	/**
 	 * setting a ship to a specific player
-	 * @param type the type of the ship
-	 * @param ship the ship itself
-	 * @param player the player which will own the ship
+	 * 
+	 * @param type
+	 *            the type of the ship
+	 * @param ship
+	 *            the ship itself
+	 * @param player
+	 *            the player which will own the ship
 	 */
 	private void setShip(ShipType type, AbstractShip ship, PlayerType player) {
 		Ships concernedShips = null;
-		
-		switch(player){
+
+		switch (player) {
 		case COMPUTER:
 			concernedShips = computerShips;
 			break;
@@ -202,29 +224,34 @@ public abstract class AbstractGame {
 			concernedShips = humanShips;
 			break;
 		}
-		
+
 		concernedShips.setShip(type, ship);
 	}
-	
+
 	/**
 	 * adding a new ship to the game and by extension to the grid
-	 * @param type the type of the ship wanted
-	 * @param c the cord of the top-left corner of the ship
-	 * @param ori orientation of the ship
-	 * @param player player concerned by the adding
+	 * 
+	 * @param type
+	 *            the type of the ship wanted
+	 * @param c
+	 *            the cord of the top-left corner of the ship
+	 * @param ori
+	 *            orientation of the ship
+	 * @param player
+	 *            player concerned by the adding
 	 * @return false if adding the ship fails
 	 */
-	public boolean addShipDefault(ShipType type, Coord2D c, Orientation ori, PlayerType player ) {
-		
+	public boolean addShipDefault(ShipType type, Coord2D c, Orientation ori, PlayerType player) {
+
 		Grid concernedGrid = null;
 		AbstractShip ship = null;
-	
+
 		if (player == PlayerType.COMPUTER)
 			concernedGrid = getComputerGrid();
 		else
 			concernedGrid = getHumanGrid();
-		
-		switch(type){
+
+		switch (type) {
 		case CARRIER:
 			ship = sf.createCarrier();
 			break;
@@ -241,68 +268,76 @@ public abstract class AbstractGame {
 			ship = sf.createDestroyer();
 			break;
 		}
-		
+
 		int xCord = c.getX();
 		int yCord = c.getY();
-		
+
 		if (xCord < 0 || xCord >= 10 || yCord < 0 || yCord >= 10)
 			return false;
-		
+
 		if (ori == Orientation.HORIZONTAL) {
 			if (xCord + ship.getSize() >= 10)
 				return false;
-			
-			//checking if there is already a ship or not
+
+			// checking if there is already a ship or not
 			for (int x = xCord; x < ship.getSize(); x++)
 				if (concernedGrid.getCell(x, yCord) instanceof ShipCell)
 					return false;
 		} else {
 			if (yCord + ship.getSize() >= 10)
 				return false;
-			
-			//checking if there is already a ship or not
+
+			// checking if there is already a ship or not
 			for (int y = yCord; y < ship.getSize(); y++)
 				if (concernedGrid.getCell(xCord, y) instanceof ShipCell)
 					return false;
 		}
-		
+
 		ship.setPosition(c);
 		ship.setOrientation(ori);
 		setShip(type, ship, player);
-		
+
 		if (ori == Orientation.HORIZONTAL) {
-			//linking cells on the grid to the ship
+			// linking cells on the grid to the ship
 			for (int x = xCord; x < ship.getSize() + xCord; x++)
 				concernedGrid.addDefaultShipCell(x, yCord, ship);
 		} else {
-			//linking cells on the grid to the ship
+			// linking cells on the grid to the ship
 			for (int y = yCord; y < ship.getSize() + yCord; y++)
 				concernedGrid.addDefaultShipCell(xCord, y, ship);
 		}
-		
+
 		return true;
 	}
-	
+
 	/**
 	 * adding an existing ship
-	 * @param type the type of the ship to add
-	 * @param ship the ship to add
-	 * @param c the cord of the top-left corner of the ship
-	 * @param ori orientation of the ship
-	 * @param player player concerned by the adding
-	 * @param dataCells cells' data from JSON save file
+	 * 
+	 * @param type
+	 *            the type of the ship to add
+	 * @param ship
+	 *            the ship to add
+	 * @param c
+	 *            the cord of the top-left corner of the ship
+	 * @param ori
+	 *            orientation of the ship
+	 * @param player
+	 *            player concerned by the adding
+	 * @param dataCells
+	 *            cells' data from JSON save file
 	 * @return false if adding the ship fails
 	 */
-	public boolean addShip(ShipType type, int numberofBullets, Coord2D c, Orientation ori, PlayerType player, ShipCellData dataCells[]) {
+	public boolean addShip(ShipType type, int numberofBullets, Coord2D c, Orientation ori, PlayerType player,
+			ShipCellData dataCells[]) {
 		Grid concernedGrid = null;
 		AbstractShip ship = null;
-	
+
 		if (player == PlayerType.COMPUTER)
 			concernedGrid = getComputerGrid();
 		else
 			concernedGrid = getHumanGrid();
-		
-		switch(type){
+
+		switch (type) {
 		case CARRIER:
 			ship = sf.createCarrier();
 			break;
@@ -319,74 +354,78 @@ public abstract class AbstractGame {
 			ship = sf.createDestroyer();
 			break;
 		}
-		
+
 		ship.setNumberOfBullets(numberofBullets);
-		
+
 		int xCord = c.getX();
 		int yCord = c.getY();
-		
+
 		if (xCord < 0 || xCord >= 10 || yCord < 0 || yCord >= 10)
 			return false;
-		
+
 		if (dataCells.length != ship.getSize())
 			return false;
-		
+
 		if (ori == Orientation.HORIZONTAL)
 			if (xCord + ship.getSize() >= 10)
 				return false;
-		else
-			if (yCord + ship.getSize() >= 10)
+			else if (yCord + ship.getSize() >= 10)
 				return false;
-			
-		//checking if there is already a ship or not
+
+		// checking if there is already a ship or not
 		for (ShipCellData dataCell : dataCells)
 			if (concernedGrid.getCell(dataCell.getX(), dataCell.getY()) instanceof ShipCell)
 				return false;
-		
+
 		ship.setPosition(c);
 		ship.setOrientation(ori);
 		setShip(type, ship, player);
 
-		//linking cells on the grid to the ship
+		// linking cells on the grid to the ship
 		for (ShipCellData dataCell : dataCells)
 			concernedGrid.addShipCell(dataCell.getX(), dataCell.getY(), dataCell.getLife(), ship);
-		
+
 		return true;
 	}
-	
+
 	/**
 	 * removing a ship
-	 * @param type the type of the ship
-	 * @param player the player which owns the ship
+	 * 
+	 * @param type
+	 *            the type of the ship
+	 * @param player
+	 *            the player which owns the ship
 	 * @return true if deleting succeed
 	 */
-	public boolean deleteShip(ShipType type, PlayerType player){
+	public boolean deleteShip(ShipType type, PlayerType player) {
 		Grid concernedGrid = null;
-		
+
 		if (player == PlayerType.COMPUTER)
 			concernedGrid = getComputerGrid();
 		else
 			concernedGrid = getHumanGrid();
-		
+
 		AbstractShip ship = getShip(type, player);
-		
-		for (ShipCell cell : ship.getAsc()){
+
+		for (ShipCell cell : ship.getAsc()) {
 			int x = cell.getX();
 			int y = cell.getY();
-			
+
 			concernedGrid.addDefaultSeaCell(x, y);
 		}
-		
+
 		setShip(type, null, player);
-		
+
 		return true;
 	}
-	
 
 	/**
 	 * hit a cell
-	 * @param player the player which plays
-	 * @param coord the target on the grid
+	 * 
+	 * @param player
+	 *            the player which plays
+	 * @param coord
+	 *            the target on the grid
 	 * @return false if the target is not valid
 	 */
 	protected abstract boolean hit(PlayerType player, Coord2D coord);
@@ -394,26 +433,26 @@ public abstract class AbstractGame {
 	public Ships getHumanShips() {
 		return humanShips;
 	}
-	
+
 	public void save(String filename) {
 		(new DAO()).saveGame(filename, this);
 	}
-	
+
 	public void save() {
 		save("game.txt");
 	}
 
 	public void applyVisiblityArray(boolean[][] visibilityArray, PlayerType player) {
 		Grid concernedGrid = null;
-		
+
 		if (player == PlayerType.COMPUTER)
 			concernedGrid = getComputerGrid();
 		else
 			concernedGrid = getHumanGrid();
-		
-		for(int x = 0; x < 10; x++)
-			for(int y = 0; y < 10; y++)
+
+		for (int x = 0; x < 10; x++)
+			for (int y = 0; y < 10; y++)
 				concernedGrid.getCell(x, y).setVisibility(visibilityArray[x][y]);
-		
+
 	}
 }
