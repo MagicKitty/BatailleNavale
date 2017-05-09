@@ -1,7 +1,11 @@
 # BatailleNavale
 
-## commande de build :
+## commande de build 
 ### ant build
 
 ## commande de lancement :
 ### ant Launcher
+
+## Modification apporté ( Deuxieme partie du projet )
+### Ajout de la stratégie Path qui fait emprunter à l'ordinateur une case voisine si elle est disponible sinon on choisit une case random
+### L'ajout de la nouvelle stratégie n'a necessité aucune modification quand au code seulement des ajouts, donc l'architecture respecte bien l'open-close principle.  
