@@ -2,5 +2,6 @@ package player;
 
 public enum StrategyType {
 	CROSS,
-	RANDOM
+	RANDOM,
+	PATH
 }
