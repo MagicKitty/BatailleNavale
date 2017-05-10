@@ -1,19 +1,21 @@
 <?xml version="1.0" encoding="UTF-8" standalone="no"?>
-<!-- WARNING: Eclipse auto-generated file.
-              Any modifications will be overwritten.
-              To include a user specific buildfile here, simply create one in the same
-              directory with the processing instruction <?eclipse.ant.import?>
-              as the first entry and export the buildfile again. --><project basedir="." default="build" name="BatailleNavale">
+	<project basedir="." default="build" name="BatailleNavale">
     <property environment="env"/>
     <property name="ECLIPSE_HOME" value="../../../../eclipse/java-neon/eclipse/"/>
+    <property name="junit.output.dir" value="junit"/>
     <property name="debuglevel" value="source,lines,vars"/>
     <property name="target" value="1.8"/>
     <property name="source" value="1.8"/>
+    <path id="JUnit 4.libraryclasspath">
+        <pathelement location="junit.jar"/>
+        <pathelement location="org.hamcrest.core_1.3.0.v201303031735.jar"/>
+    </path>
     <path id="BatailleNavale.classpath">
         <pathelement location="bin"/>
         <pathelement location="java-json.jar"/>
         <pathelement location="jgoodies-common-1.8.0.jar"/>
         <pathelement location="jgoodies-forms-1.8.0.jar"/>
+        <path refid="JUnit 4.libraryclasspath"/>
     </path>
     <target name="init">
         <mkdir dir="bin"/>
@@ -50,6 +52,15 @@
         <property name="build.compiler" value="org.eclipse.jdt.core.JDTCompilerAdapter"/>
         <antcall target="build"/>
     </target>
+    <target name="ShipCellTests.testHitValid5">
+        <mkdir dir="${junit.output.dir}"/>
+        <junit fork="yes" printsummary="withOutAndErr">
+            <formatter type="xml"/>
+            <test name="tests.ShipCellTests" todir="${junit.output.dir}"/>
+            <jvmarg line="-ea"/>
+            <classpath refid="BatailleNavale.classpath"/>
+        </junit>
+    </target>
     <target name="Grid">
         <java classname="main.Grid" failonerror="true" fork="yes">
             <classpath refid="BatailleNavale.classpath"/>
@@ -60,9 +71,53 @@
             <classpath refid="BatailleNavale.classpath"/>
         </java>
     </target>
+    <target name="SeaCellTests">
+        <mkdir dir="${junit.output.dir}"/>
+        <junit fork="yes" printsummary="withOutAndErr">
+            <formatter type="xml"/>
+            <test name="tests.SeaCellTests" todir="${junit.output.dir}"/>
+            <jvmarg line="-ea"/>
+            <classpath refid="BatailleNavale.classpath"/>
+        </junit>
+    </target>
+    <target name="SeaCellTests.testHitValid2000">
+        <mkdir dir="${junit.output.dir}"/>
+        <junit fork="yes" printsummary="withOutAndErr">
+            <formatter type="xml"/>
+            <test name="tests.SeaCellTests" todir="${junit.output.dir}"/>
+            <jvmarg line="-ea"/>
+            <classpath refid="BatailleNavale.classpath"/>
+        </junit>
+    </target>
     <target name="JSONBuilder">
         <java classname="game.JSONBuilder" failonerror="true" fork="yes">
             <classpath refid="BatailleNavale.classpath"/>
         </java>
+    </target>
+    <target name="GridTests">
+        <mkdir dir="${junit.output.dir}"/>
+        <junit fork="yes" printsummary="withOutAndErr">
+            <formatter type="xml"/>
+            <test name="tests.GridTests" todir="${junit.output.dir}"/>
+            <jvmarg line="-ea"/>
+            <classpath refid="BatailleNavale.classpath"/>
+        </junit>
+    </target>
+    <target name="ShipCellTests">
+        <mkdir dir="${junit.output.dir}"/>
+        <junit fork="yes" printsummary="withOutAndErr">
+            <formatter type="xml"/>
+            <test name="tests.ShipCellTests" todir="${junit.output.dir}"/>
+            <jvmarg line="-ea"/>
+            <classpath refid="BatailleNavale.classpath"/>
+        </junit>
+    </target>
+    <target name="junitreport">
+        <junitreport todir="${junit.output.dir}">
+            <fileset dir="${junit.output.dir}">
+                <include name="TEST-*.xml"/>
+            </fileset>
+            <report format="frames" todir="${junit.output.dir}"/>
+        </junitreport>
     </target>
 </project>

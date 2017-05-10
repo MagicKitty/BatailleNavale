@@ -1,10 +1,7 @@
 package screen;
 
-import com.sun.java.swing.plaf.windows.resources.windows;
-
 import controller.PlaceShipsController;
 import graphic.Coord2D;
-import ship.Orientation;
 import ship.ShipType;
 
 public class PlaceShipsScreen extends GridScreen {
