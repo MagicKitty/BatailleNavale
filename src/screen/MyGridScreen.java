@@ -1,5 +1,6 @@
 package screen;
 
+import cell.AbstractCell;
 import cell.Grid;
 import controller.PlaceShipsController;
 import game.AbstractGame;
@@ -35,7 +36,8 @@ public class MyGridScreen extends GridScreen {
 		
 		for(int i = 0; i < 10; i++) {
 			for(int j = 0; j < 10; j++) {
-				colorCell(i, j, grid.getCell(i, j).isSea() ? 0 : 3);
+				AbstractCell c = grid.getCell(i, j);
+				colorCell(i, j, c.isVisible() ? -1 : (c.isSea() ? 0 : 3));
 			}
 		}
 	}
